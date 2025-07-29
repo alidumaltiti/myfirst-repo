@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chanda Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Chanda Calculator</h2>
+
+    <table>
+        <tr>
+            <th>Total Amount</th>
+            <th>Number of Contributors</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td><input type="number" id="totalAmount" placeholder="Enter total amount" required></td>
+            <td><input type="number" id="contributors" placeholder="Enter number of contributors" required></td>
+            <td><button onclick="calculateChanda()">Calculate Chanda</button></td>
+        </tr>
+    </table>
+
+    <h3>Chanda Amount per Contributor:</h3>
+    <p id="result"></p>
+
+    <script>
+        function calculateChanda() {
+            var totalAmount = parseFloat(document.getElementById('totalAmount').value);
+            var numberOfContributors = parseInt(document.getElementById('contributors').value);
+
+            if (isNaN(totalAmount) || isNaN(numberOfContributors) || totalAmount <= 0 || numberOfContributors <= 0) {
+                alert("Please enter valid numbers greater than zero.");
+                return;
+            }
+
+            var chandaAmount = totalAmount / numberOfContributors;
+            document.getElementById('result').innerHTML = '₹ ' + chandaAmount.toFixed(2) + ' per contributor';
+        }
+    </script>
+
+</body>
+</html>

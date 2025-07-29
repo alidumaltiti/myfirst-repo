@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style2.css">
+        <meta charset="ufs -8">
+        <meta name="description" content="JavaScript Practice Page">
+        <title>JavaScript Practice Page </title>
+    </head>
+    <body>
+        <P class="p">WELCOME TO JS PRACTICE PAGE</P>
+        <p id="jsoutput"></p>
+        <script>
+            function displayOutput(massage){
+            const element = document.getElementById("jsoutput");
+            element.innerHTML = massage;
+            }
+            function calculateSupply(currentage, Maxage, dailyNeed,){
+                var remainingYears = Maxage - currentage;
+                var remainingDays = remainingYears * 365;
+                var totalSupply = remainingDays * dailyNeed;
+                return totalSupply;
+            }
+            var totalSupply = calculateSupply (25,100,10);
+            displayOutput("I will need " + calculateSupply(25,100,10) + " bottles for the rest of his life");
+        </script>
+        </p>
+        <p id=""></p>
+        <script>
+            function displayOutput(massage){
+                const element = document.getElementById("jsoutput3");
+                element.innerHTML = massage;
+            }
+            function calculateMonthlySupply(currentage, Maxage, dailyNeed){
+                var remainingYears = Maxage - currentage;
+                var remainingDays = remainingYears * 31;
+                var totalSupply = remainingDays * dailyNeed;
+                return totalSupply
+            }
+            var totalMonthlySupply = calculateMonthlySupply (20, 80, 5);
+            displayOutput("You will have " + calculateMonthlySupply(20, 80, 5) + " bottles  in a month ");
+        </script>
+        <p id="jsoutput3">Time</p>
+        <script>
+            function appendOutput(message){
+                const element = document.getElementById("jsoutput3");
+                element.innerHTML = element.innerHTML + "<br/>" + massage;
+            }
+            function printTable(number){
+            }    //for loop from 1-10
+                var x=5
+                while(x>20)
+                {
+                    x = x * 5
+                    if (x>=20) ;
+                    {
+                        break;
+                    } 
+                }
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <p id=""></p>
+        <script>
+            function displayOutput(massage){
+                const element = document.getElementById("");
+                element.innerHTML = massage;
+            }
+            function calculateF(A, B, C){
+                var D = B * A;
+                var E = D * 5;
+                var F = E * C;
+                return F
+            }
+            var G = calculateF(100, 20, 10);
+            displayOutput(" your answer is " + G);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+        <p id="jsoutput4"></p>
+        <script>
+            function displayOutput(massage){
+                const element = document.getElementById("jsoutput4");
+                element.innerHTML = massage;
+            }
+            function calculateTotalIncome(Income, Savings, Loans){
+                var MonthlyIncome = Income + 500;
+                var Expense = MonthlyIncome - Loans;
+                var TotalIncome = Expense + Savings;
+                return TotalIncome
+            }
+            //var NetIncome = calculateTotalIncome(800, 500, 800);
+            var IncomeG = calculateTotalIncome(40, 30, 20);
+            displayOutput("Your total networth is " + IncomeG);
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <p id="jsoutput4"></p>
+        <script>
+            function displayOutput(massage){
+                const element = document.getElementById("jsouput4");
+                element.innerHTML = massage;
+            }
+            function calculatenum7(num1, num2, num3){
+                var num5 = num1 + num2;
+                var num6 = num5 - num1;
+                var num7 = num6 + num2;
+                //var YearlyIncome = AverageProfitInAYear + Savings;
+                return num7
+            }
+            var num7 = calculatenum7 (30, 80, 20);
+            displayOutput(" Your Income and Svaings is" + "left for this year");
+        </script>
+    </body>

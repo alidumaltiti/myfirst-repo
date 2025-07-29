@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style2.css"
+    <meta charset="ufs -8">
+    <meta name="description" content="printTable">
+    <title>Timetables</title>
+</head>
+<body>
+    <p id="jsoutput">Times Tables</p>
+    <script>
+        function appendOutput(massage){
+            const element = document.getElementById('jsoutput');
+            element.innerHTML = massage;
+        }
+        function printTable2(number)
+        {
+            for (i=1; i<11; i++)
+            {
+                appendOutput(number + " x " + i + " = "+ (number*1) );
+            }
+        }
+        printTable2(5);
+    </script>
+</body>

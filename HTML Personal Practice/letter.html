@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="letter.css">
+    <title>Letter Writing</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Letter Writing</h1>
+        <form id="letterForm">
+            <label for="recipientName">Recipient's Name:</label>
+            <input type="text" id="recipientName" required>
+
+            <label for="letterBody">Letter Body:</label>
+            <textarea id="letterBody" rows="8" required></textarea>
+
+            <button type="button" onclick="generateLetter()">Generate Letter</button>
+
+            <div id="generatedLetter"></div>
+        </form>
+    </div>
+
+    <script src="letter.js"></script>
+
+</body>
+</html>
