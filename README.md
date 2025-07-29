@@ -1,1 +1,1 @@
-This cpontains my rough practices
+This contains my rough practices
