@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="uft-8">
+        <meta name="description" content=" Bio Page ">
+        <title>Bio Page Information</title>
+    </head>
+    <body>
+        <p>BIOGRAGRAPHY PAGE</p>
+        <p>
+            This page contains the personal information of Alidu Maltiti Azindoo.
+        </p> 
+        <p>
+            <img src="file:///E:/Passports/289238453_2927867084026709_9123256345155323541_n.jpg" alt="Profile Picture" align="ceenter">
+        </p>
+        <p>Personal Information</p>
+        <p>
+        <h4>
+            Name
+        </h4>
+            <p>First Name:Maltiti Azindoo</p>
+            <p>Last Name:Alidu</p>
+            <p>Sex:Male <p>Date of Birth:18th May, 1998</p>
+        </p>
+        <p>Contact Information
+            <p>
+                <h>Personal Number: +233558839833</h>
+            </p>
+            <h>Other Number: </h>
+            <p><h>
+                Email: <a href="alidumaltiti0@gmail.com">alidumaltiti0@gmail.com</a>
+            </h></p>
+        </p>
+        <p>
+            <p>Qualifications:</p>
+            <p><h>School Name:University for Development Studies</h></p>
+            <h>Program Studied: BSc. Agriculture Technology</h>
+        </p>
+        <p>
+            <h><p>Location</h>
+            <p><h>Country: Ghana</h></p>
+            <h>City: Tmalale</h>
+        </p>
+    </body>
+</html>

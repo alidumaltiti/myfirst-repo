@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style2.css">
+        <meta charset="ufs -8">
+        <meta name="description" content="JavaScript Practice Page">
+        <title>JavaScript Practice Page </title>
+    </head>
+    <body>
+        <p align="center" id="welcome">Welcome</p>
+        <p id="jsoutput">
+        <script>
+            const element = document.getElementById("jsoutput");
+            element.innerHTML = "something else";
+            var num1 = 2;
+            var num2 = 3;
+            var text = " is one less than";
+            var currentage = 25;
+            var maximumage = 100;
+            var amountperday = 10;
+            var numberofdaysinayear = 365;
+            var total = " is the amount I will require until my ripe old age ";
+            element.innerHTML = (maximumage - currentage)*(numberofdaysinayear) * amountperday  + total ;
+        </script>
+        </p>
+    </body>
+</html>

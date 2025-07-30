@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="uft-8">
+        <meta name="description" content=" Bio Page ">
+        <title>Bio Page Information</title>
+    </head>
+    <body>
+        <blockquote>
+        <p align="center">BIOGRAGRAPHY PAGE</p>
+        <p align="center">BIOGRAPHY PAGE OF ALIDU MALTITI AZINDOO</p>
+        This page contains the personal information of Alidu Maltiti Azindoo.
+        <p>
+            <img src="file:///E:/Passports/289238453_2927867084026709_9123256345155323541_n.jpg" alt="Profile Picture" align="ceenter">
+        </p>
+        <p align="center">Personal Information</p>
+        <p>
+        <h4>
+            Name
+        </h4>
+            <p>First Name:Maltiti Azindoo</p>
+            <p>Last Name:Alidu</p>
+            <p>Sex:Male <div align="left">Date of Birth:18th May, 1998</div></p>
+        </p>
+        <p align="center">Contact Information
+            <p>
+                <h>Personal Number: +233558839833</h>
+            </p>
+            <h>Other Number: +233</h>
+            <p><h>
+                Email: <a href="alidumaltiti0@gmail.com">alidumaltiti0@gmail.com</a>
+            </h></p>
+        </p>
+        <p>
+            <p align="center">Qualifications:</p>
+            <p><h>School Name:University for Development Studies</h></p>
+            <h>Program Studied: BSc. Agriculture Technology</h>
+        </p>
+        <p>
+            <p align="center">Location</h4>
+            <p><h>Country: Ghana</h></p>
+            <h>City: Tmalale</h>
+        </p>
+     </blockquote>
+    </body>
+    <body>
+        <blockquote>
+            <p align="center">Legai Information of ALIDU MALTITI AZINDOO</p>
+            <h3><p div="left">Warning</p></h3>
+            <p div="center">Not Paat of the informationweitten here should be replicated or serious consequences shalll be met.</p>
+            <h><p div="left">Maerital Status:Single</p></h>
+        </blockquote>
+    </body>
+</html>
