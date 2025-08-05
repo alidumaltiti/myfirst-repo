@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, World! - Beautiful Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        .container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 40px 60px;
+            text-align: center;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 3em;
+            color: #2575fc;
+            margin-bottom: 0.3em;
+            letter-spacing: 2px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #444;
+            margin-top: 0;
+        }
+        .wave {
+            display: inline-block;
+            animation: wave 1.5s infinite;
+            transform-origin: 70% 70%;
+        }
+        @keyframes wave {
+            0%, 60%, 100% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <span class="wave">👋</span> Hello, World!
+        </h1>
+        <p>Welcome to your beautifully designed HTML page.</p>
+    </div>
+</body>
+</html>
