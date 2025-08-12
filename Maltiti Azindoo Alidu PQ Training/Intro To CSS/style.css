@@ -1,0 +1,30 @@
+body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+    .h1 {
+        color: #e70c0c;
+        text-align: center;
+    }
+    .h2 {
+        color: #07bb52;
+        text-align: center;
+    }
+    .h3 {
+        color: #6a06ee;
+        text-align: center;
+    }
+    p {
+        line-height: 1.6;
+    }
+    .box {
+        width: 600px auto;
+        height: 100px auto;
+        background-color: #dbe1e6;
+        margin: 20px auto;
+        border-radius: 10px;
+
+    }
