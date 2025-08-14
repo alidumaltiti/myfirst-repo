@@ -6,8 +6,12 @@
     <title>Contacts</title>
 </head>
 <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
     body{
-        background-color: bisque;
+        background-color: blue;
         padding: 20px;
         color: rgb(41, 37, 37);
         margin: 20px;
@@ -16,8 +20,37 @@
         }
 
     }
+    .box1{
+        padding: 20px;
+        margin: 20px;
+        background-color: white;
+        width: auto;
+    }
+    .nav-list{
+        margin-left: 70%;
+        grid-row: 20px;
+    } 
+    .box2{
+        padding: 20px;
+        margin: 20px;
+        background-color: white;
+        width: auto;
+    }
 </style>
 <body>
+    <header>
+        <section class="box1">
+         <nav class="nav-list">
+        <a href="./index.html">Index</a>
+        <a href="#Home">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./contact.html">Contact</a>
+        <a href="#projects">Project</a>
+        <a href="#Services">Services</a>
+        </nav>
+        </section>
+    </header>
+    <section class="box1">
     <h1>MyContact</h1>
     <hr>
     <h2>Address</h2>
@@ -29,7 +62,7 @@
     <p>vilorine@gmail.com</p>
     <h2>Telephone</h2>
     <p>+233556674844</p>
-    
+    </section>
 </body>
 
 <footer></footer>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .mybox{
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+        border-radius: 20px;
+    }
+    .mybox2{
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+        border-radius: 50px;
+
+    }
+    .mybox3{
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+       clip-path: polygon(
+        20% 0%, 80% 0%,
+        100% 20%, 20% 80%,
+        80% 100%, 20% 100%,
+       0% 80%, 0% 20%
+       );
+
+
+    }
+</style>
+<body>
+    <section class="mybox">
+        <p>This is my box</p>
+    </section>
+    <section class="mybox2">
+        <p>second box</p>
+    </section>
+    <section class="mybox3">
+        <p>second box</p>
+    </section>
+    
+</body>
+</html>

@@ -12,7 +12,7 @@
         margin: 0;
     }
     body{
-        background-color: rgb(115, 9, 236);
+        background-color: white;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         ul{
             font-size: larger;
@@ -21,31 +21,34 @@
         h2{
             text-align: center;
         }
-        li{
-        padding: 20px;
-        margin: 20px;
-        background-color: rgb(26, 183, 231);
-        width: auto;
-        color: white;
-        width: fit-content;
-        width: fit-content;
-        height: fit-content;
-    
+        
     }
+    .header{
+    
     }
     .box{
         padding: 20px;
         margin: 20px;
-        background-color: white;
+        background-color: blueviolet;
         width: auto;
         
         img{
             float: inline-end;
         }
-        nav{
-          position: absolute;
         }
-
+    .nav-list{
+        margin-left: 75%;
+    } 
+    .box1{
+        padding: 20px;
+        margin: 20px;
+        background-color: blueviolet;
+        width: auto;
+    }
+    .box2{
+        background-color: white;
+        padding: 20px;
+        margin: 20px;
     }
 
     footer{
@@ -55,26 +58,43 @@
         color: white;
         text-align: center;
     }
+    .Bimage{
+            background-image: url("assets/IMAGE/birthday1.jpg"); /* Path to your image */
+            background-size: cover; /* Makes it cover the whole screen */
+            background-repeat: no-repeat; /* Prevents repeating */
+            background-position: center; /* Centers the image */
+    }
 </style>
 <body>
     <header>
+    <div class="box1">
+        <p>This is a test page</p>
+    </div>
     <div class="box">
-    <img src="SOCIAL ICONS/facebook-icon.png" width="50px" alt="facebook">
-    <img src="SOCIAL ICONS/linkedin-icon.png" width="50px" alt="linkedin">
-    <img src="SOCIAL ICONS/twitter-icon.png" width="50px" alt="twitter">
-    <img src="SOCIAL ICONS/vecteezy_set-of-social-media-icons-editable-w.png" width="50px" alt="vecteezy_set-of-social-media-icons-editable-w">
-     <nav>
-        <a href="./about.html">About</a></li>
-        <a href="./contact.html">Contact</a></li>
-        <a href="#projects">Project</a></li></button>
-    </nav>
+    <img style="float: inline-start;" src="SOCIAL ICONS/645.jpg" width="50px">
+    <img src="SOCIAL ICONS/facebook-icon.png" width="30px" alt="facebook">
+    <img src="SOCIAL ICONS/linkedin-icon.png" width="30px" alt="linkedin">
+    <img src="SOCIAL ICONS/twitter-icon.png" width="30px" alt="twitter">
+    <img src="SOCIAL ICONS/vecteezy_set-of-social-media-icons-editable-w.png" width="30px" alt="vecteezy_set-of-social-media-icons-editable-w">
     <h2>My Portfolio</h2>
     </div>
+    <section>
+        <nav class="nav-list">
+        <a href="./index.html">Index</a>
+        <a href="#Home">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./contact.html">Contact</a>
+        <a href="#projects">Project</a>
+        <a href="#Services">Services</a>
+        </nav>
+    </section>
     </header>
     <hr>
-    
+    <section class="box2">
+        <p>This is the section</p>
+    </section>
 </body>
 <footer>
-    <p>&copy; 2025 Maltiti Azindoo Alidu 
+    <p>&copy; 2025 Maltiti Azindoo Alidu</p> 
 </footer>
 </html>

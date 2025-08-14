@@ -6,8 +6,12 @@
     <title>myportfolio</title>
 </head>
 <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
     body{
-        background-color: blanchedalmond;
+        background-color: white;
         padding: 20px;
         margin: 20px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,12 +21,42 @@
        
     }
     .box{
-        background-color: azure;
+        background-color: blueviolet;
         padding: 20px;
         margin: 20px;
+        border-radius: 10%;
     }
+    footer{
+        padding: 20px;
+        margin: 20px;
+        background-color: rgb(15, 15, 15);
+        color: white;
+        text-align: center;
+    }
+    .box1{
+        padding: 20px;
+        margin: 20px;
+        background-color: white;
+        width: auto;
+    }
+    .nav-list{
+        margin-left: 70%;
+        grid-row: 20px;
+    } 
 </style>
 <body>
+    <header>
+        <section class="box1">
+         <nav class="nav-list">
+        <a href="./index.html">Index</a>
+        <a href="#Home">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./contact.html">Contact</a>
+        <a href="#projects">Project</a>
+        <a href="#Services">Services</a>
+        </nav>
+        </section>
+    </header>
     <h1>About Me</h1>
     <hr>
     <p class="box">
@@ -31,4 +65,7 @@
     <br>I combine technical skills, project management, and community engagement to solve real-world problems, aiming to bridge development gaps in rural Ghana and beyond
 </p>
 </body>
+<footer>
+    <p>&copy; 2025 Maltiti Azindoo Alidu 
+</footer>
 </html>
