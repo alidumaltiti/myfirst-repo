@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: aliceblue;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;;
+    }
+    header{
+        background-color: #1f1a1d;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        
+        h1{
+            text-align: left;
+            font-size: x-large;
+            position: absolute;
+    
+        }
+        p{
+            text-align: center;
+            font-size: 1.2em;
+        }
+        img{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 1px;
+            float: inline-end;
+            margin-bottom: 40px;
+            
+        }
+    }
+    .footer1{
+        background-color: black;
+        color: white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 200px;
+        align-content: center;
+    }
+    footer{
+        background-color: #160e1498;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+      nav a {
+            margin: 10p 5px;
+            color: white;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .box{
+            width: fit-content;
+            height: fit-content;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+</style>
+<body>
+    <header>
+        <h1>My Portfolio</h1>
+        <img src="assets/SOCIAL ICONS/linkedin-icon.png" alt="Profile Picture" >
+        <img src="assets/SOCIAL ICONS/facebook-icon.png" alt="Profile Picture" >
+        <img src="assets/SOCIAL ICONS/twitter-icon.png" alt="Profile Picture">
+        <img src="assets/SOCIAL ICONS/github.png" alt="Profile Picture">
+    <nav>
+        <a href="#About">About</a>
+        <a href="Home">Home</a>
+        <a href="#Contact">Contact</a>
+        <a href="#Portfolio">Portfolio</a>
+    </nav>
+    
+    </header>
+    <div class="content">
+        <h2>Welcome to My Portfolio</h2>
+        <p>This is a showcase of my work and skills as a web developer. Here you can find information about my projects, skills, and how to contact me.</p>
+        <h2>About Me</h2>
+        <p>Welcome to my portfolio! I am a passionate web developer with a keen interest in creating dynamic and responsive websites. My journey in web development began with a fascination for how websites are built and designed.</p>
+        <p>I have experience in HTML, CSS, and JavaScript, and I am constantly learning new technologies to enhance my skills. My goal is to create user-friendly and visually appealing web applications that provide an excellent user experience.</p>
+        <p>Feel free to explore my portfolio to see some of the projects I have worked on. If you have any questions or would like to collaborate, don't hesitate to reach out!</p>
+        
+    <div class="footer1">
+        <div>
+            <h3>Quick Links</h3>
+        
+        </div>
+        <div class="box">
+            <h3>Contact Me</h3>
+            <p>Email:</p>
+            <p>Phone:</p>
+            <p>LinkedIn:</p>    
+        </div>
+        <div class="box">
+            <h3>Follow Me</h3>
+            <p>Twitter:</p>
+            <p>GitHub:</p>
+            <p>Instagram:</p>
+        </div>
+    </div>
+    <footer>    
+        <p>© 2023 My Portfolio. All rights reserved.</p>
+    </footer>
+    <script>
+        // JavaScript can be added here for interactivity
+        document.querySelector('h1').addEventListener('click', function() {
+            alert('Welcome to my portfolio!');
+        });
+    </script>
+
+</body>
+</html>
