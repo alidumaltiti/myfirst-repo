@@ -14,13 +14,12 @@
         background-color: #f0f0f0;
         color: #333;
         font-family: Arial, sans-serif;
-        line-height: 1.6;
     }
     header{
-        background-color: #af528a;
+        background-color: #141414;
         color: white;
         padding: 20px;
-        text-align: center;
+        align-content: center;
         
         h1{
             text-align: left;
@@ -39,10 +38,13 @@
             margin: 1px;
             float: inline-end;
         }
+        img:hover{
+            transform: scale(1.2);
+            transition: transform 0.3s;
+        }
     }
     .footer1{
-        background-color:rgba(231, 56, 56, 0.336);
-        color: rgba(10, 9, 9, 0.651);
+        background-color:rgba(14, 11, 219, 0.966);
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         padding: 20px;
@@ -51,14 +53,22 @@
         position: absolute;
         bottom: 0;
         width: 100%;
+        a{
+            text-decoration: none;
+            color: white
+        }
+        h3{
+            font-size: large;
+        }
     }
     .grid-item {
-      color: rgba(8, 8, 8, 0.733);
+      color: white;
       height: 150px;
-      
+      font-size: small;
+          
     }
     footer{
-        background-color: #160e1498;
+        background-color: #141414e5;
         color: white;
         text-align: center;
         padding: 10px 0;
@@ -66,47 +76,52 @@
         bottom: 0;
         width: 100%;
     }
-      nav a {
-            margin: 10p 5px;
-            color: white;
-            
+    nav {
+        background-color: #1808f7;
+        overflow: hidden;
+    }
+        nav a {
+            float: inline-end;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
         }
         nav a:hover {
-            text-decoration: none
+            text-decoration: none;
+            background-color: #ddd;
+            color: black;
         }
-
-
 </style>
 <body>
     <header>
-        <h1>MAL<SPAn>TITI</SPAn></h1>
+        <h1>MAL<>TITI</h1>
         <img src="assets/SOCIAL ICONS/linkedin-icon.png" alt="Profile Picture" >
         <img src="assets/SOCIAL ICONS/facebook-icon.png" alt="Profile Picture" >
         <img src="assets/SOCIAL ICONS/twitter-icon.png" alt="Profile Picture">
         <img src="assets/SOCIAL ICONS/github.png" alt="Profile Picture">
+    </header>
     <nav>
         <a href="#About">About</a>
         <a href="Home">Home</a>
         <a href="#Contact">Contact</a>
         <a href="#Portfolio">Portfolio</a>
     </nav>
-    
-    </header>
-    <div class="content">
-        <h2>Welcome to My Portfolio</h2>
-        <p>This is a showcase of my work and skills as a web developer. Here you can find information about my projects, skills, and how to contact me.</p>
-        <h2>About Me</h2>
-        <p>Welcome to my portfolio! I am a passionate web developer with a keen interest in creating dynamic and responsive websites. My journey in web development began with a fascination for how websites are built and designed.</p>
-        <p>I have experience in HTML, CSS, and JavaScript, and I am constantly learning new technologies to enhance my skills. My goal is to create user-friendly and visually appealing web applications that provide an excellent user experience.</p>
-        <p>Feel free to explore my portfolio to see some of the projects I have worked on. If you have any questions or would like to collaborate, don't hesitate to reach out!</p>
+    <div style="text-align: center; margin: 20px;">
+        <h2>Get in Touch</h2>
+    </div>
     <section>    
     <div class="footer1">
         <div class="grid-item">
+            <h3>Maltiti</h3>
+        </div>
+        <div class="grid-item">
             <h3>Quick Links</h3>
-                <li><a href="#About">About</a>
-                <li><a href="Home">Home</a>
-                <li><a href="#Contact">Contact</a>
-                <li><a href="#Portfolio">Portfolio</a>
+                <a href="#About">About</a><br>
+                <a href="Home">Home</a><br>
+                <a href="#Contact">Contact</a><br>
+                <a href="#Portfolio">Portfolio</a>
             </div>
         <div class="grid-item">
             <h3>Contact Me</h3>
@@ -119,12 +134,6 @@
             <p>Twitter:</p>
             <p>GitHub:</p>
             <p>Instagram:</p>
-        </div>
-        <div class="grid-item">
-            <h3>Latest Projects</h3>
-            <p>Project 1: Description</p>
-            <p>Project 2: Description</p>
-            <p>Project 3: Description</p>
         </div>
     </div>
     </section>

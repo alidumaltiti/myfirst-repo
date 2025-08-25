@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh; 
+        min-width: 100vw;
+        position: relative;
+        padding-bottom: 100px;
+        background: linear-gradient(to right, #380f8b, #ffffff);
+        overflow-x: hidden;
+    }
+    header{
+        background-color: #141414;
+        color: white;
+        padding: 20px;
+        align-content: center;
+        
+        h1{
+            text-align: left;
+            font-size: x-large;
+            position: absolute;
+    
+        }
+        p{
+            text-align: center;
+            font-size: 1.2em;
+        }
+        img{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 1px;
+            float: inline-end;
+        }
+        img:hover{
+            transform: scale(1.2);
+            transition: transform 0.3s;
+        }
+    }
+    .footer1{
+        background-color:rgba(14, 11, 219, 0.966);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 20px;
+        gap: 10px;
+        align-content: center;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        a{
+            text-decoration: none;
+            color: white
+        }
+        h3{
+            font-size: large;
+        }
+    }
+    .grid-item {
+      color: white;
+      height: 150px;
+      font-size: small;
+          
+    }
+    footer{
+        background-color: #141414e5;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    nav {
+        background-color: #1808f7;
+        overflow: hidden;
+    }
+        nav a {
+            float: inline-end;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: none;
+            background-color: #ddd;
+            color: black;
+        }
+        .textcontainer{
+            text-align:left;
+            font-size: 1.2em;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 600px;
+            height: fit-content;
+            margin-bottom: 80px;
+        }
+</style>
+<body>
+    <header>
+        <h1>MAL<>TITI</h1>
+        <img src="assets/SOCIAL ICONS/linkedin-icon.png" alt="Profile Picture" >
+        <img src="assets/SOCIAL ICONS/facebook-icon.png" alt="Profile Picture" >
+        <img src="assets/SOCIAL ICONS/twitter-icon.png" alt="Profile Picture">
+        <img src="assets/SOCIAL ICONS/github.png" alt="Profile Picture">
+    </header>
+    <nav>
+        <a href="#About">About</a>
+        <a href="Home">Home</a>
+        <a href="#Contact">Contact</a>
+        <a href="#Portfolio">Portfolio</a>
+    </nav>
+    <div style="padding: 110px; color: rgba(17, 1, 1, 0.87);">
+        <img src="assets/dark circle.jpg" alt="Contact Image" style="width:200px; height:200px; margin-left: 800px;position: absolute;">
+        <div class="textcontainer">
+        <h2>Get in Touch</h2>
+        <p>
+            Hi there 👋, welcome to my corner of the web!<br>
+            I’m Maltiti, an aspiring software developer passionate about building creative digital solutions.<br>
+            This portfolio showcases my journey, skills, and projects in the world of coding and technology.<br> 
+            Explore my projects, learn more about me, and let’s connect to build something amazing together.<br>
+        </p>
+        <p>
+            I'd love to hear from you! Whether you have a question about my work, want to <br> 
+            discuss a potential project, or just want to say hello, feel free to reach<br>
+            out using the contact information below.<br>
+        </p>
+        <p>
+            If you have any questions or would like to work together,<br>
+            feel free to reach.<br>
+        </p>
+        </div>
+    </div>
+    <section>    
+    <div class="footer1">
+        <div class="grid-item">
+            <h3>Maltiti</h3>
+        </div>
+        <div class="grid-item">
+            <h3>Quick Links</h3>
+                <a href="#About">About</a><br>
+                <a href="Home">Home</a><br>
+                <a href="#Contact">Contact</a><br>
+                <a href="#Portfolio">Portfolio</a>
+            </div>
+        <div class="grid-item">
+            <h3>Contact Me</h3>
+            <p>Email:<a href="alidumaltiti0@gmail.com">alidumaltiti0@gmail.com</a></p>
+            <p>Phone:+233558839833</p>
+            <p>LinkedIn:<a href="https://www.linkedin.com/in/maltiti-azindoo-alidu-076046151/">Alidu Maltiti Azindoo</a></p>    
+        </div>
+        <div class="grid-item">
+            <h3>Follow Me</h3>
+            <p>Twitter:</p>
+            <p>GitHub:</p>
+            <p>Instagram:</p>
+        </div>
+    </div>
+    </section>
+    <footer>    
+        <p>© 2023 My Portfolio. All rights reserved.</p>
+    </footer>
+    <script>
+        // JavaScript can be added here for interactivity
+        document.querySelector('h1').addEventListener('click', function() {
+            alert('Welcome to my portfolio!');
+        });
+    </script>
+
+</body>
+</html>
