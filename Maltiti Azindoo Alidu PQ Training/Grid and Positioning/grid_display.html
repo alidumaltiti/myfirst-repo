@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Display</title>
+</head>
+<style>
+    body{
+        background: linear-gradient(100deg, white, blue);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header{
+        background-color: #141414;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .container{
+        display: grid;
+        background-color: white;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 4px;
+        
+
+    }
+    .container> *{
+        background-color: rgba(179, 19, 19, 0.808);
+        height: 100px auto;
+        width: 300px auto ;
+        text-align: center;
+        font-size: xx-large;
+        padding: 20px;
+    }
+
+    .globe{
+        background-color: rgba(14, 11, 219, 0.966);
+        grid-column: 3/3;
+        grid-row: 1/4 ;
+        
+    }
+
+    footer{
+        background-color: #141414;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+<body>
+    <header>
+            <p>Intro To Grid Display</p>
+    </header>
+        <div class="container">
+            <div class="globe">🌍🌎🌏</div>
+            <div class="redheart">💖💘💞</div>
+            <div class="house">🛖🏚️🏡</div>
+            <div class="car">🚔🚗🚙</div>
+            <div class="car">🚔🚗🚙</div>
+            <div class="car">🚔🚗🚙</div>
+        </div>
+    <footer>
+        <p>© 2023 My Portfolio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
