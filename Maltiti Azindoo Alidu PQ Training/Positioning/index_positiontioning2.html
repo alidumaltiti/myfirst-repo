@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning</title>
+</head>
+<style>
+    *{
+        margin: 0;
+    }
+    body{
+        background-color: rgb(232, 232, 235);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header{
+        background-color: rgb(41, 4, 204);
+        padding: 20px;
+    }
+    main{
+        background-color: lightblue;
+        padding: 10px;
+    }
+    footer{
+        background-color: rgb(49, 7, 236);
+        padding: 20px;
+        margin-top: 100%;
+        
+    }
+    .footer1{
+        background-color: rgba(21, 18, 37, 0.808);
+        padding: 20px;
+        margin-top: 100%;
+        color: white;
+    }
+    .parent{
+        border: 3px rgb(235, 59, 6) solid;
+        height: 500px;
+        width: 500px;
+        position: relative;
+        left: 20px;
+    }
+    .child{
+        border: 3px rgb(25, 0, 255) solid;
+        height: 100px;
+        width: 50px;
+        position: absolute;
+        left: 50px;
+        top: 100px;
+    }
+    .child-2{
+        border: 3px green solid;
+        height: 100px;
+        width: 50px;
+        position: absolute;
+        left: 20px;
+        top: 50px;
+    }
+    nav{
+        text-align: end;
+        text-decoration: none;
+    }
+
+</style>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">View</a>
+            <a href="Edit">Edit</a>
+            <a href="#">About</a>
+        </nav>
+    </main>
+    <div class="parent">
+        <div class="child"></div>
+        <div class="child-2"></div>
+    </div>
+
+    <div class="footer1"></div>
+    <footer>
+        <p>&copy; 2024 Maltiti Azindoo Alidu</p>
+    </footer>
+</body>
+</html>

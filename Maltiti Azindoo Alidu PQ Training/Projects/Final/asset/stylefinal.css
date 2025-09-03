@@ -1,4 +1,4 @@
-   * {
+ * {
             margin: 0;
             padding: 0;
         }
@@ -58,7 +58,6 @@
             height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            float: left;
         }
         .footer1 {
             background-color: rgba(14, 11, 219, 0.966);
