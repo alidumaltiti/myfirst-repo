@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Navigation with Motivation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        /* Side Navigation Bar */
+        .side-navbar {
+            width: 300px;
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo h2 {
+            font-weight: 600;
+            font-size: 22px;
+        }
+        
+        .nav-links {
+            padding: 20px 0;
+            flex-grow: 1;
+        }
+        
+        .nav-links ul {
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 5px 0;
+        }
+        
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .nav-links i {
+            margin-right: 15px;
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Motivation Section */
+        .motivation-section {
+            background: rgba(255, 255, 255, 0.08);
+            margin: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .motivation-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+        }
+        
+        .motivation-section h3 i {
+            margin-right: 10px;
+        }
+        
+        .motivation-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        
+        .course-modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .module-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .module-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .module-card p {
+            color: #7f8c8d;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #ecf0f1;
+            border-radius: 3px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #4CAF50;
+            border-radius: 3px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .side-navbar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .nav-links {
+                display: flex;
+                overflow-x: auto;
+            }
+            
+            .nav-links ul {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0;
+            }
+            
+            .nav-links a {
+                padding: 15px 20px;
+                white-space: nowrap;
+            }
+            
+            .motivation-section {
+                display: none; /* Hide on mobile to save space */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Side Navigation Bar -->
+    <nav class="side-navbar">
+        <div class="logo">
+            <h2>Learning Platform</h2>
+        </div>
+        
+        <div class="nav-links">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a href="#"><i class="fas fa-tasks"></i> Assignments</a></li>
+                <li><a href="#"><i class="fas fa-calendar"></i> Schedule</a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i> Progress</a></li>
+                <li><a href="#"><i class="fas fa-comments"></i> Discussions</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+        
+        <!-- Motivation Section -->
+        <div class="motivation-section">
+            <h3><i class="fas fa-lightbulb"></i> My Motivation</h3>
+            <p>I'm taking this course to expand my knowledge in web development and learn modern techniques for creating responsive, accessible websites. The skills gained will help me advance my career and work on more complex projects.</p>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="header">
+            <h1>Web Development Course</h1>
+            <p>Master modern web development techniques with HTML, CSS, JavaScript, and more</p>
+        </div>
+        
+        <div class="course-modules">
+            <div class="module-card">
+                <h3>HTML Fundamentals</h3>
+                <p>Learn the building blocks of web pages with semantic HTML.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 80%;"></div>
+                </div>
+            </div>
+            
+            <div class="module-card">
+                <h3>CSS Styling</h3>
+                <p>Master CSS layouts, flexbox, grid, and responsive design.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 65%;"></div>
+                </div>
+            </div>
+            
+            <div class="module-card">
+                <h3>JavaScript Basics</h3>
+                <p>Add interactivity to your websites with JavaScript.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 30%;"></div>
+                </div>
+            </div>
+            
+            <div class="module-card">
+                <h3>Advanced Layouts</h3>
+                <p>Create complex layouts with CSS Grid and Flexbox.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 10%;"></div>
+                </div>
+            </div>
+            
+            <div class="module-card">
+                <h3>Responsive Design</h3>
+                <p>Make your websites work on all screen sizes.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 0%;"></div>
+                </div>
+            </div>
+            
+            <div class="module-card">
+                <h3>Final Project</h3>
+                <p>Apply all your skills to build a complete website.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Simple JavaScript to handle active state for navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Example of dynamic motivation text update
+            const motivationText = "I'm taking this course to expand my knowledge in web development and learn modern techniques for creating responsive, accessible websites. The skills gained will help me advance my career and work on more complex projects.";
+            
+            // You could update this text based on user input or other factors
+            console.log("Motivation section ready!");
+        });
+    </script>
+</body>
+</html>
