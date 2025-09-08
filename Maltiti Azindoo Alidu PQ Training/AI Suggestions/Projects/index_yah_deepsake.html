@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youth Digital Advocacy Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #27ae60;
+            --secondary: #f1c40f;
+            --accent: #2980b9;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --info: #3498db;
+            --gray: #95a5a6;
+            --white: #ffffff;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .nav-link i {
+            margin-right: 0.5rem;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content Area */
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 180px);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #219653;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e2b607;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #2471a3;
+        }
+
+        /* Home Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .featured-issues {
+            margin-top: 2rem;
+        }
+
+        /* Issues Section */
+        .issues-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--light);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .issue-card {
+            position: relative;
+        }
+
+        .issue-category {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--accent);
+            color: var(--white);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .issue-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .issue-author {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+        }
+
+        .issue-author img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            object-fit: cover;
+        }
+
+        .issue-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .action-btn i {
+            margin-right: 0.5rem;
+        }
+
+        .action-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Comments */
+        .comments-section {
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+
+        .comment {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .comment-content {
+            flex-grow: 1;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .mentor-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .comment-text {
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .comment-form {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+
+        .comment-input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px 0 0 8px;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .comment-submit {
+            padding: 0 1rem;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+
+        /* Media Section */
+        .media-tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 1.5rem;
+        }
+
+        .media-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .media-tab.active {
+            color: var(--primary);
+        }
+
+        .media-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .media-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .media-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .media-content {
+            padding: 1rem;
+        }
+
+        .media-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .media-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .media-play-btn i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .media-play-btn:hover {
+            background-color: var(--white);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Leaderboard Section */
+        .leaderboard-tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 1.5rem;
+        }
+
+        .leaderboard-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .leaderboard-tab.active {
+            color: var(--primary);
+        }
+
+        .leaderboard-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .leaderboard-list {
+            list-style: none;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .leaderboard-item:first-child {
+            border-top: 1px solid #eee;
+        }
+
+        .leaderboard-rank {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            width: 50px;
+            text-align: center;
+        }
+
+        .leaderboard-user {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .leaderboard-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        .leaderboard-name {
+            font-weight: 600;
+        }
+
+        .leaderboard-badges {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .leaderboard-score {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        /* Profile Section */
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid var(--primary);
+        }
+
+        .profile-name {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-bio {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            max-width: 600px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-stat {
+            text-align: center;
+        }
+
+        .profile-stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .profile-stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .profile-badges {
+            margin-bottom: 2rem;
+        }
+
+        .badges-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+
+        .badge-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--secondary);
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-name {
+            font-size: 0.8rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .profile-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Auth Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+            display: none;
+        }
+
+        .modal {
+            background-color: var(--white);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .auth-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo i {
+            margin-right: 0.5rem;
+        }
+
+        .footer-description {
+            margin-bottom: 1rem;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link a {
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-link a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Accessibility */
+        .accessibility-tools {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .accessibility-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+        }
+
+        .accessibility-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .accessibility-menu {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+        }
+
+        .accessibility-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .accessibility-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .accessibility-option label {
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+
+        /* High Contrast Mode */
+        .high-contrast {
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+
+        .high-contrast .card {
+            background-color: #000 !important;
+            color: #fff !important;
+            border: 1px solid #fff !important;
+        }
+
+        .high-contrast .form-control {
+            background-color: #000 !important;
+            color: #fff !important;
+            border: 1px solid #fff !important;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--primary);
+                width: 100%;
+                text-align: center;
+                transition: var(--transition);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .issue-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-hands-helping"></i>
+                <span>Youth Advocacy Hub</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link section-link" data-section="home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#issues" class="nav-link section-link" data-section="issues">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Issues</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#media" class="nav-link section-link" data-section="media">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Media</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#leaderboard" class="nav-link section-link" data-section="leaderboard">
+                        <i class="fas fa-trophy"></i>
+                        <span>Leaderboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#profile" class="nav-link section-link" data-section="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button id="login-btn" class="btn btn-secondary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="hero">
+                    <h1 class="hero-title">Youth Digital Advocacy Hub</h1>
+                    <p class="hero-subtitle">A platform for young people in Ghana to share community issues, propose solutions, collaborate with mentors, and drive positive change through digital advocacy.</p>
+                    <button class="btn btn-secondary">Get Started</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">248</div>
+                        <div class="stat-label">Issues Reported</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">127</div>
+                        <div class="stat-label">Solutions Proposed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">56</div>
+                        <div class="stat-label">Active Campaigns</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">543</div>
+                        <div class="stat-label">Youth Members</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Featured Issues</h2>
+                <div class="featured-issues">
+                    <div class="card issue-card">
+                        <span class="issue-category">Climate Action</span>
+                        <h3 class="card-title">Plastic Pollution in Accra</h3>
+                        <div class="issue-meta">
+                            <div class="issue-author">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
+                                <span>Kwame Mensah</span>
+                            </div>
+                            <span><i class="far fa-clock"></i> 2 days ago</span>
+                        </div>
+                        <p>Plastic waste is overwhelming our city. Drainage systems are clogged, leading to flooding during rainy seasons. We need sustainable solutions and better waste management policies.</p>
+                        <div class="issue-actions">
+                            <button class="action-btn"><i class="far fa-thumbs-up"></i> Support (42)</button>
+                            <button class="action-btn"><i class="far fa-comment"></i> Comment (15)</button>
+                            <button class="action-btn"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </div>
+
+                    <div class="card issue-card">
+                        <span class="issue-category">Education</span>
+                        <h3 class="card-title">Lack of Digital Resources in Rural Schools</h3>
+                        <div class="issue-meta">
+                            <div class="issue-author">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Avatar">
+                                <span>Ama Nyarko</span>
+                            </div>
+                            <span><i class="far fa-clock"></i> 5 days ago</span>
+                        </div>
+                        <p>Schools in rural areas lack computers, internet access, and digital learning tools. This creates an educational gap between urban and rural students. We need initiatives to bridge this digital divide.</p>
+                        <div class="issue-actions">
+                            <button class="action-btn"><i class="far fa-thumbs-up"></i> Support (28)</button>
+                            <button class="action-btn"><i class="far fa-comment"></i> Comment (9)</button>
+                            <button class="action-btn"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Issues Section -->
+            <section id="issues" class="section">
+                <h2 class="section-title">Community Issues</h2>
+                
+                <div class="card">
+                    <h3 class="card-title">Report an Issue</h3>
+                    <form id="issue-form">
+                        <div class="form-group">
+                            <label for="issue-title" class="form-label">Title</label>
+                            <input type="text" id="issue-title" class="form-control" placeholder="Brief description of the issue">
+                        </div>
+                        <div class="form-group">
+                            <label for="issue-category" class="form-label">Category</label>
+                            <select id="issue-category" class="form-control">
+                                <option value="">Select a category</option>
+                                <option value="social-justice">Social Justice</option>
+                                <option value="climate-action">Climate Action</option>
+                                <option value="education">Education</option>
+                                <option value="governance">Governance</option>
+                                <option value="health">Health</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="issue-description" class="form-label">Description</label>
+                            <textarea id="issue-description" class="form-control" placeholder="Describe the issue in detail, including its impact and potential solutions"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Submit Issue</button>
+                    </form>
+                </div>
+
+                <div class="issues-filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Social Justice</button>
+                    <button class="filter-btn">Climate Action</button>
+                    <button class="filter-btn">Education</button>
+                    <button class="filter-btn">Governance</button>
+                    <button class="filter-btn">Health</button>
+                </div>
+
+                <div id="issues-list">
+                    <!-- Issues will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Media Section -->
+            <section id="media" class="section">
+                <h2 class="section-title">Media Showcase</h2>
+                
+                <div class="media-tabs">
+                    <button class="media-tab active" data-tab="videos">Videos</button>
+                    <button class="media-tab" data-tab="podcasts">Podcasts</button>
+                    <button class="media-tab" data-tab="campaigns">Campaigns</button>
+                </div>
+
+                <div class="media-content">
+                    <div class="media-tab-content active" id="videos-tab">
+                        <div class="media-grid">
+                            <div class="card media-card">
+                                <img src="https://i.ytimg.com/vi/6CNLv0h5bgU/maxresdefault.jpg" alt="Video thumbnail" class="media-thumbnail">
+                                <div class="media-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="media-content">
+                                    <h3 class="media-title">Youth Leading Climate Action</h3>
+                                    <p class="media-description">How young activists in Ghana are tackling environmental challenges through innovation and advocacy.</p>
+                                    <button class="btn btn-accent">Watch Now</button>
+                                </div>
+                            </div>
+
+                            <div class="card media-card">
+                                <img src="https://i.ytimg.com/vi/6stlBk9JgIc/maxresdefault.jpg" alt="Video thumbnail" class="media-thumbnail">
+                                <div class="media-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="media-content">
+                                    <h3 class="media-title">Digital Rights in Ghana</h3>
+                                    <p class="media-description">A discussion on internet freedom, digital privacy, and the role of youth in shaping digital policy.</p>
+                                    <button class="btn btn-accent">Watch Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media-tab-content" id="podcasts-tab" style="display: none;">
+                        <div class="media-grid">
+                            <div class="card media-card">
+                                <img src="https://images.unsplash.com/photo-1589903308904-d969a5ad15d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Podcast thumbnail" class="media-thumbnail">
+                                <div class="media-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="media-content">
+                                    <h3 class="media-title">Youth Voice Podcast: Episode 12</h3>
+                                    <p class="media-description">Interview with social entrepreneur Kofi Amankwah on creating change through business.</p>
+                                    <button class="btn btn-accent">Listen Now</button>
+                                </div>
+                            </div>
+
+                            <div class="card media-card">
+                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Podcast thumbnail" class="media-thumbnail">
+                                <div class="media-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="media-content">
+                                    <h3 class="media-title">Advocate's Corner: Education Reform</h3>
+                                    <p class="media-description">Students discuss the need for curriculum changes to include digital literacy and critical thinking.</p>
+                                    <button class="btn btn-accent">Listen Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media-tab-content" id="campaigns-tab" style="display: none;">
+                        <div class="media-grid">
+                            <div class="card media-card">
+                                <img src="https://images.unsplash.com/photo-1546412414-e1885e51cefe?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Campaign thumbnail" class="media-thumbnail">
+                                <div class="media-content">
+                                    <h3 class="media-title">#CleanGhanaNow</h3>
+                                    <p class="media-description">Join our campaign to reduce plastic waste and promote recycling initiatives across Ghanaian communities.</p>
+                                    <div class="progress" style="height: 10px; background-color: #eee; border-radius: 5px; margin-bottom: 1rem;">
+                                        <div class="progress-bar" style="height: 100%; width: 65%; background-color: var(--primary); border-radius: 5px;"></div>
+                                    </div>
+                                    <p>2,548 supporters of 5,000 goal</p>
+                                    <button class="btn btn-accent">Join Campaign</button>
+                                </div>
+                            </div>
+
+                            <div class="card media-card">
+                                <img src="https://images.unsplash.com/photo-1584697964358-3e14ca57658b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Campaign thumbnail" class="media-thumbnail">
+                                <div class="media-content">
+                                    <h3 class="media-title">#DigitalForAll</h3>
+                                    <p class="media-description">Advocating for equal access to digital resources and internet connectivity for all Ghanaian students.</p>
+                                    <div class="progress" style="height: 10px; background-color: #eee; border-radius: 5px; margin-bottom: 1rem;">
+                                        <div class="progress-bar" style="height: 100%; width: 42%; background-color: var(--primary); border-radius: 5px;"></div>
+                                    </div>
+                                    <p>1,230 supporters of 3,000 goal</p>
+                                    <button class="btn btn-accent">Join Campaign</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaderboard Section -->
+            <section id="leaderboard" class="section">
+                <h2 class="section-title">Leaderboard</h2>
+                
+                <div class="leaderboard-tabs">
+                    <button class="leaderboard-tab active" data-board="weekly">Weekly</button>
+                    <button class="leaderboard-tab" data-board="monthly">Monthly</button>
+                    <button class="leaderboard-tab" data-board="alltime">All-Time</button>
+                </div>
+
+                <div class="card">
+                    <ul class="leaderboard-list" id="leaderboard-list">
+                        <!-- Leaderboard items will be dynamically added here -->
+                    </ul>
+                </div>
+
+                <h3 class="section-title">Badges</h3>
+                
+                <div class="card">
+                    <div class="badges-list">
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="badge-name">First Contribution</span>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <span class="badge-name">Active Commenter</span>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <span class="badge-name">Solution Proposer</span>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="badge-name">Community Builder</span>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <span class="badge-name">Top Advocate</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="section">
+                <div class="profile-header">
+                    <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Profile Avatar" class="profile-avatar">
+                    <h2 class="profile-name">Kwame Mensah</h2>
+                    <p class="profile-bio">Climate activist and community organizer passionate about sustainable development and youth empowerment.</p>
+                    
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-number">24</div>
+                            <div class="profile-stat-label">Issues Reported</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-number">18</div>
+                            <div class="profile-stat-label">Solutions Proposed</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-number">356</div>
+                            <div class="profile-stat-label">XP Points</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title">My Badges</h3>
+                
+                <div class="card profile-badges">
+                    <div class="badges-list">
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="badge-name">First Contribution</span>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <span class="badge-name">Active Commenter</span>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <span class="badge-name">Solution Proposer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <div>
+                        <h3 class="section-title">My Issues</h3>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Plastic Pollution in Accra</h4>
+                                <span class="issue-category">Climate Action</span>
+                            </div>
+                            <p>Plastic waste is overwhelming our city. Drainage systems are clogged, leading to flooding during rainy seasons...</p>
+                            <div class="issue-actions">
+                                <button class="action-btn"><i class="far fa-thumbs-up"></i> Support (42)</button>
+                                <button class="action-btn"><i class="far fa-comment"></i> Comment (15)</button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Lack of Green Spaces in Urban Areas</h4>
+                                <span class="issue-category">Climate Action</span>
+                            </div>
+                            <p>Our cities are becoming concrete jungles with fewer parks and green spaces for recreation and environmental balance...</p>
+                            <div class="issue-actions">
+                                <button class="action-btn"><i class="far fa-thumbs-up"></i> Support (28)</button>
+                                <button class="action-btn"><i class="far fa-comment"></i> Comment (7)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="section-title">My Solutions</h3>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Community Recycling Program</h4>
+                                <span>Posted on "Plastic Pollution in Accra"</span>
+                            </div>
+                            <p>I propose establishing neighborhood recycling centers where residents can bring sorted waste for proper processing and even earn incentives for participation...</p>
+                            <div class="issue-actions">
+                                <button class="action-btn"><i class="far fa-thumbs-up"></i> Support (35)</button>
+                                <button class="action-btn"><i class="far fa-comment"></i> Comment (12)</button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Rooftop Gardens Initiative</h4>
+                                <span>Posted on "Lack of Green Spaces in Urban Areas"</span>
+                            </div>
+                            <p>We can create more green spaces by implementing rooftop gardens on buildings throughout the city. This would help with air purification, temperature regulation, and even urban agriculture...</p>
+                            <div class="issue-actions">
+                                <button class="action-btn"><i class="far fa-thumbs-up"></i> Support (24)</button>
+                                <button class="action-btn"><i class="far fa-comment"></i> Comment (8)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>Youth Advocacy Hub</span>
+                    </div>
+                    <p class="footer-description">Empowering young people in Ghana to drive positive change through digital advocacy and community engagement.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#home">Home</a></li>
+                        <li class="footer-link"><a href="#issues">Report an Issue</a></li>
+                        <li class="footer-link"><a href="#media">Media</a></li>
+                        <li class="footer-link"><a href="#leaderboard">Leaderboard</a></li>
+                        <li class="footer-link"><a href="#profile">My Profile</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Contact Us</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><i class="fas fa-envelope"></i> <a href="mailto:info@youthhubgh.org">info@youthhubgh.org</a></li>
+                        <li class="footer-link"><i class="fas fa-phone"></i> <a href="tel:+233123456789">+233 123 456 789</a></li>
+                        <li class="footer-link"><i class="fas fa-map-marker-alt"></i> Accra, Ghana</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Youth Digital Advocacy Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modals -->
+    <div class="modal-overlay" id="login-modal">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Login to Your Account</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="Your email address">
+                </div>
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="Your password">
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+            </form>
+            <div class="auth-toggle">
+                <p>Don't have an account? <button class="auth-toggle-btn" data-target="signup-modal">Sign up</button></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="signup-modal">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h2 class="modal-title">Create an Account</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name" class="form-label">Full Name</label>
+                    <input type="text" id="signup-name" class="form-control" placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email" class="form-label">Email</label>
+                    <input type="email" id="signup-email" class="form-control" placeholder="Your email address">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password" class="form-label">Password</label>
+                    <input type="password" id="signup-password" class="form-control" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label for="signup-bio" class="form-label">Bio (Optional)</label>
+                    <textarea id="signup-bio" class="form-control" placeholder="Tell us about yourself and your interests"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Sign Up</button>
+            </form>
+            <div class="auth-toggle">
+                <p>Already have an account? <button class="auth-toggle-btn" data-target="login-modal">Login</button></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility Tools -->
+    <div class="accessibility-tools">
+        <div class="accessibility-btn">
+            <i class="fas fa-universal-access"></i>
+        </div>
+        <div class="accessibility-menu">
+            <div class="accessibility-option">
+                <input type="checkbox" id="high-contrast">
+                <label for="high-contrast">High Contrast</label>
+            </div>
+            <div class="accessibility-option">
+                <input type="checkbox" id="large-text">
+                <label for="large-text">Large Text</label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const sectionLinks = document.querySelectorAll('.section-link');
+            const sections = document.querySelectorAll('.section');
+            
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            sectionLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Hide all sections
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show target section
+                    document.getElementById(targetSection).classList.add('active');
+                    
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Auth Modals
+            const loginBtn = document.getElementById('login-btn');
+            const loginModal = document.getElementById('login-modal');
+            const signupModal = document.getElementById('signup-modal');
+            const modalCloses = document.querySelectorAll('.modal-close');
+            const authToggleBtns = document.querySelectorAll('.auth-toggle-btn');
+            
+            loginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+            });
+            
+            modalCloses.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    loginModal.style.display = 'none';
+                    signupModal.style.display = 'none';
+                });
+            });
+            
+            authToggleBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetModal = this.getAttribute('data-target');
+                    loginModal.style.display = 'none';
+                    signupModal.style.display = 'none';
+                    
+                    if (targetModal === 'login-modal') {
+                        loginModal.style.display = 'flex';
+                    } else if (targetModal === 'signup-modal') {
+                        signupModal.style.display = 'flex';
+                    }
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (e.target === signupModal) {
+                    signupModal.style.display = 'none';
+                }
+            });
+            
+            // Form Submissions
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const issueForm = document.getElementById('issue-form');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                // Simple validation
+                if (email && password) {
+                    alert('Login successful!');
+                    loginModal.style.display = 'none';
+                    // In a real app, you would handle authentication here
+                } else {
+                    alert('Please fill in all fields');
+                }
+            });
+            
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                
+                // Simple validation
+                if (name && email && password) {
+                    alert('Account created successfully!');
+                    signupModal.style.display = 'none';
+                    // In a real app, you would handle user registration here
+                } else {
+                    alert('Please fill in all required fields');
+                }
+            });
+            
+            issueForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const title = document.getElementById('issue-title').value;
+                const category = document.getElementById('issue-category').value;
+                const description = document.getElementById('issue-description').value;
+                
+                // Simple validation
+                if (title && category && description) {
+                    alert('Issue submitted successfully!');
+                    issueForm.reset();
+                    // In a real app, you would handle issue submission here
+                } else {
+                    alert('Please fill in all fields');
+                }
+            });
+            
+            // Media Tabs
+            const mediaTabs = document.querySelectorAll('.media-tab');
+            
+            mediaTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs
+                    mediaTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab content
+                    document.querySelectorAll('.media-tab-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    
+                    // Show selected tab content
+                    document.getElementById(`${tabName}-tab`).style.display = 'block';
+                });
+            });
+            
+            // Leaderboard Tabs
+            const leaderboardTabs = document.querySelectorAll('.leaderboard-tab');
+            
+            leaderboardTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const boardType = this.getAttribute('data-board');
+                    
+                    // Remove active class from all tabs
+                    leaderboardTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // In a real app, you would fetch and display the appropriate leaderboard data
+                    alert(`Showing ${boardType} leaderboard`);
+                });
+            });
+            
+            // Accessibility Tools
+            const accessibilityBtn = document.querySelector('.accessibility-btn');
+            const accessibilityMenu = document.querySelector('.accessibility-menu');
+            const highContrastToggle = document.getElementById('high-contrast');
+            const largeTextToggle = document.getElementById('large-text');
+            
+            accessibilityBtn.addEventListener('click', function() {
+                accessibilityMenu.style.display = accessibilityMenu.style.display === 'block' ? 'none' : 'block';
+            });
+            
+            highContrastToggle.addEventListener('change', function() {
+                document.body.classList.toggle('high-contrast', this.checked);
+            });
+            
+            largeTextToggle.addEventListener('change', function() {
+                document.body.classList.toggle('large-text', this.checked);
+            });
+            
+            // Close accessibility menu when clicking outside
+            window.addEventListener('click', function(e) {
+                if (!e.target.closest('.accessibility-tools')) {
+                    accessibilityMenu.style.display = 'none';
+                }
+            });
+            
+            // Sample data for issues (in a real app, this would come from a database)
+            const sampleIssues = [
+                {
+                    id: 1,
+                    title: "Lack of Youth Centers in Kumasi",
+                    category: "Social Justice",
+                    author: "Ama Serwaa",
+                    authorAvatar: "https://randomuser.me/api/portraits/women/65.jpg",
+                    date: "3 days ago",
+                    content: "Our community has no dedicated spaces for young people to gather, learn, and develop skills. This leads to limited opportunities for personal growth and community engagement.",
+                    supports: 31,
+                    comments: 8
+                },
+                {
+                    id: 2,
+                    title: "Poor Road Conditions in Rural Areas",
+                    category: "Governance",
+                    author: "Kofi Manu",
+                    authorAvatar: "https://randomuser.me/api/portraits/men/22.jpg",
+                    date: "1 week ago",
+                    content: "Many rural communities lack proper road infrastructure, making transportation difficult especially during rainy seasons. This affects access to education, healthcare, and markets.",
+                    supports: 45,
+                    comments: 12
+                },
+                {
+                    id: 3,
+                    title: "Limited Access to Mental Health Services",
+                    category: "Health",
+                    author: "Esi Ampofo",
+                    authorAvatar: "https://randomuser.me/api/portraits/women/33.jpg",
+                    date: "5 days ago",
+                    content: "Young people in Ghana face mental health challenges but have limited access to affordable and youth-friendly mental health services. We need more awareness and support systems.",
+                    supports: 52,
+                    comments: 15
+                }
+            ];
+            
+            // Render sample issues
+            const issuesList = document.getElementById('issues-list');
+            
+            sampleIssues.forEach(issue => {
+                const issueCard = document.createElement('div');
+                issueCard.className = 'card issue-card';
+                issueCard.innerHTML = `
+                    <span class="issue-category">${issue.category}</span>
+                    <h3 class="card-title">${issue.title}</h3>
+                    <div class="issue-meta">
+                        <div class="issue-author">
+                            <img src="${issue.authorAvatar}" alt="User Avatar">
+                            <span>${issue.author}</span>
+                        </div>
+                        <span><i class="far fa-clock"></i> ${issue.date}</span>
+                    </div>
+                    <p>${issue.content}</p>
+                    <div class="issue-actions">
+                        <button class="action-btn"><i class="far fa-thumbs-up"></i> Support (${issue.supports})</button>
+                        <button class="action-btn"><i class="far fa-comment"></i> Comment (${issue.comments})</button>
+                        <button class="action-btn"><i class="fas fa-share"></i> Share</button>
+                    </div>
+                `;
+                issuesList.appendChild(issueCard);
+            });
+            
+            // Sample data for leaderboard (in a real app, this would come from a database)
+            const sampleLeaderboard = [
+                {
+                    rank: 1,
+                    name: "Kwame Mensah",
+                    avatar: "https://randomuser.me/api/portraits/men/41.jpg",
+                    score: 356,
+                    badges: 3
+                },
+                {
+                    rank: 2,
+                    name: "Ama Nyarko",
+                    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+                    score: 298,
+                    badges: 2
+                },
+                {
+                    rank: 3,
+                    name: "Kofi Manu",
+                    avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+                    score: 267,
+                    badges: 2
+                },
+                {
+                    rank: 4,
+                    name: "Esi Ampofo",
+                    avatar: "https://randomuser.me/api/portraits/women/33.jpg",
+                    score: 231,
+                    badges: 2
+                },
+                {
+                    rank: 5,
+                    name: "Ama Serwaa",
+                    avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+                    score: 215,
+                    badges: 1
+                }
+            ];
+            
+            // Render leaderboard
+            const leaderboardList = document.getElementById('leaderboard-list');
+            
+            sampleLeaderboard.forEach(user => {
+                const leaderboardItem = document.createElement('li');
+                leaderboardItem.className = 'leaderboard-item';
+                leaderboardItem.innerHTML = `
+                    <div class="leaderboard-rank">${user.rank}</div>
+                    <div class="leaderboard-user">
+                        <img src="${user.avatar}" alt="User Avatar" class="leaderboard-avatar">
+                        <div>
+                            <div class="leaderboard-name">${user.name}</div>
+                            <div class="leaderboard-badges">
+                                ${Array(user.badges).fill('<i class="fas fa-medal" style="color: #f1c40f;"></i>').join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="leaderboard-score">${user.score}</div>
+                `;
+                leaderboardList.appendChild(leaderboardItem);
+            });
+        });
+    </script>
+</body>
+</html>
