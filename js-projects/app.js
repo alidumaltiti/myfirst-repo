@@ -1,5 +1,5 @@
 // app.js
-console.log("Hello, World! This is my first script.");
+console.log ("Hello, World! This is my first script.");
 
 const a = 5;
 const b = 10;
