@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+<style>
+    .box{
+        padding: 20px;
+        background-color: black;
+        border: 20px solid;
+    }
+    button{
+        background-color: blue;
+    }
+</style>
 <body>
-    <h1>Hello World</h1>
-    <script src="script.js"></script>
+    <header>
+    <h2>My First JavaScript</h2>
+    </header>
+    <main>
+    <p>What is the result of 5 + 6</p>
+    <p id="demo">Hello</p>
+     <button onclick="document.getElementById('demo').innerHTML = 5 + 6;">Click here</button>
+    <hr>
+    <p id="math">Here</p>
+    <hr>
+    <p id="fonts">Hello There</p> 
+    <button type="button" onclick="myfunction">Click here</button>
+    <hr>
+
+    </main>
+
+    <script>
+        function myfunction () {
+            document.getElementById("fonts").innerHTML;
+        }
+
+    </script>
 </body>
 </html>
