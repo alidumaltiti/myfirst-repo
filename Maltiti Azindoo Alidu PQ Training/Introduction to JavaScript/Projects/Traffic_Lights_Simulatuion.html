@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        <div style="width:60px; margin:auto; padding:20px; background:#222; border-radius:20px;">
+            <div id="redLight" style="width:40px; height:40px; margin:10px auto; border-radius:50%; background:gray;"></div>
+            <div id="yellowLight" style="width:40px; height:40px; margin:10px auto; border-radius:50%; background:gray;"></div>
+            <div id="greenLight" style="width:40px; height:40px; margin:10px auto; border-radius:50%; background:gray;"></div>
+        </div>
+        <div class="content" style="margin-top:30px;">
+            <button onclick="changeLight('red')">Red</button>
+            <button onclick="changeLight('yellow')">Yellow</button>
+            <button onclick="changeLight('green')">Green</button>
+        </div>
+    </div>
+    <script>
+        function changeLight(color) {
+            document.getElementById('redLight').style.background = color === 'red' ? 'red' : 'gray';
+            document.getElementById('yellowLight').style.background = color === 'yellow' ? 'yellow' : 'gray';
+            document.getElementById('greenLight').style.background = color === 'green' ? 'green' : 'gray';
+            }
+    </script>
+</body>
+</html>

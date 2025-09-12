@@ -57,6 +57,7 @@
         margin: 20px;
         width: 80px;
         padding: 5px;
+        box-shadow:0px 5px 5px 0px rgb(27, 20, 20);
     }
 
     button:hover{
@@ -65,6 +66,7 @@
     }
 
 </style>
+
 <body>
     <header>
         <h2>Traffic Lights Simulation</h2>
@@ -77,23 +79,41 @@
 
             <div id="green" class="green"></div>
         </div>
-        <div class="buttons">
-        <button onclick="changeLight('red')">Stop</button>
-        <button onclick="changeLight('yellow')">Get Ready</button>
-        <button onclick="changeLight('Reset')">Reset</button>
-        <button onclick="changeLight('green')">Start</button>
-        </div>
-    </main>
+        </main>
     <footer>
-
     </footer>
     <script>
-        function changeLight(color) {
-            document.getElementById('red').style.background = color === 'red' ? 'red' : 'gray';
-            document.getElementById('yellow').style.background = color === 'yellow' ? 'yellow' : 'gray';
-            document.getElementById('green').style.background = color === 'green' ? 'green' : 'gray';
-            document.getElementById('Reset').style.background =color ===  'gray' ? 'gray' : 'gray';
+        const redLight = document.getElementById('red');
+        const yellowLight = document.getElementById('yellow');
+        const greenLight = document.getElementById('green');
+
+        const lights = [
+            { element: redLight, color: 'red' },
+            { element: greenLight, color: 'green' },
+            { element: yellowLight, color: 'yellow' }
+        ];
+
+        let currentLightIndex = 0;
+
+        function changeLight() {
+            // Turn off all lights
+            redLight.style.backgroundColor = 'rgba(85, 79, 79, 0.808)';
+            yellowLight.style.backgroundColor = 'rgba(73, 69, 69, 0.801)';
+            greenLight.style.backgroundColor = 'rgba(68, 66, 66, 0.877)';
+
+            // Turn on the current light
+            const currentLight = lights[currentLightIndex];
+            currentLight.element.style.backgroundColor = currentLight.color;
+
+            // Move to the next light
+            currentLightIndex = (currentLightIndex + 1) % lights.length;
         }
+
+        // Change light every 2 seconds
+        setInterval(changeLight, 2000);
+
+        // Initialize the first light
+        changeLight();
     </script>
 </body>
 </html>
