@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Test Area</title>
 </head>
 <body>
     <h1 id="title">Hello, DOM!</h1>
@@ -11,12 +11,44 @@
   const title = document.getElementById("title");
   console.log(title.textContent); // Output: Hello, DOM!
 </script>
-
+<hr>
 <p class="intro">Welcome!</p>
 <p class="intro">Let's learn the DOM.</p>
 <script>
   const intros = document.getElementsByClassName("intro");
   console.log(intros[2].textContent); // Output: Welcome!
+</script>
+<hr>
+<h1 id="title2">Old Title</h1>
+<script>
+  const title2 = document.getElementById("title2");
+  title2.textContent = "New Title"; // Updates text
+</script>
+<hr>
+<h2 id="home">home</h2>
+<script>
+  /*const home = document.querySelector("h2");*/h
+  const home = document.getElementById("home");
+  home.style.color = "blue"; // Changes text color to blue  
+  home.style.fontSize = "24px"; // Changes font size to 24px
+  home.style.backgroundColor = "lightgray"; // Changes background color to light gray
+</script>
+<hr>
+<div id="container"></div>
+<script>
+  const container = document.getElementById("container");
+  container.innerHTML = "<p>Dynamic Content</p>,"; // Adds a paragraph
+  container.innerHTML += "<button>Click Me</button>"; // Adds a button
+  container.innerHTML += "<ul><li>Item 1</li><li>Item 2</li></ul>"; // Adds a list
+  container.innerHTML += "<img src='https://via.placeholder.com/150' alt='Placeholder Image'>"; // Adds an image
+  container.innerHTML += "<a href='https://www.example.com' target='_blank'>Visit Example.com</a>"; // Adds a link
+  container.innerHTML += "<input type='text' placeholder='Enter text here'>"; // Adds a text input  
+  container.innerHTML += "<textarea placeholder='Enter text here'></textarea>"; // Adds a text area
+  container.innerHTML += "<select><option value='option1'>Option 1</option><option value='option2'>Option 2</option></select>";
+  container.innerHTML += "<form><input type='submit' value='Submit'></form>"; // Adds a form with a submit button
+  container.innerHTML += "<div style='border: 1px solid black; padding: 10px;'>Styled Div</div>"; // Adds a styled div
+  container.innerHTML += "<span style='color: red;'>Red Text</span>"; // Adds a span with red text
+  container.innerHTML += "<table border='1'><tr><th>Header 1</th><th>Header 2</th></tr><tr><td>Data 1</td><td>Data 2</td></tr></table>"; // Adds a table
 </script>
 </body>
 </html>
