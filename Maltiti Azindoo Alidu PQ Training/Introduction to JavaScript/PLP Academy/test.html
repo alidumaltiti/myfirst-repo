@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="title">Hello, DOM!</h1>
+<script>
+  const title = document.getElementById("title");
+  console.log(title.textContent); // Output: Hello, DOM!
+</script>
+
+<p class="intro">Welcome!</p>
+<p class="intro">Let's learn the DOM.</p>
+<script>
+  const intros = document.getElementsByClassName("intro");
+  console.log(intros[2].textContent); // Output: Welcome!
+</script>
+</body>
+</html>
