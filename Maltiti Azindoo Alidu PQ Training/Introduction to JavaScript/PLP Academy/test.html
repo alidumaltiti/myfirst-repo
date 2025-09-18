@@ -50,5 +50,71 @@
   container.innerHTML += "<span style='color: red;'>Red Text</span>"; // Adds a span with red text
   container.innerHTML += "<table border='1'><tr><th>Header 1</th><th>Header 2</th></tr><tr><td>Data 1</td><td>Data 2</td></tr></table>"; // Adds a table
 </script>
+<hr>
+<img id="image" src="assets/dsd.jpg" alt="Sample Image">
+<script>
+  const image = document.getElementById("image");
+  image.setAttribute("src", "assets/sds.jpg"); // Updates the image source
+</script>
+<hr>
+<p id="text">Style Me!</p>
+<script>
+  const text = document.getElementById("text");
+  text.style.color = "blue"; // Changes text color
+  text.style.fontSize = "20px"; // Changes font size
+  text.style.fontWeight = "bold"; // Makes text bold
+  text.style.backgroundColor = "lightgray"; // Changes background color
+  text.style.padding = "10px"; // Adds padding
+  text.style.border = "2px solid black"; // Adds border
+  text.style.borderRadius = "5px"; // Rounds the corners
+  text.style.textAlign = "center"; // Centers the text
+  text.style.textTransform = "uppercase"; // Converts text to uppercase
+  text.style.textDecoration = "underline"; // Adds an underline to the text
+  text.style.letterSpacing = "2px"; // Increases letter spacing
+  text.style.listStyle = "none"; // Removes bullet points if it were in a list    
+  text.style.lineHeight = "1.5"; // Sets line height
+  text.style.wordSpacing = "4px"; // Increases word spacing
+</script>
+<hr>
+<p id="text" class="highlight">Styled Text</p>
+<script>
+  const text = document.getElementById("text");
+  text.classList.add("bold"); // Adds a class
+  text.classList.remove("highlight"); // Removes a class
+</script>
+<hr>
+<p id="message">Click the button to change me!</p>
+<button id="btn">Click Me</button>
+<script>
+  const button = document.getElementById("btn");
+  const message = document.getElementById("message");
+
+  button.addEventListener("click", () => {
+    message.textContent = "You clicked the button!";
+  });
+</script>
+<hr>
+<ul id="list"></ul>
+<button id="add">Add Item</button>
+<script>
+  const list = document.getElementById("list");
+  const addButton = document.getElementById("add");
+
+  addButton.addEventListener("click", () => {
+    const newItem = document.createElement("li"); // Create new list item
+    newItem.textContent = "New Item"; // Set its text
+    list.appendChild(newItem); // Add it to the list
+  });
+</script>
+<hr>
+<button id="alert">Show Alert</button>
+<script>
+  const alertButton = document.getElementById("alert");
+  alertButton.addEventListener("click", () => {
+    alert("Button clicked!");
+  });
+</script>
+<hr>
+
 </body>
 </html>

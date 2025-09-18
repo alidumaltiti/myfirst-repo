@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #b40da6;
+    }
+    .container {
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin: 0 auto;
+        font-size: medium;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+    h1 {
+        color: #333;
+        font-size: medium;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+        font-size: 14px;
+    }
+    input, select, button {
+        margin: 10px 0;
+        padding: 8px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #result {
+        margin-top: 20px;
+        font-weight: bold;
+        color: green;
+        font-size: 18px;
+        text-align: center;
+        font-size: medium;
+    }
+    #result.error {
+        color: red;
+    }
+    select {
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 6px;
+        width: 220px;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield; /* For Firefox */
+        -webkit-appearance: textfield; /* For Safari and Chrome */
+        appearance: textfield;
+    }
+    select option {
+        padding: 10px;
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        color: #140e0e;
+        background-color: #fff;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+    }
+    select option:hover {
+        background-color: #f0f0f0;
+    }
+    select option:selected {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+</style>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <label for="temperature">Enter temperature</label>
+        <input type="number" id="temperature" placeholder="Enter temperature">
+        <label for="conversionType">Unit Conversion</label>
+        <select name="conversionType" id="conversionType">
+            <option value="cToF">Celsius to Fahrenheit</option>
+            <option value="fToC">Fahrenheit to Celsius</option>
+            <option value="cToK">Celsius to Kelvin</option>
+            <option value="kToC">Kelvin to Celsius</option>
+            <option value="fToK">Fahrenheit to Kelvin</option>
+            <option value="kToF">Kelvin to Fahrenheit</option>
+        </select><br>
+        <button onclick="convertTemperature()">Convert</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function convertTemperature() {
+            const temperatureInput = document.getElementById("temperature").value;
+            const conversionType = document.getElementById("conversionType").value;
+            const resultElement = document.getElementById("result");
+
+            if (isNaN(temperatureInput)) {
+                resultElement.textContent = "Please enter a valid number.";
+                resultElement.classList.add("error");
+                return;
+            }
+
+            let convertedTemperature;
+
+            switch (conversionType) {
+                case "cToF":
+                    convertedTemperature = (temperatureInput * 9/5) + 32;
+                    break;
+                case "fToC":
+                    convertedTemperature = (temperatureInput - 32) * 5/9;
+                    break;
+                case "cToK":
+                    convertedTemperature = parseFloat(temperatureInput) + 273.15;
+                    break;
+                case "kToC":
+                    convertedTemperature = temperatureInput - 273.15;
+                    break;
+                case "fToK":
+                    convertedTemperature = (temperatureInput - 32) * 5/9 + 273
+                    break;
+                case "kToF":
+                    convertedTemperature = (temperatureInput - 273.15) * 9/5 + 32;
+                    break;
+                default:
+                    resultElement.textContent = "Invalid conversion type.";
+                    resultElement.classList.add("error");
+                    return;
+            }
+
+            resultElement.textContent = `Converted temperature: ${convertedTemperature.toFixed(2)}`;
+            resultElement.classList.remove("error");
+        }
+
+    </script>    
+
+</body>
+</html>
