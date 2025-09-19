@@ -329,3 +329,182 @@ University for Development Studies (UDS), Ghana – 2021
 ✅ This is the **fully fleshed-out content** for your portfolio website. Each section can stand as a full page or as a block in a one-page portfolio site.
 
 Do you want me to now **convert this into a starter HTML + CSS template** so you can begin building the site directly?
+
+
+New information
+
+Perfect 🙌 Since you want your **portfolio website** to be detailed and comprehensive, I’ll compile **everything I know about you** from our conversations, your background, and achievements. I’ll organize it into sections that you can directly use for your website. This will serve as your **master portfolio draft**.
+
+---
+
+# 🌍 Maltiti Azindoo Alidu – Portfolio Content (Master Draft)
+
+## 👤 About Me
+
+I am **Maltiti Azindoo Alidu**, a versatile and impact-driven professional with a background in **Agricultural Technology (Biotechnology)** and a growing specialization in **digital innovation, data analytics, software development, and community development**.
+
+Born and raised in **Tamale, Northern Region of Ghana**, and originally from **Zabzugu**, I have lived most of my life in rural communities. This has given me a deep appreciation of rural challenges and strengthened my passion for **inclusive and sustainable development**.
+
+I am driven by the belief that **technology, research, and education can transform communities**—especially in Africa. My work and studies reflect this mission: bridging agriculture, technology, and social impact.
+
+---
+
+## 🎓 Education
+
+* **BSc. Agriculture Technology (Biotechnology Option)**
+  *University for Development Studies, Tamale, Ghana* (Graduated 2021)
+* **National Service**: Savannah Agriculture Research Institute (CSIR–SARI), 2022
+
+  * Conducted soil testing, precision agriculture research, field trials, and farmer engagement.
+
+---
+
+## 💼 Professional Experience
+
+### 1. **Precision Quality Internship (PQ™)** – Ongoing (2025)
+
+*Software Development Track (with DTI)*
+
+* Learning **web development** and precision-driven digital skills.
+* Engaged in **hard skills training** and team-based projects.
+* Gaining hands-on experience in building **industry-ready tech solutions**.
+
+### 2. **Nobel Internship** – Ongoing (2025)
+
+*Promo Team Volunteer*
+
+* Supporting **community development** and outreach.
+* Conducting **competitive analysis** and using digital tools for engagement.
+* Promoting Nobel Internship Programs in communities.
+
+### 3. **Kuueza Limited** – Intern (2025)
+
+* Supporting digital trade facilitation for farmers.
+* Gained insights into **agribusiness and tech-enabled commerce**.
+
+### 4. **Enumerator – Mennonite Economic Development Associates (MEDA)** (2024)
+
+* Collected and verified **agricultural data** using digital tools.
+* Engaged with rural farmers to ensure accurate data collection.
+* Improved trust and participation by simplifying digital processes.
+
+### 5. **Customer Solution Executive – GLICO Life Insurance** (2024)
+
+* Promoted insurance products and supported business growth.
+* Provided customer service and maintained compliance.
+
+### 6. **Sales Manager – Crystal Mineral Water, Bibiani** (2024)
+
+* Managed production and distribution of mineral water.
+* Supervised staff, handled sales, and analyzed stock reports.
+
+### 7. **Scientific Laboratory Technician – CSIR-SARI, Tamale** (2021–2022)
+
+* Conducted soil testing and precision agriculture research.
+* Carried out field data collection, DNA analysis, and laboratory work.
+* Collaborated with farmers to apply sustainable agricultural practices.
+
+### 8. **Undergraduate Student Researcher – UDS** (2021)
+
+* Conducted **DNA extraction, phylogenetic analysis**, and **Fusarium biocontrol studies**.
+* Focused on genetic diversity of crop pathogens.
+
+### 9. **TTFPP Internships – UDS** (2017 & 2018)
+
+* Participated in rural community projects and data analysis.
+* Contributed to research proposals, reports, and farmer engagement.
+
+---
+
+## 🏆 Achievements
+
+* Selected for the **AWS re/Start Program by AmaliTech (2025)**.
+* Joined the **AWS Emerging Talent Community (2025)**.
+* Selected for **Power Learn Project Software Development Scholarship (2025)**.
+* Admitted into **GrowthPro Africa Scholarship (Cohort 2, 2025)** – Data Science & Machine Learning Track.
+* Admitted into **Aspire Leaders Program (Harvard-affiliated, 2025)** – Completed Module 1 with certification.
+* Selected for **Global Mentorship Initiative Program (2024/2025)**.
+* Volunteer at **Community-Based Health Planning and Services (CHPS), Tamale** – supported health outreach.
+* Participant at **Barcamp Ghana (Tamale)** – grassroots youth engagement.
+
+---
+
+## 📜 Certifications
+
+1. **Artificial Intelligence** – Great Learning
+2. **Software Development** – Mirza Ghulam Qadir Shaheed IT Research Lab
+3. **Business Analysis Basics** – Simplilearn Alumni
+4. **ChatGPT Certification** – Great Learning
+5. **Career Essentials in Generative AI** – Microsoft & LinkedIn
+6. **General Vegetable Production (Crop Advisor Trainer)** – East-West Seed Foundation
+7. **Virtual Assistant** – ALX Africa
+8. **SME Growth & Resiliency Training Program** – OZE
+9. **Essentials of Sustainability** – Microsoft Community Learning
+10. **Nonprofit Essentials** – NonprofitReady
+11. **Project Management Essentials** – DisasterReady.org
+12. **Customer Experience for Business Success** – (CX Certification)
+13. **Essentials in Sustainability** – Microsoft
+14. **AI/ML-related courses** – including **Generative AI with Udacity**
+
+---
+
+## 🌱 Volunteer Experience
+
+* **CHPS, Tamale**: Supported health outreach in rural communities.
+* **Barcamp Ghana (Tamale)**: Active participant in youth empowerment and digital engagement programs.
+* **Nobel Promo Team**: Engaged in promoting tech opportunities for youth.
+* **Kwahu Asabi Royal Foundation Volunteer**: Contributing to community empowerment programs.
+
+---
+
+## 💡 Skills
+
+* **Technical Skills**:
+
+  * Data Analysis & Visualization (Excel, Power BI, Tableau).
+  * Web Development (HTML, CSS, JavaScript).
+  * Research & Laboratory Analysis.
+  * Cloud Computing (AWS, beginner).
+  * Cybersecurity (aspirant).
+
+* **Professional Skills**:
+
+  * Project Management.
+  * Community Engagement.
+  * Customer Service & Sales.
+  * Agricultural Development & Precision Agriculture.
+
+* **Soft Skills**:
+
+  * Strong Communication & Teamwork.
+  * Leadership & Collaboration.
+  * Problem-solving & Critical Thinking.
+
+---
+
+## 📌 Career Aspirations
+
+I aspire to build a career at the **intersection of digital innovation, agriculture, and social impact**.
+In the next 5 years, I see myself as a **data-driven leader in agri-tech and digital transformation**, using AI, data, and cloud technologies to **solve pressing issues in food security, sustainability, and community development**.
+
+---
+
+## 🔗 Online Presence
+
+* **LinkedIn**: [Maltiti Azindoo Alidu](https://www.linkedin.com/in/maltiti-azindoo-alidu-076046151)
+* **Kickresume Profile (CV)**: [View Here](https://www.kickresume.com/cv/maltiti-alidu/)
+
+---
+
+## 📞 Contact
+
+* **Phone**: +233 558839833
+* **Email**: [alidumaltiti0@gmail.com](mailto:alidumaltiti0@gmail.com)
+* **Location**: Tamale, Northern Region, Ghana
+
+---
+
+👉 This is everything structured for a **portfolio website**.
+Would you like me to now **turn this into a ready-made portfolio site structure** (HTML/CSS template) so you just upload and personalize?
+
+Perfect   🙌
