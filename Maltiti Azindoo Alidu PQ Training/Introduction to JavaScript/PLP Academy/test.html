@@ -57,7 +57,8 @@
   image.setAttribute("src", "assets/sds.jpg"); // Updates the image source
 </script>
 <hr>
-<p id="text">Style Me!</p>
+<p id="text">Style Me! Hello</p>
+<p id="highlight">Hello There</p>
 <script>
   const text = document.getElementById("text");
   text.style.color = "blue"; // Changes text color
@@ -74,6 +75,11 @@
   text.style.listStyle = "none"; // Removes bullet points if it were in a list    
   text.style.lineHeight = "1.5"; // Sets line height
   text.style.wordSpacing = "4px"; // Increases word spacing
+
+  const highlight = document.getElementById("highlight");
+  highlight.style.backgroundColor = "yellow";
+   // Highlights the text
+
 </script>
 <hr>
 <p id="text" class="highlight">Styled Text</p>
@@ -113,6 +119,7 @@
   alertButton.addEventListener("click", () => {
     alert("Button clicked!");
   });
+  document.get
 </script>
 <hr>
 

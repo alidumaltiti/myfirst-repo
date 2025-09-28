@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatibility Checker</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    header {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+    }
+    main {
+        padding: 20px;
+        text-align: center;
+    }
+    input {
+        margin: 10px;
+        padding: 10px;
+        width: 200px;
+    }
+    button {
+        margin: 10px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    .result {
+        margin-top: 20px;
+        font-size: 1.2em;
+        color: #333;
+    }
+    footer {
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+</style>
+<body>
+    <header>
+        <h1>Team Compatibility Checker</h1>
+
+    </header>
+    <main>
+        <p>Enter Two Teams</p>
+        <input type="text" id="name1" placeholder="Enter name of section team">
+        <input type="text" id="name2" placeholder="Enter name of section team">
+
+        <button class="ChckBtn">Check</button>
+        <button class="resetBtn">Reset</button>
+
+        <p class="result"></p>
+
+    </main>
+    <footer>
+        <p>&copy; 2024 Compatibility Checker. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const name1 = document.getElementById('name1');
+        const name2 = document.getElementById('name2');
+        const checkBtn = document.querySelector('.ChckBtn');
+        const resetBtn = document.querySelector('.resetBtn');
+        const result = document.querySelector('.result');
+
+        function calculateCompatibility(name1, name2) {
+            // Simple compatibility calculation based on the length of names
+            const totalLength = name1.length + name2.length;
+            return totalLength % 100; // Return a percentage
+        }
+
+        checkBtn.addEventListener('click', () => {
+            const team1 = name1.value.trim();
+            const team2 = name2.value.trim();
+
+            if (team1 === '' || team2 === '') {
+                result.textContent = 'Please enter both team names.';
+                return;
+            }
+
+            const compatibilityScore = calculateCompatibility(team1, team2);
+            result.textContent = `The compatibility between ${team1} and ${team2} is ${compatibilityScore}%.`;
+        });
+
+        resetBtn.addEventListener('click', () => {
+            name1.value = '';
+            name2.value = '';
+            result.textContent = '';
+        });
+    </script>
+</body>
+</html>

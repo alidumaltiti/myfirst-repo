@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leap Year Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Is it a Leap Year?</h1>
+      <p class="subtitle">Enter a year and see whether it's a leap year — with the reasoning.</p>
+    </header>
+
+    <section class="layout">
+      <aside class="flowchart">
+        <h2>Flowchart</h2>
+        <!-- You can replace this SVG with a prettier flowchart or Mermaid embed -->
+        <pre class="mermaid">
+flowchart TD
+  A[Start] --> B[Input year]
+  B --> C{Is year % 4 == 0?}
+  C -- No --> F[Not a leap year]
+  C -- Yes --> D{Is year % 100 == 0?}
+  D -- No --> E[Leap year]
+  D -- Yes --> G{Is year % 400 == 0?}
+  G -- Yes --> E[Leap year]
+  G -- No --> F[Not a leap year]
+  E --> H[Output "Leap year"]
+  F --> I[Output "Not a leap year"]
+  H --> J[End]
+  I --> J[End]
+        </pre>
+        <small>Tip: Use a Mermaid renderer or replace this with an SVG for production.</small>
+      </aside>
+
+      <article class="checker">
+        <label for="year">Enter year</label>
+        <input id="year" type="number" placeholder="e.g. 2024" min="1" />
+        <div class="controls">
+          <button id="checkBtn">Check</button>
+          <button id="clearBtn" class="secondary">Clear</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite"></div>
+
+        <div class="examples">
+          <h3>Try examples</h3>
+          <button class="example" data-year="2000">2000</button>
+          <button class="example" data-year="1900">1900</button>
+          <button class="example" data-year="2024">2024</button>
+          <button class="example" data-year="2023">2023</button>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <p>Leaps rules: divisible by 4 → unless divisible by 100 → unless divisible by 400.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leap Year Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        body:hover {
+            background-color: #dddbe0;
+        }
+        header{
+            text-align: center;
+            margin-bottom: 20px;
+            color: red;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            text-align: center;
+            border-top: red 10px solid;
+        }
+        .container:hover{
+            transform: translateY(-10px);
+            box-shadow: 0 10px 10px rgba(177, 21, 21, 0.925);
+            
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<header>
+    <h2></h2>
+</header>
+<body>
+
+    <div class="container">
+        <h1>Leap Year Checker</h1>
+        <label for="yearInput">Enter a year:</label><br>
+        <input type="number" id="yearInput" placeholder="e.g., 2024"><br>
+        <button onclick="checkLeapYear()">Check</button>
+        <button onclick="reset()">Reset</button>
+        <div id="result"></div>
+    </div>
+
+    <footer>
+        
+    </footer>
+    <script>
+        function checkLeapYear() {
+            const year = parseInt(document.getElementById('yearInput').value);
+            const resultDiv = document.getElementById('result');
+
+            if (isNaN(year)) {
+                resultDiv.textContent = "Please enter a valid year.";
+                resultDiv.style.color = "red";
+                return;
+            }
+
+            let isLeap = false;
+            if (year % 400 === 0) {
+                isLeap = true;
+            } else if (year % 100 === 0) {
+                isLeap = false;
+            } else if (year % 4 === 0) {
+                isLeap = true;
+            }
+
+            if (isLeap) {
+                resultDiv.textContent = `${year} is a leap year.`;
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.textContent = `${year} is not a leap year.`;
+                resultDiv.style.color = "red";
+            }
+            }
+
+        function reset() {
+            document.getElementById('yearInput').value = '';
+            document.getElementById('result').textContent = '';
+        }
+    </script>
+</body>
+</html>

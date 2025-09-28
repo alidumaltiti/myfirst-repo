@@ -1,0 +1,76 @@
+:root{
+  --bg:#f7fbff;
+  --card:#ffffff;
+  --accent:#0a66c2;
+  --good:#1e8f5b;
+  --bad:#c23628;
+  --muted:#666;
+  --pad:16px;
+  --radius:10px;
+}
+
+*{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111;
+  padding:24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  line-height:1.5;
+}
+
+.container{
+  max-width:960px;
+  margin:0 auto;
+}
+
+header{
+  margin-bottom:16px;
+}
+h1{
+  margin:0;font-size:clamp(20px,3vw,28px);
+}
+.subtitle{
+  margin:6px 0 0;color:var(--muted);
+}
+
+.layout{
+  display:flex;gap:20px;flex-wrap:wrap;
+}
+.flowchart{
+  flex:1 1 380px;
+  background:var(--card);padding:var(--pad);
+  border-radius:var(--radius);box-shadow:0 6px 18px rgba(12,30,60,0.06);
+}
+.flowchart pre{
+  white-space:pre-wrap;
+  font-family:monospace;
+  background:#f0f6ff;
+  padding:10px;
+  border-radius:6px;
+  overflow:auto;
+}
+
+.checker{
+  flex:1 1 260px;
+  background:var(--card);
+  padding:var(--pad);
+  border-radius:var(--radius);box-shadow:0 6px 18px rgba(12,30,60,0.06);
+  display:flex;flex-direction:column;gap:12px;
+}
+
+label{font-weight:600;}
+input[type=number]{padding:10px;border-radius:6px;border:1px solid #ddd;font-size:16px;width:100%;}
+.controls{display:flex;gap:8px;}
+button{cursor:pointer;padding:10px 12px;border-radius:8px;border:0;background:var(--accent);color:white;font-weight:600;}
+button.secondary{background:#eef2f7;color:#333;border:1px solid #d6dbe6;}
+.result{min-height:64px;padding:12px;border-radius:8px;border:1px dashed #e6eefb;background:#fbfdff;}
+.result.leap{border-color:rgba(30,143,91,0.25);background:#f3fff7;}
+.result.not-leap{border-color:rgba(194,54,40,0.15);background:#fff7f6;}
+.examples{display:flex;gap:8px;flex-wrap:wrap;}
+.examples button{background:#eef6ff;color:#0a58a8;border:1px solid #dbeeff;padding:6px 10px;border-radius:6px;font-weight:600;}
+footer{margin-top:12px;color:var(--muted);font-size:13px;}
