@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamale TVET Marketplace - Connect with Skilled Professionals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tamale-orange: #FF8C42;
+            --craftsman-blue: #2E86AB;
+            --artisan-gray: #A23B72;
+            --workshop-brown: #8B4513;
+            --tool-steel: #708090;
+            --safety-yellow: #FFD700;
+            --canvas-white: #FAFAFA;
+            --charcoal: #2F2F2F;
+            --light-gray: #E5E5E5;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--canvas-white) 0%, #F0F8FF 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+        
+        .font-display { font-family: 'Poppins', sans-serif; }
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+        
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(250, 250, 250, 0.95);
+            border-bottom: 1px solid rgba(46, 134, 171, 0.1);
+        }
+        
+        .provider-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(46, 134, 171, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        
+        .provider-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(46, 134, 171, 0.2);
+        }
+        
+        .service-category {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 140, 66, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-category:hover {
+            border-color: var(--tamale-orange);
+            background: rgba(255, 140, 66, 0.1);
+            transform: translateY(-4px);
+        }
+        
+        .service-category.active {
+            background: var(--tamale-orange);
+            color: white;
+            border-color: var(--tamale-orange);
+        }
+        
+        .btn-primary {
+            background: var(--tamale-orange);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--craftsman-blue);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 140, 66, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--craftsman-blue);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--artisan-gray);
+            transform: scale(1.05);
+        }
+        
+        .rating-stars {
+            color: var(--safety-yellow);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(46, 134, 171, 0.8), rgba(255, 140, 66, 0.8)), url('resources/tvet-hero-workshop.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .search-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(46, 134, 171, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: var(--tamale-orange);
+            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.1);
+        }
+        
+        .filter-chip {
+            background: rgba(46, 134, 171, 0.1);
+            color: var(--craftsman-blue);
+            border: 1px solid rgba(46, 134, 171, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .filter-chip:hover {
+            background: var(--craftsman-blue);
+            color: white;
+        }
+        
+        .filter-chip.active {
+            background: var(--tamale-orange);
+            color: white;
+            border-color: var(--tamale-orange);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--tamale-orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .stagger-fade {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .availability-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        
+        .available {
+            background: #10B981;
+        }
+        
+        .busy {
+            background: #EF4444;
+        }
+        
+        .offline {
+            background: #6B7280;
+        }
+        
+        .service-badge {
+            background: linear-gradient(135deg, var(--tamale-orange), var(--craftsman-blue));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .price-tag {
+            background: var(--safety-yellow);
+            color: var(--charcoal);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, var(--craftsman-blue), var(--artisan-gray));
+            color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-left: 4px solid var(--tamale-orange);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full top-0 z-50 py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🔧</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold" style="color: var(--craftsman-blue);">Tamale TVET</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link font-medium">Home</a>
+                    <a href="#services" class="nav-link font-medium">Services</a>
+                    <a href="#providers" class="nav-link font-medium">Find Professionals</a>
+                    <a href="register.html" class="nav-link font-medium">Register</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showLoginModal()" class="text-gray-600 hover:text-orange-500 font-medium">Login</button>
+                    <button onclick="window.location.href='register.html'" class="btn-primary px-6 py-2 rounded-full font-medium">Join as Provider</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl">
+                <h1 class="font-display text-6xl md:text-8xl font-bold text-white mb-6 leading-tight">
+                    <span class="stagger-fade">Connect with</span>
+                    <span class="stagger-fade text-yellow-300">Skilled</span>
+                    <span class="stagger-fade">Professionals</span>
+                    <span class="stagger-fade text-orange-300">in Tamale</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl stagger-fade">
+                    Find verified TVET professionals for all your construction, repair, and maintenance needs. 
+                    From carpentry to welding, plumbing to electrical work.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 stagger-fade">
+                    <button onclick="scrollToServices()" class="btn-primary px-8 py-4 rounded-full text-lg font-semibold">
+                        Find a Professional
+                    </button>
+                    <button onclick="window.location.href='register.html'" class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold">
+                        Join as Provider
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Stats -->
+    <section class="py-16" style="background: var(--craftsman-blue);">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="stats-card stagger-fade">
+                    <div class="text-4xl font-bold mb-2" data-count="250">0</div>
+                    <div class="text-lg">Verified Professionals</div>
+                    <div class="text-sm opacity-80 mt-2">TVET certified experts</div>
+                </div>
+                
+                <div class="stats-card stagger-fade">
+                    <div class="text-4xl font-bold mb-2" data-count="8">0</div>
+                    <div class="text-lg">Service Categories</div>
+                    <div class="text-sm opacity-80 mt-2">From carpentry to auto repair</div>
+                </div>
+                
+                <div class="stats-card stagger-fade">
+                    <div class="text-4xl font-bold mb-2" data-count="1200">0</div>
+                    <div class="text-lg">Completed Jobs</div>
+                    <div class="text-sm opacity-80 mt-2">Satisfied customers</div>
+                </div>
+                
+                <div class="stats-card stagger-fade">
+                    <div class="text-4xl font-bold mb-2" data-count="4.8">0</div>
+                    <div class="text-lg">Average Rating</div>
+                    <div class="text-sm opacity-80 mt-2">⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Categories -->
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-5xl font-bold mb-6 stagger-fade" style="color: var(--craftsman-blue);">
+                    Find Professionals By Trade
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto stagger-fade">
+                    Browse our verified professionals across all major TVET categories. 
+                    Each provider is thoroughly vetted and rated by real customers.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="service-category rounded-2xl p-8 text-center stagger-fade" data-category="carpentry">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">🔨</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-2" style="color: var(--craftsman-blue);">Carpentry</h3>
+                    <p class="text-gray-600 mb-4">Furniture, doors, roofing, custom woodwork</p>
+                    <div class="text-sm font-medium text-orange-600">42 Professionals</div>
+                </div>
+                
+                <div class="service-category rounded-2xl p-8 text-center stagger-fade" data-category="welding">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">🔥</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-2" style="color: var(--craftsman-blue);">Welding</h3>
+                    <p class="text-gray-600 mb-4">Metal fabrication, repairs, structural work</p>
+                    <div class="text-sm font-medium text-blue-600">38 Professionals</div>
+                </div>
+                
+                <div class="service-category rounded-2xl p-8 text-center stagger-fade" data-category="plumbing">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">🔧</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-2" style="color: var(--craftsman-blue);">Plumbing</h3>
+                    <p class="text-gray-600 mb-4">Pipe fitting, installations, repairs</p>
+                    <div class="text-sm font-medium text-green-600">35 Professionals</div>
+                </div>
+                
+                <div class="service-category rounded-2xl p-8 text-center stagger-fade" data-category="electrical">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">⚡</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-2" style="color: var(--craftsman-blue);">Electrical</h3>
+                    <p class="text-gray-600 mb-4">Wiring, installations, safety inspections</p>
+                    <div class="text-sm font-medium text-yellow-600">28 Professionals</div>
+                </div>
+                
+                <div class="service-category rounded-2xl p-8 text-center stagger-fade" data-category="auto-repair">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">🚗</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-2" style="color: var(--craftsman-blue);">Auto Repair</h3>
+                    <p class="text-gray-600 mb-4">Mechanical, electrical, body work</p>
+                    <div class="text-sm font-medium text-purple-600">31 Professionals</div>
+                </div>
+                
+                <div class="service-category rounded-2xl p-8 text-center stagger-fade" data-category="construction">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">🏗️</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-2" style="color: var(--craftsman-blue);">Construction</h3>
+                    <p class="text-gray-600 mb-4">Building, masonry, renovations</p>
+                    <div class="text-sm font-medium text-red-600">25 Professionals</div>
+                </div>
+                
+                <div class="service-category rounded-2xl p-8 text-center stagger-fade" data-category="tailoring">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">✂️</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-2" style="color: var(--craftsman-blue);">Tailoring</h3>
+                    <p class="text-gray-600 mb-4">Clothing repairs, custom garments</p>
+                    <div class="text-sm font-medium text-pink-600">22 Professionals</div>
+                </div>
+                
+                <div class="service-category rounded-2xl p-8 text-center stagger-fade" data-category="metalwork">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl text-white">⚒️</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-2" style="color: var(--craftsman-blue);">Metalwork</h3>
+                    <p class="text-gray-600 mb-4">Blacksmithing, fabrication, repairs</p>
+                    <div class="text-sm font-medium text-indigo-600">19 Professionals</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section id="providers" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="font-display text-4xl font-bold mb-6" style="color: var(--craftsman-blue);">
+                        Find Your Perfect Professional
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Search, compare, and connect with verified TVET professionals in Tamale
+                    </p>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="search-box rounded-2xl p-6 mb-8">
+                    <div class="flex flex-col lg:flex-row gap-4">
+                        <div class="flex-1">
+                            <input type="text" id="search-input" placeholder="Search by service, name, or location..." 
+                                   class="w-full p-4 border-0 bg-transparent focus:outline-none text-lg">
+                        </div>
+                        <button onclick="performSearch()" class="btn-primary px-8 py-4 rounded-xl font-semibold">
+                            Search Professionals
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filter Chips -->
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <button class="filter-chip px-4 py-2 rounded-full text-sm font-medium active" data-filter="all">
+                        All Services
+                    </button>
+                    <button class="filter-chip px-4 py-2 rounded-full text-sm font-medium" data-filter="available">
+                        Available Now
+                    </button>
+                    <button class="filter-chip px-4 py-2 rounded-full text-sm font-medium" data-filter="top-rated">
+                        Top Rated
+                    </button>
+                    <button class="filter-chip px-4 py-2 rounded-full text-sm font-medium" data-filter="affordable">
+                        Affordable
+                    </button>
+                    <button class="filter-chip px-4 py-2 rounded-full text-sm font-medium" data-filter="experienced">
+                        5+ Years Experience
+                    </button>
+                </div>
+                
+                <!-- Provider Grid -->
+                <div id="providers-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Provider cards will be dynamically generated here -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div class="text-center mt-12">
+                    <button onclick="loadMoreProviders()" class="btn-primary px-8 py-3 rounded-full font-semibold">
+                        Load More Professionals
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold mb-6" style="color: var(--craftsman-blue);">
+                    How It Works
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Simple steps to connect with verified TVET professionals and get quality work done
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center stagger-fade">
+                    <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl text-white">🔍</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-4" style="color: var(--craftsman-blue);">Search & Browse</h3>
+                    <p class="text-gray-600">Find professionals by service category, location, ratings, and availability</p>
+                </div>
+                
+                <div class="text-center stagger-fade">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl text-white">📋</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-4" style="color: var(--craftsman-blue);">Request Quote</h3>
+                    <p class="text-gray-600">Describe your needs and get quotes from multiple verified professionals</p>
+                </div>
+                
+                <div class="text-center stagger-fade">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl text-white">✅</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-4" style="color: var(--craftsman-blue);">Book & Confirm</h3>
+                    <p class="text-gray-600">Choose your preferred professional and schedule the service</p>
+                </div>
+                
+                <div class="text-center stagger-fade">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl text-white">⭐</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-4" style="color: var(--craftsman-blue);">Rate & Review</h3>
+                    <p class="text-gray-600">Share your experience and help others make informed decisions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Testimonials -->
+    <section class="py-20" style="background: var(--craftsman-blue);">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-white mb-6">
+                    What Our Customers Say
+                </h2>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                    Real experiences from satisfied customers who found quality professionals through our platform
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-8 rounded-2xl stagger-fade">
+                    <div class="flex items-center mb-6">
+                        <img src="https://kimi-web-img.moonshot.cn/img/cdn.ghanaweb.com/39a2e0e00dfddbbf34c692e14303eb0a7a80631b.jpg" 
+                             alt="Customer" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-lg">Amina Ibrahim</h4>
+                            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        "Found an excellent carpenter through Tamale TVET who built custom furniture for my home. 
+                        The work quality was outstanding and the pricing was fair. Highly recommend!"
+                    </p>
+                    <div class="text-sm text-gray-500">Carpentry Service • Tamale</div>
+                </div>
+                
+                <div class="testimonial-card p-8 rounded-2xl stagger-fade">
+                    <div class="flex items-center mb-6">
+                        <img src="https://kimi-web-img.moonshot.cn/img/ghanaeducation.org/1c06ca6e2b3bb7e37f9fb8813a3ab18efbea1fea.jpg" 
+                             alt="Customer" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-lg">Kwame Asante</h4>
+                            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        "The electrician I hired fixed my wiring issues quickly and professionally. 
+                        The platform made it easy to compare providers and choose the right one."
+                    </p>
+                    <div class="text-sm text-gray-500">Electrical Service • Tamale</div>
+                </div>
+                
+                <div class="testimonial-card p-8 rounded-2xl stagger-fade">
+                    <div class="flex items-center mb-6">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.theghanareport.com/431eaca3f591b5601e9e72b1cf45be7f82d44d6d.png" 
+                             alt="Customer" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-lg">Fatima Alhassan</h4>
+                            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        "Professional plumbing service at reasonable prices. The provider was punctual, 
+                        skilled, and cleaned up after the work was done. Will definitely use again!"
+                    </p>
+                    <div class="text-sm text-gray-500">Plumbing Service • Tamale</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20" style="background: var(--tamale-orange);">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-display text-4xl font-bold text-white mb-6">
+                Ready to Get Started?
+            </h2>
+            <p class="text-xl text-orange-100 max-w-3xl mx-auto mb-12">
+                Whether you need professional services or want to offer your skills, 
+                Tamale TVET Marketplace connects you with the right people.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button onclick="scrollToServices()" class="bg-white text-orange-600 px-12 py-4 rounded-full text-lg font-semibold hover:bg-orange-50 transition-all duration-300 transform hover:scale-105">
+                    Find a Professional
+                </button>
+                <button onclick="window.location.href='register.html'" class="border-2 border-white text-white px-12 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-orange-600 transition-all duration-300">
+                    Join as Provider
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background: var(--charcoal);">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🔧</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold text-white">Tamale TVET</span>
+                </div>
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                    Connecting skilled TVET professionals with customers in Tamale. 
+                    Quality workmanship, verified professionals, reliable service.
+                </p>
+                <div class="border-t border-gray-700 pt-6">
+                    <p class="text-gray-500 text-sm">
+                        © 2025 Tamale TVET Marketplace. Building skills, connecting communities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl p-8 max-w-md w-full">
+                <div class="text-center mb-6">
+                    <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--craftsman-blue);">Welcome Back</h3>
+                    <p class="text-gray-600">Login to your account</p>
+                </div>
+                
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email or Phone</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    </div>
+                    
+                    <button type="button" onclick="handleLogin()" class="w-full btn-primary py-3 rounded-lg font-semibold">
+                        Login
+                    </button>
+                </form>
+                
+                <div class="text-center mt-6">
+                    <p class="text-sm text-gray-600">
+                        Don't have an account? 
+                        <a href="register.html" class="text-orange-500 font-medium hover:underline">Register here</a>
+                    </p>
+                </div>
+                
+                <button onclick="hideLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                    <span class="text-2xl">×</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="marketplace.js"></script>
+</body>
+</html>

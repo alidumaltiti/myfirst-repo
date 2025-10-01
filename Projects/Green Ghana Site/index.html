@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Ghana - Building a Sustainable Future</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --forest-green: #2D5016;
+            --earth-brown: #8B4513;
+            --sunset-orange: #FF6B35;
+            --savannah-gold: #DAA520;
+            --cream-white: #FFF8DC;
+            --charcoal: #2F2F2F;
+        }
+
+        .heading-forest-green {
+            color: var(--forest-green);
+        }
+
+        .text-sunset-orange {
+            color: var(--sunset-orange);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--cream-white) 0%, var(--savannah-gold) 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+        
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-script { font-family: 'Dancing Script', cursive; }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(45, 80, 22, 0.3), rgba(139, 69, 19, 0.3)), url('resources/hero-ghana-landscape.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass-nav {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 248, 220, 0.9);
+            border-bottom: 1px solid rgba(45, 80, 22, 0.1);
+        }
+        
+        .skill-card {
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(45, 80, 22, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(45, 80, 22, 0.2);
+        }
+        
+        .btn-primary {
+            background: var(--forest-green);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--earth-brown);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--forest-green);
+            color: var(--forest-green);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--forest-green);
+            color: white;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .delay--2s {
+            animation-delay: -2s;
+        }
+        .delay--4s {
+            animation-delay: -4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .stagger-fade {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dasharray 0.35s;
+            transform-origin: 50% 50%;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--sunset-orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .achievement-badge {
+            background: linear-gradient(135deg, var(--sunset-orange), var(--clay-red));
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+    .bg-forest-green {
+        background: var(--forest-green);
+    }
+    .bg-earth-brown {
+        background: var(--earth-brown);
+    }
+    .earth-brown-hover:hover {
+        color: var(--earth-brown) !important;
+    }
+    .footer-bg {
+        background: var(--charcoal);
+    }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full top-0 z-50 py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🌱</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold heading-forest-green">Green Ghana</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link font-medium">Home</a>
+                    <a href="assessment.html" class="nav-link font-medium">Assessment</a>
+                    <a href="calculator.html" class="nav-link font-medium">Impact Calculator</a>
+                    <a href="resources.html" class="nav-link font-medium">Resources</a>
+                </div>
+                <button onclick="window.location.href='assessment.html'" class="btn-primary px-6 py-2 rounded-full font-medium">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl">
+                <h1 class="font-display text-6xl md:text-8xl font-bold text-white mb-6 leading-tight">
+                    <span class="stagger-fade">Building Green Skills</span>
+                </h1>
+                <p class="font-script text-3xl text-white/90 mb-4 stagger-fade text-sunset-orange">
+                    Empowering a Sustainable Tomorrow
+                </p>
+                <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl stagger-fade">
+                    Empowering communities with sustainable skills, renewable energy knowledge, and climate resilience for a prosperous Ghana.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 stagger-fade">
+                    <button onclick="window.location.href='assessment.html'" class="btn-primary px-8 py-4 rounded-full text-lg font-semibold">
+                        Take Skills Assessment
+                    </button>
+                    <button type="button" onclick="window.location.href='calculator.html'" class="btn-secondary px-12 py-4 rounded-full text-lg font-semibold">
+                        Calculate Impact
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 right-20 floating-element">
+            <div class="w-12 h-12 bg-yellow-400/30 rounded-full flex items-center justify-center">
+                <span class="text-xl">☀️</span>
+            </div>
+        </div>
+        <div class="absolute bottom-32 left-16 floating-element delay--2s">
+            <div class="w-12 h-12 bg-green-500/30 rounded-full flex items-center justify-center">
+                <span class="text-xl">♻️</span>
+            </div>
+        </div>
+        <div class="absolute top-1/2 right-1/4 floating-element delay--4s">
+            <div class="w-14 h-14 bg-blue-500/30 rounded-full flex items-center justify-center">
+                <span class="text-xl">💧</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Overview Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-5xl font-bold mb-6 stagger-fade heading-forest-green">
+                    Master Essential Green Skills
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto stagger-fade">
+                    Discover the five core areas driving Ghana's sustainable development and climate resilience. 
+                    Each skill opens doors to green careers and environmental impact.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="skill-card p-8 rounded-2xl stagger-fade">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-2xl">☀️</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 heading-forest-green">Renewable Energy</h3>
+                    <p class="text-gray-600 mb-6">Master solar, wind, and hydro power technologies. Learn installation, maintenance, and energy management for Ghana's growing renewable sector.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-gray-500">12 Learning Modules</span>
+                        <div class="achievement-badge">15%</div>
+                    </div>
+                </div>
+                
+                <div class="skill-card p-8 rounded-2xl stagger-fade">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-2xl">🌱</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 heading-forest-green">Sustainable Agriculture</h3>
+                    <p class="text-gray-600 mb-6">Climate-smart farming techniques, soil conservation, and crop optimization for Ghana's agricultural communities.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-gray-500">8 Learning Modules</span>
+                        <div class="achievement-badge">8%</div>
+                    </div>
+                </div>
+                
+                <div class="skill-card p-8 rounded-2xl stagger-fade">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-2xl">♻️</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 heading-forest-green">Waste Management</h3>
+                    <p class="text-gray-600 mb-6">Circular economy principles, recycling technologies, and waste-to-energy solutions for sustainable communities.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-gray-500">10 Learning Modules</span>
+                        <div class="achievement-badge">12%</div>
+                    </div>
+                </div>
+                
+                <div class="skill-card p-8 rounded-2xl stagger-fade">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-2xl">🏗️</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 heading-forest-green">Green Construction</h3>
+                    <p class="text-gray-600 mb-6">Sustainable building materials, energy-efficient design, and green infrastructure development.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-gray-500">6 Learning Modules</span>
+                        <div class="achievement-badge">5%</div>
+                    </div>
+                </div>
+                
+                <div class="skill-card p-8 rounded-2xl stagger-fade">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-2xl">🌍</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 heading-forest-green">Climate Resilience</h3>
+                    <p class="text-gray-600 mb-6">Climate adaptation strategies, disaster preparedness, and community resilience building.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-gray-500">9 Learning Modules</span>
+                        <div class="achievement-badge">10%</div>
+                    </div>
+                </div>
+                
+                <div class="skill-card p-8 rounded-2xl stagger-fade">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full flex items-center justify-center mb-6">
+                        <span class="text-2xl">💡</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 heading-forest-green">Green Entrepreneurship</h3>
+                    <p class="text-gray-600 mb-6">Business development, green innovation, and sustainable enterprise creation for economic growth.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-gray-500">7 Learning Modules</span>
+                        <div class="achievement-badge">7%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="window.location.href='assessment.html'" class="btn-primary px-12 py-4 rounded-full text-lg font-semibold">
+                    Start Your Green Skills Journey
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Statistics -->
+    <section class="py-20 bg-forest-green">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl font-bold text-white mb-6">
+                    Ghana's Green Transformation
+                </h2>
+                <p class="text-xl text-green-100 max-w-3xl mx-auto">
+                    Real impact data from Ghana's green economy initiatives and the opportunities ahead.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center text-white stagger-fade">
+                    <div class="text-5xl font-bold mb-2 text-yellow-300" data-count="670">0</div>
+                    <div class="text-lg">Million USD Invested</div>
+                    <div class="text-sm text-green-200 mt-2">In coastal defense projects</div>
+                </div>
+                
+                <div class="text-center text-white stagger-fade">
+                    <div class="text-5xl font-bold mb-2 text-yellow-300" data-count="6">0</div>
+                    <div class="text-lg">Million Tonnes CO₂</div>
+                    <div class="text-sm text-green-200 mt-2">Reduced through REDD+ program</div>
+                </div>
+                
+                <div class="text-center text-white stagger-fade">
+                    <div class="text-5xl font-bold mb-2 text-yellow-300" data-count="2000">0</div>
+                    <div class="text-lg">Green Jobs Created</div>
+                    <div class="text-sm text-green-200 mt-2">Through Youth in Green Ghana</div>
+                </div>
+                
+                <div class="text-center text-white stagger-fade">
+                    <div class="text-5xl font-bold mb-2 text-yellow-300" data-count="13.2">0</div>
+                    <div class="text-lg">Million USD Strategy</div>
+                    <div class="text-sm text-green-200 mt-2">National Green Jobs Investment</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Carousel -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-5xl font-bold mb-6 stagger-fade heading-forest-green">
+                    Success Stories
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto stagger-fade">
+                    Meet Ghanaians who are leading the green revolution and creating sustainable impact in their communities.
+                </p>
+            </div>
+            
+            <div class="splide" id="success-stories">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mx-4">
+                                <div class="flex items-center mb-6">
+                                    <img src="resources/solar-installation.jpg" alt="Solar Installation" class="w-20 h-20 rounded-full object-cover mr-4">
+                                    <div>
+                                        <h3 class="font-display text-xl font-bold heading-forest-green">Abena Osei</h3>
+                                        <p class="text-gray-600">Solar Energy Entrepreneur</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-6">
+                                    "After completing the Green Skills training, I started my own solar installation company. We've now powered over 200 homes in rural Ghana and created 15 green jobs for young people."
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-gray-500">Kumasi, Ghana</span>
+                                    <div class="flex space-x-1">
+                                        <span class="text-yellow-400">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mx-4">
+                                <div class="flex items-center mb-6">
+                                    <img src="resources/sustainable-farming.jpg" alt="Sustainable Farming" class="w-20 h-20 rounded-full object-cover mr-4">
+                                    <div>
+                                        <h3 class="font-display text-xl font-bold heading-forest-green">Kwame Asante</h3>
+                                        <p class="text-gray-600">Climate-Smart Farmer</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-6">
+                                    "The sustainable agriculture training changed everything. My farm's yield increased by 40% while using 30% less water. Now I train other farmers in my community."
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-gray-500">Tamale, Ghana</span>
+                                    <div class="flex space-x-1">
+                                        <span class="text-yellow-400">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl p-8 shadow-lg mx-4">
+                                <div class="flex items-center mb-6">
+                                    <img src="resources/conservation-work.jpg" alt="Conservation Work" class="w-20 h-20 rounded-full object-cover mr-4">
+                                    <div>
+                                        <h3 class="font-display text-xl font-bold heading-forest-green">Fatima Alhassan</h3>
+                                        <p class="text-gray-600">Wildlife Conservationist</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-6">
+                                    "Working with the Green Skills program, I've helped establish 5 community conservation areas. We've seen elephant populations stabilize and local tourism increase."
+                                </p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-gray-500">Mole National Park</span>
+                                    <div class="flex space-x-1">
+                                        <span class="text-yellow-400">★★★★★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-earth-brown">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-display text-5xl font-bold text-white mb-6">
+                Ready to Build Your Green Future?
+            </h2>
+            <p class="text-xl text-cream-white max-w-3xl mx-auto mb-12">
+                Join thousands of Ghanaians who are already building sustainable careers and making a positive impact on our environment.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button type="button" onclick="window.location.href='resources.html'" class="border-2 border-white text-white px-12 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-earth-brown transition-all duration-300">
+                    Explore Resources
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 footer-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🌱</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold text-white">Green Ghana</span>
+                </div>
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                    Empowering Ghana's communities with green skills, sustainable practices, and climate resilience for a prosperous future.
+                </p>
+                <div class="border-t border-gray-700 pt-6">
+                    <p class="text-gray-500 text-sm">
+                        © 2025 Green Ghana. Building sustainable futures together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Staggered fade-in animation for elements with the 'stagger-fade' class
+            const fadeElements = document.querySelectorAll('.stagger-fade');
+            anime({
+                targets: fadeElements,
+                translateY: [30, 0],
+                opacity: [0, 1],
+                delay: anime.stagger(100, { start: 200 }),
+                easing: 'easeOutExpo',
+                duration: 1200,
+            });
+
+            // Counting animation for statistics
+            const countElements = document.querySelectorAll('[data-count]');
+            countElements.forEach(el => {
+                const target = parseFloat(el.getAttribute('data-count'));
+                anime({
+                    targets: el,
+                    innerHTML: [0, target],
+                    round: target % 1 !== 0 ? 100 : 1, // Round to 2 decimal places if it's a float
+                    easing: 'easeOutCirc',
+                    duration: 2500,
+                    delay: 500,
+                });
+            });
+
+            // Initialize Splide carousel for success stories
+            if (document.getElementById('success-stories')) {
+                new Splide('#success-stories', {
+                    type: 'loop',
+                    perPage: 2,
+                    perMove: 1,
+                    gap: '2rem',
+                    pagination: false,
+                    arrows: true,
+                    breakpoints: {
+                        768: {
+                            perPage: 1,
+                        },
+                    },
+                }).mount();
+            }
+        });
+    </script>
+</body>
+</html>

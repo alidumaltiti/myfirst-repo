@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Quote Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-image: url('https://www.transparenttextures.com/patterns/diagmonds-light.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .quote-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        .quote-text {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .quote-author {
+            font-style: italic;
+            color: #555;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Quote Generator</h1>
+    <div class="quote-container" id="quoteContainer">
+        <p class="quote-text" id="quoteText"></p>
+        <p class="quote-author" id="quoteAuthor"></p>
+    </div>
+    <button onclick="generateQuote()">New Quote</button>
+
+    <script>
+        const quotes = [
+            {
+                text: "The only way to do great work is to love what you do.",
+                author: "Steve Jobs",
+                details: "Co-founder of Apple Inc."
+            },
+            {
+                text: "Believe you can and you're halfway there.",
+                author: "Theodore Roosevelt",
+                details: "26th U.S. President"
+            },
+            {
+                text: "The future belongs to those who believe in the beauty of their dreams.",
+                author: "Eleanor Roosevelt",
+                details: "Former First Lady of the United States"
+            },
+            {
+                text: "It is during our darkest moments that we must focus to see the light.",
+                author: "Aristotle Onassis",
+                details: "Greek shipping magnate"
+            },
+            {
+                text: "There is the known, known and there is the known, unknown. But there is also the unknown, unknown.",
+                author: "Boondocks",
+                details:"The Gangsta"
+            },
+            {
+                text: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+                author: "Winston Churchill",
+                details: "British Prime Minister"
+            },
+            {
+                text: "In the middle of every difficulty lies opportunity.",
+                author: "Albert Einstein",
+                details: "Professor of Physics"
+            },
+            {
+                text: "The best way to predict the future is to invent it.",
+                author: "Alan Kay",
+                details: "Co-founder of Apple Inc."
+            },
+            {
+                text: "Do not go where the path may lead, go instead where there is no path and leave a trail.",
+                author: "Ralph Waldo Emerson",
+                details: "American poet"
+            },
+            {
+                text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+                author: "Ralph Waldo Emerson",
+                details: "American poet"
+            },
+            {
+                text: "The journey of a thousand miles begins with one step.",
+                author: "Lao Tzu",
+                details: "Chinese philosopher"
+            },
+            {
+                text: "You miss 100% of the shots you don't take.",
+                author: "Wayne Gretzky",
+                details: "American player"
+            },
+            {
+                text: "Whether you think you can or you think you can't, you're right.",
+                author: "Henry Ford",
+                details: "American inventor"
+            },
+            {
+                text: "The best revenge is massive success.",
+                author: "Frank Sinatra",
+                details: "American singer"
+            },
+            {
+                text: "Life is what happens when you're busy making other plans.",
+                author: "John Lennon",
+                details: "British musician"
+            },
+            {
+                text: "The purpose of our lives is to be happy.",
+                author: "Dalai Lama",
+                details: "Chinese poet"
+            },
+            {
+                text: "Get busy living or get busy dying.",
+                author: "Stephen King",
+                details: "American writer"
+            },
+            {
+                text: "You only live once, but if you do it right, once is enough.",
+                author: "Mae West",
+                details: "American author"
+            },
+            {
+                text: "In three words I can sum up everything I've learned about life: it goes on.",
+                author: "Robert Frost",
+                details: "American poet"
+            },
+
+        ]
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+            document.getElementById('quoteText').innerText = `"${quote.text}"`;
+            document.getElementById('quoteAuthor').innerText = `- ${quote.author}, ${quote.details}`;
+            document.getElementById('quoteAuthor').style.color = randomIndex % 2 === 0 ? "green" : "red"; "yellow";
+            document.getElementById('quoteText').style.color = randomIndex % 2 === 0 ? "green" : "red";
+            document.getElementById('quoteText').style.fontSize = "20px";
+            document.getElementById('quoteAuthor').style.fontSize = "15px";
+            document.getElementById('quoteAuthor').style.fontStyle = "italic";
+            document.getElementById('quoteAuthor').style.fontWeight = "bold";
+            document.getElementById('quoteContainer').style.backgroundColor = randomIndex % 2 === 0 ? "#e0f7fa" : "#fff3e0";
+            document.getElementById('quoteContainer').style.boxShadow = randomIndex % 2 === 0 ? "2px 2px 5px rgba(0,0,0,0.2)" : "none";
+            document.getElementById('quoteContainer').style.border = randomIndex % 2 === 0 ? "1px solid #ccc" : "1px solid #ff9800";
+            document.getElementById('quoteContainer').style.borderRadius = "60%";
+        }
+    </script>
+</body>
+</html>
+        

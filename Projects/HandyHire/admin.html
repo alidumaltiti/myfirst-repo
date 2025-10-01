@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tamale TVET Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tamale-orange: #FF8C42;
+            --craftsman-blue: #2E86AB;
+            --artisan-gray: #A23B72;
+            --workshop-brown: #8B4513;
+            --tool-steel: #708090;
+            --safety-yellow: #FFD700;
+            --canvas-white: #FAFAFA;
+            --charcoal: #2F2F2F;
+            --light-gray: #E5E5E5;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--canvas-white) 0%, #F0F8FF 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+        
+        .font-display { font-family: 'Poppins', sans-serif; }
+        .font-mono { font-family: 'Roboto Mono', monospace; }
+        
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(250, 250, 250, 0.95);
+            border-bottom: 1px solid rgba(46, 134, 171, 0.1);
+        }
+        
+        .admin-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(46, 134, 171, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(46, 134, 171, 0.15);
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, var(--craftsman-blue), var(--artisan-gray));
+            color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(46, 134, 171, 0.3);
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        
+        .status-approved {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .status-rejected {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+        
+        .status-under-review {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+        
+        .btn-primary {
+            background: var(--tamale-orange);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--craftsman-blue);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 140, 66, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--craftsman-blue);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--artisan-gray);
+            transform: scale(1.05);
+        }
+        
+        .btn-success {
+            background: #10B981;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+            transform: scale(1.05);
+        }
+        
+        .btn-danger {
+            background: #EF4444;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger:hover {
+            background: #DC2626;
+            transform: scale(1.05);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--tamale-orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border-right: 1px solid rgba(46, 134, 171, 0.1);
+            min-height: calc(100vh - 80px);
+        }
+        
+        .sidebar-item {
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin: 0.25rem 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .sidebar-item:hover {
+            background: rgba(255, 140, 66, 0.1);
+            color: var(--tamale-orange);
+        }
+        
+        .sidebar-item.active {
+            background: var(--tamale-orange);
+            color: white;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 1rem;
+            border: 1px solid rgba(46, 134, 171, 0.1);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(46, 134, 171, 0.1);
+        }
+        
+        .data-table th {
+            background: rgba(46, 134, 171, 0.05);
+            font-weight: 600;
+            color: var(--craftsman-blue);
+        }
+        
+        .data-table tr:hover {
+            background: rgba(46, 134, 171, 0.05);
+        }
+        
+        .modal {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .filter-bar {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(46, 134, 171, 0.1);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(46, 134, 171, 0.2);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: var(--tamale-orange);
+            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.1);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full top-0 z-50 py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🔧</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold" style="color: var(--craftsman-blue);">Tamale TVET Admin</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-600">Welcome, Admin</span>
+                    <button onclick="logout()" class="text-gray-600 hover:text-orange-500 font-medium">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <div class="flex">
+            <!-- Sidebar -->
+            <div class="sidebar w-64 fixed left-0 top-20 bottom-0">
+                <div class="p-4">
+                    <div class="space-y-2">
+                        <div class="sidebar-item active" data-section="dashboard">
+                            <span class="mr-3">📊</span>
+                            Dashboard
+                        </div>
+                        <div class="sidebar-item" data-section="applications">
+                            <span class="mr-3">📋</span>
+                            Applications
+                        </div>
+                        <div class="sidebar-item" data-section="providers">
+                            <span class="mr-3">👥</span>
+                            Providers
+                        </div>
+                        <div class="sidebar-item" data-section="customers">
+                            <span class="mr-3">🤝</span>
+                            Customers
+                        </div>
+                        <div class="sidebar-item" data-section="analytics">
+                            <span class="mr-3">📈</span>
+                            Analytics
+                        </div>
+                        <div class="sidebar-item" data-section="settings">
+                            <span class="mr-3">⚙️</span>
+                            Settings
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 ml-64 p-6">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="content-section">
+                    <div class="mb-8">
+                        <h1 class="font-display text-4xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Admin Dashboard
+                        </h1>
+                        <p class="text-gray-600">Monitor platform performance and manage user applications</p>
+                    </div>
+
+                    <!-- Key Metrics -->
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="metric-card">
+                            <div class="text-3xl font-bold mb-2" data-count="156">0</div>
+                            <div class="text-lg">Total Applications</div>
+                            <div class="text-sm opacity-80 mt-2">This month</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="text-3xl font-bold mb-2" data-count="89">0</div>
+                            <div class="text-lg">Approved Providers</div>
+                            <div class="text-sm opacity-80 mt-2">Active on platform</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="text-3xl font-bold mb-2" data-count="34">0</div>
+                            <div class="text-lg">Pending Reviews</div>
+                            <div class="text-sm opacity-80 mt-2">Need attention</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <div class="text-3xl font-bold mb-2" data-count="1247">0</div>
+                            <div class="text-lg">Completed Jobs</div>
+                            <div class="text-sm opacity-80 mt-2">Total platform</div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Applications Chart -->
+                        <div class="admin-card rounded-2xl p-6">
+                            <h3 class="font-display text-xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                                Application Trends
+                            </h3>
+                            <div class="chart-container">
+                                <canvas id="applicationsChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Provider Distribution -->
+                        <div class="admin-card rounded-2xl p-6">
+                            <h3 class="font-display text-xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                                Provider Distribution
+                            </h3>
+                            <div class="chart-container">
+                                <canvas id="distributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="admin-card rounded-2xl p-6 mt-8">
+                        <h3 class="font-display text-xl font-bold mb-6" style="color: var(--craftsman-blue);">
+                            Quick Actions
+                        </h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <button onclick="showSection('applications')" class="btn-primary p-4 rounded-lg text-center">
+                                <div class="text-2xl mb-2">📋</div>
+                                <div class="font-semibold">Review Applications</div>
+                            </button>
+                            <button onclick="showSection('providers')" class="btn-secondary p-4 rounded-lg text-center">
+                                <div class="text-2xl mb-2">👥</div>
+                                <div class="font-semibold">Manage Providers</div>
+                            </button>
+                            <button onclick="exportData()" class="bg-gray-600 text-white p-4 rounded-lg text-center hover:bg-gray-700 transition-colors">
+                                <div class="text-2xl mb-2">📊</div>
+                                <div class="font-semibold">Export Data</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Section -->
+                <div id="applications-section" class="content-section hidden">
+                    <div class="mb-8">
+                        <h1 class="font-display text-4xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Provider Applications
+                        </h1>
+                        <p class="text-gray-600">Review and manage service provider applications</p>
+                    </div>
+
+                    <!-- Filter Bar -->
+                    <div class="filter-bar">
+                        <div class="flex flex-col lg:flex-row gap-4 items-center">
+                            <div class="flex-1">
+                                <input type="text" id="application-search" placeholder="Search applications..." 
+                                       class="search-input w-full">
+                            </div>
+                            <div class="flex gap-2">
+                                <select id="status-filter" class="search-input">
+                                    <option value="">All Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="under-review">Under Review</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                                <select id="category-filter" class="search-input">
+                                    <option value="">All Categories</option>
+                                    <option value="carpentry">Carpentry</option>
+                                    <option value="welding">Welding</option>
+                                    <option value="plumbing">Plumbing</option>
+                                    <option value="electrical">Electrical</option>
+                                    <option value="auto-repair">Auto Repair</option>
+                                    <option value="construction">Construction</option>
+                                    <option value="tailoring">Tailoring</option>
+                                    <option value="metalwork">Metalwork</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Applications Table -->
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Applicant</th>
+                                    <th>Service Category</th>
+                                    <th>Experience</th>
+                                    <th>Application Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applications-table-body">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Other sections would be similar structure -->
+                <div id="providers-section" class="content-section hidden">
+                    <div class="mb-8">
+                        <h1 class="font-display text-4xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Service Providers
+                        </h1>
+                        <p class="text-gray-600">Manage approved service providers and their profiles</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-2xl p-8 text-center">
+                        <div class="text-6xl mb-4">👥</div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Provider Management
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Feature coming soon! This section will allow you to manage approved providers, 
+                            view their performance, and handle customer feedback.
+                        </p>
+                        <button onclick="showNotification('Provider management features coming soon!', 'info')" 
+                                class="btn-primary px-8 py-3 rounded-full font-semibold">
+                            Coming Soon
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Additional sections would follow the same pattern -->
+                <div id="customers-section" class="content-section hidden">
+                    <div class="mb-8">
+                        <h1 class="font-display text-4xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Customers
+                        </h1>
+                        <p class="text-gray-600">View customer information and service history</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-2xl p-8 text-center">
+                        <div class="text-6xl mb-4">🤝</div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Customer Management
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Feature coming soon! This section will provide customer insights and service tracking.
+                        </p>
+                        <button onclick="showNotification('Customer management features coming soon!', 'info')" 
+                                class="btn-primary px-8 py-3 rounded-full font-semibold">
+                            Coming Soon
+                        </button>
+                    </div>
+                </div>
+
+                <div id="analytics-section" class="content-section hidden">
+                    <div class="mb-8">
+                        <h1 class="font-display text-4xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Analytics & Reports
+                        </h1>
+                        <p class="text-gray-600">Detailed platform analytics and performance metrics</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-2xl p-8 text-center">
+                        <div class="text-6xl mb-4">📈</div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Analytics Dashboard
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Feature coming soon! This section will provide comprehensive analytics and reporting tools.
+                        </p>
+                        <button onclick="showNotification('Analytics features coming soon!', 'info')" 
+                                class="btn-primary px-8 py-3 rounded-full font-semibold">
+                            Coming Soon
+                        </button>
+                    </div>
+                </div>
+
+                <div id="settings-section" class="content-section hidden">
+                    <div class="mb-8">
+                        <h1 class="font-display text-4xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Platform Settings
+                        </h1>
+                        <p class="text-gray-600">Configure platform parameters and policies</p>
+                    </div>
+                    
+                    <div class="admin-card rounded-2xl p-8 text-center">
+                        <div class="text-6xl mb-4">⚙️</div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Settings & Configuration
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Feature coming soon! This section will allow platform configuration and policy management.
+                        </p>
+                        <button onclick="showNotification('Settings features coming soon!', 'info')" 
+                                class="btn-primary px-8 py-3 rounded-full font-semibold">
+                            Coming Soon
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Application Review Modal -->
+    <div id="review-modal" class="modal fixed inset-0 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="modal-content w-full max-w-4xl p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-display text-2xl font-bold" style="color: var(--craftsman-blue);">
+                        Review Application
+                    </h3>
+                    <button onclick="closeReviewModal()" class="text-gray-400 hover:text-gray-600">
+                        <span class="text-2xl">×</span>
+                    </button>
+                </div>
+                
+                <div id="modal-content">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background: var(--charcoal);">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🔧</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold text-white">Tamale TVET Admin</span>
+                </div>
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                    Platform administration and quality control dashboard for Tamale TVET Marketplace.
+                </p>
+                <div class="border-t border-gray-700 pt-6">
+                    <p class="text-gray-500 text-sm">
+                        © 2025 Tamale TVET Marketplace. Building skills, connecting communities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="marketplace.js"></script>
+    <script>
+        // Sample application data
+        const applicationsData = [
+            {
+                id: 1,
+                name: "Kwame Adu",
+                email: "kwame.adu@email.com",
+                phone: "+233 24 123 4567",
+                category: "carpentry",
+                experience: "8 years",
+                certification: "NVTI Level II",
+                status: "pending",
+                applicationDate: "2025-01-10",
+                interviewDate: null,
+                photo: "https://kimi-web-img.moonshot.cn/img/cdn.ghanaweb.com/39a2e0e00dfddbbf34c692e14303eb0a7a80631b.jpg",
+                address: "Tamale Central",
+                services: ["Custom Furniture", "Door Installation", "Roofing"],
+                hourlyRate: "GHS 80-120",
+                emergencyFee: 50
+            },
+            {
+                id: 2,
+                name: "Amina Ibrahim",
+                email: "amina.ibrahim@email.com",
+                phone: "+233 24 234 5678",
+                category: "welding",
+                experience: "6 years",
+                certification: "NVTI Level I",
+                status: "under-review",
+                applicationDate: "2025-01-12",
+                interviewDate: "2025-01-15",
+                photo: "https://kimi-web-img.moonshot.cn/img/ghanaeducation.org/1c06ca6e2b3bb7e37f9fb8813a3ab18efbea1fea.jpg",
+                address: "Tamale Industrial",
+                services: ["Metal Fabrication", "Structural Welding", "Repairs"],
+                hourlyRate: "GHS 90-150",
+                emergencyFee: 75
+            },
+            {
+                id: 3,
+                name: "Abdul Rahman",
+                email: "abdul.rahman@email.com",
+                phone: "+233 24 345 6789",
+                category: "plumbing",
+                experience: "10 years",
+                certification: "NVTI Level II",
+                status: "approved",
+                applicationDate: "2025-01-08",
+                interviewDate: "2025-01-11",
+                photo: "https://kimi-web-img.moonshot.cn/img/www.theghanareport.com/431eaca3f591b5601e9e72b1cf45be7f82d44d6d.png",
+                address: "Tamale South",
+                services: ["Pipe Installation", "Leak Repairs", "Drainage Systems"],
+                hourlyRate: "GHS 70-100",
+                emergencyFee: 60
+            },
+            {
+                id: 4,
+                name: "Fatima Alhassan",
+                email: "fatima.alhassan@email.com",
+                phone: "+233 24 456 7890",
+                category: "electrical",
+                experience: "7 years",
+                certification: "NVTI Level I",
+                status: "rejected",
+                applicationDate: "2025-01-05",
+                interviewDate: null,
+                photo: "https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/135648978d93325b056ed80846de3bf82a5cdb6b.jpg",
+                address: "Tamale North",
+                services: ["Wiring Installation", "Electrical Repairs", "Safety Inspections"],
+                hourlyRate: "GHS 85-130",
+                emergencyFee: 80
+            }
+        ];
+
+        let currentSection = 'dashboard';
+        let filteredApplications = [...applicationsData];
+
+        // Initialize admin dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAdminDashboard();
+        });
+
+        function initializeAdminDashboard() {
+            initializeCounters();
+            initializeCharts();
+            initializeSidebar();
+            initializeApplicationsSection();
+            showSection('dashboard');
+        }
+
+        // Sidebar functionality
+        function initializeSidebar() {
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+                    showSection(section);
+                    
+                    // Update active state
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(`${sectionName}-section`).classList.remove('hidden');
+            currentSection = sectionName;
+            
+            // Load section-specific data
+            if (sectionName === 'applications') {
+                renderApplicationsTable();
+            }
+        }
+
+        // Counter animations
+        function initializeCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        animateCounter(counter, target);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, observerOptions);
+
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+        }
+
+        function animateCounter(element, target) {
+            anime({
+                targets: { count: 0 },
+                count: target,
+                duration: 2000,
+                easing: 'easeOutQuart',
+                update: function(anim) {
+                    element.textContent = Math.floor(anim.animatables[0].target.count);
+                }
+            });
+        }
+
+        // Chart initialization
+        function initializeCharts() {
+            initializeApplicationsChart();
+            initializeDistributionChart();
+        }
+
+        function initializeApplicationsChart() {
+            const ctx = document.getElementById('applicationsChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Applications',
+                        data: [12, 19, 15, 25, 22, 30],
+                        borderColor: '#FF8C42',
+                        backgroundColor: 'rgba(255, 140, 66, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Approvals',
+                        data: [8, 12, 10, 18, 16, 22],
+                        borderColor: '#2E86AB',
+                        backgroundColor: 'rgba(46, 134, 171, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function initializeDistributionChart() {
+            const ctx = document.getElementById('distributionChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Carpentry', 'Welding', 'Plumbing', 'Electrical', 'Auto Repair', 'Construction'],
+                    datasets: [{
+                        data: [18, 15, 12, 10, 8, 6],
+                        backgroundColor: [
+                            '#FF8C42',
+                            '#2E86AB',
+                            '#10B981',
+                            '#FFD700',
+                            '#8B5CF6',
+                            '#EF4444'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Applications section
+        function initializeApplicationsSection() {
+            setupApplicationFilters();
+            renderApplicationsTable();
+        }
+
+        function setupApplicationFilters() {
+            const searchInput = document.getElementById('application-search');
+            const statusFilter = document.getElementById('status-filter');
+            const categoryFilter = document.getElementById('category-filter');
+
+            searchInput.addEventListener('input', filterApplications);
+            statusFilter.addEventListener('change', filterApplications);
+            categoryFilter.addEventListener('change', filterApplications);
+        }
+
+        function filterApplications() {
+            const searchTerm = document.getElementById('application-search').value.toLowerCase();
+            const statusFilter = document.getElementById('status-filter').value;
+            const categoryFilter = document.getElementById('category-filter').value;
+
+            filteredApplications = applicationsData.filter(application => {
+                const matchesSearch = !searchTerm || 
+                    application.name.toLowerCase().includes(searchTerm) ||
+                    application.email.toLowerCase().includes(searchTerm) ||
+                    application.category.toLowerCase().includes(searchTerm);
+                
+                const matchesStatus = !statusFilter || application.status === statusFilter;
+                const matchesCategory = !categoryFilter || application.category === categoryFilter;
+                
+                return matchesSearch && matchesStatus && matchesCategory;
+            });
+
+            renderApplicationsTable();
+        }
+
+        function renderApplicationsTable() {
+            const tbody = document.getElementById('applications-table-body');
+            tbody.innerHTML = '';
+
+            filteredApplications.forEach(application => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="flex items-center">
+                            <img src="${application.photo}" alt="${application.name}" 
+                                 class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div>
+                                <div class="font-semibold">${application.name}</div>
+                                <div class="text-sm text-gray-600">${application.email}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="service-badge bg-orange-100 text-orange-800">
+                            ${application.category.charAt(0).toUpperCase() + application.category.slice(1)}
+                        </span>
+                    </td>
+                    <td>${application.experience}</td>
+                    <td>${new Date(application.applicationDate).toLocaleDateString()}</td>
+                    <td>
+                        <span class="status-badge status-${application.status}">
+                            ${application.status.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="flex gap-2">
+                            <button onclick="reviewApplication(${application.id})" 
+                                    class="btn-primary px-3 py-1 rounded text-sm">
+                                Review
+                            </button>
+                            ${application.status === 'pending' ? `
+                                <button onclick="scheduleInterview(${application.id})" 
+                                        class="btn-secondary px-3 py-1 rounded text-sm">
+                                    Schedule Interview
+                                </button>
+                            ` : ''}
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Application review modal
+        function reviewApplication(applicationId) {
+            const application = applicationsData.find(app => app.id === applicationId);
+            if (!application) return;
+
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-display text-xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Applicant Information
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center mb-4">
+                                <img src="${application.photo}" alt="${application.name}" 
+                                     class="w-20 h-20 rounded-full object-cover mr-4">
+                                <div>
+                                    <div class="font-bold text-lg">${application.name}</div>
+                                    <div class="text-gray-600">${application.email}</div>
+                                    <div class="text-gray-600">${application.phone}</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Experience</label>
+                                    <div class="font-semibold">${application.experience}</div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Certification</label>
+                                    <div class="font-semibold">${application.certification}</div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Hourly Rate</label>
+                                    <div class="font-semibold">${application.hourlyRate}</div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Emergency Fee</label>
+                                    <div class="font-semibold">GHS ${application.emergencyFee}</div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Services Offered</label>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    ${application.services.map(service => 
+                                        `<span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">${service}</span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-display text-xl font-bold mb-4" style="color: var(--craftsman-blue);">
+                            Review Actions
+                        </h4>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Interview Notes</label>
+                                <textarea id="interview-notes" rows="4" 
+                                          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                          placeholder="Add notes from the verification interview..."></textarea>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Skill Assessment</label>
+                                <div class="rating-input mb-2" data-rating="skill">
+                                    <span class="star" data-value="1">⭐</span>
+                                    <span class="star" data-value="2">⭐</span>
+                                    <span class="star" data-value="3">⭐</span>
+                                    <span class="star" data-value="4">⭐</span>
+                                    <span class="star" data-value="5">⭐</span>
+                                </div>
+                                <input type="hidden" id="skill-rating" value="0">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Professionalism</label>
+                                <div class="rating-input mb-2" data-rating="professionalism">
+                                    <span class="star" data-value="1">⭐</span>
+                                    <span class="star" data-value="2">⭐</span>
+                                    <span class="star" data-value="3">⭐</span>
+                                    <span class="star" data-value="4">⭐</span>
+                                    <span class="star" data-value="5">⭐</span>
+                                </div>
+                                <input type="hidden" id="professionalism-rating" value="0">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Decision</label>
+                                <select id="decision" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                                    <option value="">Select decision</option>
+                                    <option value="approve">Approve Application</option>
+                                    <option value="reject">Reject Application</option>
+                                    <option value="request-info">Request More Information</option>
+                                </select>
+                            </div>
+                            
+                            <div id="rejection-reason" class="hidden">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Rejection Reason</label>
+                                <textarea id="rejection-notes" rows="3" 
+                                          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                          placeholder="Explain why the application is being rejected..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end gap-4 mt-8">
+                    <button onclick="closeReviewModal()" class="btn-secondary px-6 py-2 rounded-lg">
+                        Cancel
+                    </button>
+                    <button onclick="submitReview(${application.id})" class="btn-primary px-6 py-2 rounded-lg">
+                        Submit Decision
+                    </button>
+                </div>
+            `;
+
+            // Initialize rating inputs
+            initializeRatingInputs();
+            
+            // Show/hide rejection reason based on decision
+            document.getElementById('decision').addEventListener('change', function() {
+                const rejectionDiv = document.getElementById('rejection-reason');
+                if (this.value === 'reject') {
+                    rejectionDiv.classList.remove('hidden');
+                } else {
+                    rejectionDiv.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('review-modal').classList.remove('hidden');
+        }
+
+        function initializeRatingInputs() {
+            const ratingInputs = document.querySelectorAll('.rating-input');
+            
+            ratingInputs.forEach(ratingInput => {
+                const stars = ratingInput.querySelectorAll('.star');
+                const hiddenInput = document.getElementById(`${ratingInput.dataset.rating}-rating`);
+                
+                stars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = parseInt(this.dataset.value);
+                        hiddenInput.value = value;
+                        
+                        // Update visual state
+                        stars.forEach((s, index) => {
+                            if (index < value) {
+                                s.classList.add('active');
+                            } else {
+                                s.classList.remove('active');
+                            }
+                        });
+                    });
+                });
+            });
+        }
+
+        function submitReview(applicationId) {
+            const decision = document.getElementById('decision').value;
+            const interviewNotes = document.getElementById('interview-notes').value;
+            const skillRating = document.getElementById('skill-rating').value;
+            const professionalismRating = document.getElementById('professionalism-rating').value;
+            
+            if (!decision) {
+                showNotification('Please select a decision.', 'error');
+                return;
+            }
+            
+            if (decision === 'reject' && !document.getElementById('rejection-notes').value.trim()) {
+                showNotification('Please provide a rejection reason.', 'error');
+                return;
+            }
+            
+            // Update application status
+            const application = applicationsData.find(app => app.id === applicationId);
+            if (application) {
+                application.status = decision === 'approve' ? 'approved' : 
+                                   decision === 'reject' ? 'rejected' : 'under-review';
+                
+                showNotification(`Application ${decision}d successfully!`, 'success');
+                closeReviewModal();
+                renderApplicationsTable();
+            }
+        }
+
+        function closeReviewModal() {
+            document.getElementById('review-modal').classList.add('hidden');
+        }
+
+        function scheduleInterview(applicationId) {
+            showNotification('Interview scheduling feature coming soon!', 'info');
+        }
+
+        function exportData() {
+            showNotification('Data export feature coming soon!', 'info');
+        }
+
+        function logout() {
+            showNotification('Logged out successfully!', 'success');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-6 z-50 p-4 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 ${
+                type === 'success' ? 'bg-green-500 text-white' : 
+                type === 'error' ? 'bg-red-500 text-white' : 
+                'bg-blue-500 text-white'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Animate out and remove
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

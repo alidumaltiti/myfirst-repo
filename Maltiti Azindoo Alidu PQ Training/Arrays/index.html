@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorite Foods Array</title>
+</head>
+<body>
+    <script>
+        // Create an array of favorite foods
+        const favoriteFoods = ['Pizza', 'Jollof Rice', 'Sushi', 'Tacos'];
+
+        // Print the first and last food
+        console.log('First food:', favoriteFoods[0]);
+        console.log('Last food:', favoriteFoods[favoriteFoods.length - 1]);
+
+        // Add one more food using .push()
+        favoriteFoods.push('Ice Cream');
+
+        // Print the new length of the array
+        console.log('New length:', favoriteFoods.length);
+
+        // Loop through and print all foods
+        console.log('All favorite foods:');
+        for (let i = 0; i < favoriteFoods.length; i++) {
+            console.log(favoriteFoods[i]);
+        }       
+        
+        let allFoodsMessage = 'All favorite foods:\n';
+        for (let i = 0; i < favoriteFoods.length; i++) {
+            allFoodsMessage += favoriteFoods[i] + '\n';
+        }
+        alert(allFoodsMessage);
+    </script>
+</body>
+</html>
