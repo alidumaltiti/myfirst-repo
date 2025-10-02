@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Times Table Generator</title>
+</head>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 20px;
+        text-align: center;
+        background-color: #f4f4f4;
+        color: #333;
+        padding: 20px;
+        border: #0f110f 2px solid;
+        border-radius: 10px;
+    }
+    body:hover{
+        box-shadow: 0px 10px 10px 0px #28a745;
+        transition: 0.5s;
+    }
+    input{
+        padding: 10px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+        
+    }
+    input:hover{
+        border: 1px solid #28a745;
+        box-shadow: 0px 10px 10px 0px #28a745;
+        transition: 0.5s;
+    }
+    button{
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    button:hover{
+        background-color: #218838;
+        box-shadow: 0px 10px 10px 0px #090c0a;
+        transition: 0.5s;
+    }
+    p{
+        margin-top: 20px;
+    }
+    label{
+        display: block;
+        font-weight: bold;
+    }
+    demo{
+        font-size: 18px;
+        margin-top: 20px;
+        color: #555;
+        text-align: center;
+        white-space: pre-line;
+        line-height: 1.6;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 20px auto;
+        word-wrap: break-word;
+
+    }
+</style>
+<body>
+    <header>
+        <h1>Times Table Generator</h1>
+    </header>
+    <label>Enter a number:
+        <br><input type="number" id="num">
+    </label>
+    <br><br>
+    <label>Limit:
+        <br><input type="number" id="limit">
+    </label>
+    <br><br>
+    <button onclick="myFunction()">Multiply</button>
+
+    <button onclick="generateTable()">Table</button>
+
+    <p id="demo"></p>
+
+    <script>
+        function myFunction() {
+            let num = document.getElementById("num").value;
+            let limit = document.getElementById("limit").value;
+            let text = "";
+            for (let i = 1; i <= limit; i++) {
+                let result = num * i;
+                text += num + " x " + i + " = " + result + "<br>";
+            }
+            document.getElementById("demo").innerHTML = text;
+        }
+        function generateTable() {
+            let num = document.getElementById("num").value;
+            let limit = document.getElementById("limit").value;
+
+            let html = "<table border='1' cellpadding='5' align='center'><tr><th>Number</th><th>Multiplier</th><th>Result</th></tr>";
+            for (let i = 1; i <= limit; i++) {
+                let result = num * i;
+                html += "<tr><td>" + num + "</td><td>" + i + "</td><td>" + result + "</td></tr>";
+            }
+            html += "</table>";
+            document.getElementById("demo").innerHTML = html;
+        }
+    </script>
+</body>
+</html>

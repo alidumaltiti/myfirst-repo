@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlassCraft Pro - Premium Glass Fabrication & Works</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, #2c3e50, #1a2530);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Homepage */
+        #home {
+            text-align: center;
+            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 120px;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        #home p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            color: #4a6582;
+            max-width: 700px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #3498db, #2c7ac6);
+            color: white;
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(to right, #2c7ac6, #3498db);
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #eef5ff;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .service-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #5a6d80;
+            line-height: 1.7;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 260px;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 1px solid #eef5ff;
+        }
+
+        .contact-info h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1.2rem;
+            color: #5a6d80;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info p strong {
+            color: #2c3e50;
+            min-width: 80px;
+            display: inline-block;
+        }
+
+        form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 1px solid #eef5ff;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #dce6f5;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #f8fafd;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        button {
+            background: linear-gradient(to right, #3498db, #2c7ac6);
+            color: white;
+            padding: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(to right, #2c7ac6, #3498db);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.7rem;
+            }
+            
+            #home h1 {
+                font-size: 2.5rem;
+            }
+            
+            #home p {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 90px 20px 40px;
+            }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #2c7ac6);
+            border-radius: 2px;
+        }
+
+        /* Upload button styling */
+        #imageUpload {
+            margin: 2.5rem auto;
+            display: block;
+            padding: 1rem;
+            background: linear-gradient(to right, #3498db, #2c7ac6);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        #imageUpload:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(to right, #2c7ac6, #3498db);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('services')">Services</a></li>
+            <li><a href="#" onclick="showSection('gallery')">Gallery</a></li>
+            <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h1>GlassCraft Pro</h1>
+        <p>Premium Glass Fabrication & Installation Services</p>
+        <a href="#" class="cta-button" onclick="showSection('services')">Explore Our Services</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="hidden">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Custom Glass Cutting</h3>
+                <p>Precision cutting for any glass type and thickness. We handle both residential and commercial projects with exact measurements.</p>
+            </div>
+            <div class="service-card">
+                <h3>Glass Installation</h3>
+                <p>Professional installation of windows, doors, shower enclosures, and more. Guaranteed quality workmanship.</p>
+            </div>
+            <div class="service-card">
+                <h3>Glass Repair</h3>
+                <p>Expert repair services for cracked or damaged glass. We restore your glass to its original condition.</p>
+            </div>
+            <div class="service-card">
+                <h3>Mirrors & Decorative Glass</h3>
+                <p>Custom mirrors and decorative glass solutions for homes and businesses. Add elegance to any space.</p>
+            </div>
+            <div class="service-card">
+                <h3>Commercial Glass Solutions</h3>
+                <p>Complete glass solutions for offices, storefronts, and commercial buildings. From design to installation.</p>
+            </div>
+            <div class="service-card">
+                <h3>Emergency Services</h3>
+                <p>24/7 emergency glass repair and replacement services. We're here when you need us most.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="hidden">
+        <h2>Our Work Gallery</h2>
+        <input type="file" id="imageUpload" accept="image/*" multiple style="margin: 20px auto; display: block;">
+        <div class="gallery-grid" id="galleryContainer">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/3498db/ffffff?text=Shower+Enclosure" alt="Shower Enclosure">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/2ecc71/ffffff?text=Glass+Windows" alt="Glass Windows">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/e74c3c/ffffff?text=Glass+Doors" alt="Glass Doors">
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x200/f39c12/ffffff?text=Mirror+Installation" alt="Mirror Installation">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="hidden">
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                <p><strong>WhatsApp:</strong> +1 (555) 987-6543</p>
+                <p><strong>Email:</strong> info@glasscraftpro.com</p>
+                <p><strong>Address:</strong> 123 Glass Street, Craft City, CC 12345</p>
+                <p><strong>Hours:</strong> Mon-Fri: 8AM-6PM, Sat: 9AM-4PM</p>
+            </div>
+            <form id="serviceRequestForm" onsubmit="handleSubmit(event)">
+                <h3>Request a Service</h3>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Required</label>
+                    <select id="service" name="service" required>
+                        <option value="">Select a service</option>
+                        <option value="Custom Glass Cutting">Custom Glass Cutting</option>
+                        <option value="Glass Installation">Glass Installation</option>
+                        <option value="Glass Repair">Glass Repair</option>
+                        <option value="Mirrors & Decorative Glass">Mirrors & Decorative Glass</option>
+                        <option value="Commercial Glass Solutions">Commercial Glass Solutions</option>
+                        <option value="Emergency Services">Emergency Services</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Please describe your requirements..." required></textarea>
+                </div>
+                <button type="submit">Send Request</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Section Navigation
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // Form Submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const phone = formData.get('phone');
+            const email = formData.get('email');
+            const service = formData.get('service');
+            const message = formData.get('message');
+            
+            // Create message
+            const fullMessage = `New Service Request from GlassCraft Pro Website:
+            
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Service: ${service}
+
+Message:
+${message}`;
+            
+            // Send to WhatsApp
+            const whatsappNumber = '15559876543'; // Replace with actual WhatsApp number
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(fullMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Send to Email
+            const emailAddress = 'info@glasscraftpro.com'; // Replace with actual email
+            const emailSubject = `Service Request: ${service}`;
+            const emailUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(fullMessage)}`;
+            window.open(emailUrl, '_blank');
+            
+            // Reset form
+            event.target.reset();
+            alert('Your request has been sent! We will contact you soon.');
+        }
+
+        // Image Upload for Gallery
+        document.getElementById('imageUpload').addEventListener('change', function(e) {
+            const files = e.target.files;
+            const galleryContainer = document.getElementById('galleryContainer');
+            
+            for (let file of files) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'gallery-item';
+                        galleryItem.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image">`;
+                        galleryContainer.appendChild(galleryItem);
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>
