@@ -14,10 +14,10 @@
         }
         
         body {
-            display: flex;
             min-height: 100vh;
             background-color: #f8f9fa;
             color: #333;
+            display: flex;
         }
         
         /* Side Navigation Bar */
@@ -29,7 +29,7 @@
             flex-direction: column;
             box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
             position: relative;
-            z-index: 10;
+            z-index: 1000;
         }
         
         .logo {
@@ -105,10 +105,66 @@
             line-height: 1.6;
             color: #ccc;
         }
-        
+
+        /* Content Wrapper */
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        /* Top Navigation Bar */
+        .top-navbar {
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            z-index: 999;
+        }
+
+        .search-bar {
+            position: relative;
+        }
+
+        .search-bar input {
+            padding: 8px 15px 8px 40px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
         /* Main Content */
         .main-content {
-            flex-grow: 1;
             padding: 30px;
             overflow-y: auto;
         }
@@ -177,11 +233,6 @@
                 flex-direction: column;
             }
             
-            .side-navbar {
-                width: 100%;
-                height: auto;
-            }
-            
             .nav-links {
                 display: flex;
                 overflow-x: auto;
@@ -202,6 +253,21 @@
             
             .motivation-section {
                 display: none; /* Hide on mobile to save space */
+            }
+
+            .side-navbar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+            }
+
+            .top-navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
             }
         }
     </style>
@@ -232,63 +298,80 @@
         </div>
     </nav>
     
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="header">
-            <h1>Web Development Course</h1>
-            <p>Master modern web development techniques with HTML, CSS, JavaScript, and more</p>
-        </div>
-        
-        <div class="course-modules">
-            <div class="module-card">
-                <h3>HTML Fundamentals</h3>
-                <p>Learn the building blocks of web pages with semantic HTML.</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 80%;"></div>
-                </div>
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Top Navigation Bar -->
+        <header class="top-navbar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search courses, topics...">
+            </div>
+            <div class="user-profile">
+                <i class="fas fa-bell"></i>
+                <i class="fas fa-envelope"></i>
+                <span>Maltiti Alidu</span>
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Profile">
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1>Web Development Course</h1>
+                <p>Master modern web development techniques with HTML, CSS, JavaScript, and more</p>
             </div>
             
-            <div class="module-card">
-                <h3>CSS Styling</h3>
-                <p>Master CSS layouts, flexbox, grid, and responsive design.</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 65%;"></div>
+            <div class="course-modules">
+                <div class="module-card">
+                    <h3>HTML Fundamentals</h3>
+                    <p>Learn the building blocks of web pages with semantic HTML.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <h3>CSS Styling</h3>
+                    <p>Master CSS layouts, flexbox, grid, and responsive design.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 65%;"></div>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <h3>JavaScript Basics</h3>
+                    <p>Add interactivity to your websites with JavaScript.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 30%;"></div>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <h3>Advanced Layouts</h3>
+                    <p>Create complex layouts with CSS Grid and Flexbox.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 10%;"></div>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <h3>Responsive Design</h3>
+                    <p>Make your websites work on all screen sizes.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <h3>Final Project</h3>
+                    <p>Apply all your skills to build a complete website.</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%;"></div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="module-card">
-                <h3>JavaScript Basics</h3>
-                <p>Add interactivity to your websites with JavaScript.</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 30%;"></div>
-                </div>
-            </div>
-            
-            <div class="module-card">
-                <h3>Advanced Layouts</h3>
-                <p>Create complex layouts with CSS Grid and Flexbox.</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 10%;"></div>
-                </div>
-            </div>
-            
-            <div class="module-card">
-                <h3>Responsive Design</h3>
-                <p>Make your websites work on all screen sizes.</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 0%;"></div>
-                </div>
-            </div>
-            
-            <div class="module-card">
-                <h3>Final Project</h3>
-                <p>Apply all your skills to build a complete website.</p>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 0%;"></div>
-                </div>
-            </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script>
         // Simple JavaScript to handle active state for navigation links

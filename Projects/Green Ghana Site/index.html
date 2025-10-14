@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -49,8 +50,14 @@
         .glass-nav {
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-            background: rgba(255, 248, 220, 0.9);
-            border-bottom: 1px solid rgba(45, 80, 22, 0.1);
+            background: rgba(47, 47, 47, 0.85); /* --charcoal with transparency */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .glass-nav.scrolled {
+            /* This class is no longer strictly necessary for the color change, but can be used for other scroll effects */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
         .skill-card {
@@ -92,6 +99,8 @@
         
         .floating-element {
             animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+            transform-origin: center;
         }
 
         .delay--2s {
@@ -138,6 +147,40 @@
         
         .nav-link:hover::after {
             width: 100%;
+            height: 2px;
+        }
+
+        .dark-nav-text {
+            color: var(--cream-white) !important;
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(47, 47, 47, 0.95);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0;
+            min-width: 200px;
+            z-index: 10;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-menu a {
+            padding: 0.75rem 1.5rem;
         }
         
         .achievement-badge {
@@ -164,6 +207,43 @@
     .footer-bg {
         background: var(--charcoal);
     }
+    .text-cream-white {
+        color: var(--cream-white);
+    }
+    .text-earth-brown {
+        color: var(--earth-brown);
+    }
+    .text-forest-green {
+        color: var(--forest-green);
+    }
+    .text-savannah-gold {
+        color: var(--savannah-gold);
+    }
+    .text-charcoal {
+        color: var(--charcoal);
+    }
+    .text-sunset-orange {
+        color: var(--sunset-orange);
+    }
+    .text-clay-red {
+        color: #FF4E00;
+    }
+    .bg-savannah-gold {
+        background: var(--savannah-gold);
+    }
+    .pulse-circle {
+        width: 150px;
+        height: 150px;
+        border: 4px solid var(--sunset-orange);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+        margin: 0 auto;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.7; }
+        100% { transform: scale(1); opacity: 1; }
+    }
     </style>
 </head>
 <body>
@@ -173,28 +253,56 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center">
-                        <span class="text-white font-bold text-lg">🌱</span>
+                        <span class="text-white font-bold text-lg"><a href="index.html">🌱</a></span>
                     </div>
-                    <span class="font-display text-2xl font-bold heading-forest-green">Green Ghana</span>
+                    <span class="font-display text-2xl font-bold dark-nav-text">Green Ghana</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link font-medium">Home</a>
-                    <a href="assessment.html" class="nav-link font-medium">Assessment</a>
-                    <a href="calculator.html" class="nav-link font-medium">Impact Calculator</a>
-                    <a href="resources.html" class="nav-link font-medium">Resources</a>
+                
+                <!-- Desktop Menu - Centered -->
+                <div class="md:flex flex-1 justify-center items-center space-x-8">
+                    <a href="#home" class="nav-link font-medium dark-nav-text"><i class="fas fa-home"></i>Home</a>
+                    <a href="About.html" class="nav-link font-medium dark-nav-text"><i class="fas fa-home"></i>About</a>
+                    <a href="assessment.html" class="nav-link font-medium dark-nav-text"><i class="fas fa-chalkboard-teacher"></i> Assessment</a>
+                    <a href="calculator.html" class="nav-link font-medium dark-nav-text"><i class="fas fa-calculator"></i> Impact Calculator</a>
+                    <div class="dropdown">
+                        <a href="resources.html" class="nav-link font-medium dark-nav-text flex items-center"><i class="fas fa-book"></i>
+                            Resources <i class="fas fa-chevron-down text-xs ml-2"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="resources.html#courses" class="block dark-nav-text hover:bg-white/10">Online Courses</a>
+                            <a href="resources.html#map" class="block dark-nav-text hover:bg-white/10">Initiatives Map</a>
+                            <a href="resources.html#jobs" class="block dark-nav-text hover:bg-white/10">Green Jobs</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex items-center">
+                <!-- Get Started Button (moved to the right) -->
+                <div class=" md:flex flex-2 justify-end tems-center">
                     <button onclick="window.location.href='assessment.html'" class="btn-primary px-6 py-2 rounded-full font-medium">Get Started</button>
-                    <div class="ml-4">
-                        <input type="checkbox" id="theme-toggle" class="hidden">
-                        <label for="theme-toggle" class="flex items-center cursor-pointer">
-                            <div class="relative">
-                                <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-                                <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
-                            </div>
-                        </label>
+                </div>
+                <!-- Hamburger Menu -->
+                <div class="md:hidden flex items-center dark-nav-text">
+                    <button id="hamburger-btn" class="text-2xl" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="#home" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Home</a>
+                <a href="assessment.html" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Assessment</a>
+                <a href="calculator.html" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Impact Calculator</a>
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="w-full text-left flex items-center justify-between py-2 px-4 text-sm hover:bg-green-100 rounded">
+                        Resources <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div x-show="open" @click.away="open = false" class="mt-2 pl-4 space-y-2" style="display: none;">
+                        <a href="resources.html#courses" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Online Courses</a>
+                        <a href="resources.html#map" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Initiatives Map</a>
+                        <a href="resources.html#jobs" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Green Jobs</a>
                     </div>
                 </div>
+                <button onclick="window.location.href='assessment.html'" class="w-full text-left btn-primary mt-2 px-4 py-2 rounded-lg text-sm font-medium">Get Started</button>
             </div>
         </div>
     </nav>
@@ -238,6 +346,11 @@
         <div class="absolute top-1/2 right-1/4 floating-element delay--4s">
             <div class="w-14 h-14 bg-blue-500/30 rounded-full flex items-center justify-center">
                 <span class="text-xl">💧</span>
+            </div>
+        </div>
+        <div class="absolute top-1/2 right-1/4 floating-element delay--4s">
+            <div class="w-14 h-14 bg-blue-500/30 rounded-full flex items-center justify-center">
+                <span class="text-xl">🏡</span>
             </div>
         </div>
     </section>
@@ -377,6 +490,13 @@
         </div>
     </section>
 
+     <!-- Pulse of Modern Farming (Placeholder for future content) -->
+    <section id="pulse-section" class="py-20 bg-savannah-gold text-center">
+        <h2>Green Transformation: Pulse of a Regenerative Future</h2>
+        <div class="pulse-circle"></div><br><br>
+        <p>Visualizing the heartbeat of sustainability in motion. A living rhythm where innovation, ecology, and equity converge to reshape our world.</p>
+    </section>
+
     <!-- Success Stories Carousel -->
     <section class="py-20">
         <div class="container mx-auto px-6">
@@ -498,9 +618,34 @@
             </div>
         </div>
     </footer>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
+        // Alpine.js for mobile dropdown
         document.addEventListener('DOMContentLoaded', function () {
+            // Hamburger Menu Toggle
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = hamburgerBtn.querySelector('i');
+
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('fa-bars');
+                hamburgerIcon.classList.toggle('fa-times');
+            });
+
+            // Navigation bar scroll effect
+            // The following code is no longer needed for the background change, but I'll leave it here in case you want to add other scroll effects.
+            // const nav = document.querySelector('.glass-nav');
+            // window.addEventListener('scroll', () => {
+            //     if (window.scrollY > 50) {
+            //         nav.classList.add('scrolled');
+            //     } else {
+            //         nav.classList.remove('scrolled');
+            //     }
+            // });
+
+
             // Staggered fade-in animation for elements with the 'stagger-fade' class
             const fadeElements = document.querySelectorAll('.stagger-fade');
             anime({
@@ -543,6 +688,7 @@
                 }).mount();
             }
         });
+
     </script>
         <script src="script.js"></script>
     </body></html>

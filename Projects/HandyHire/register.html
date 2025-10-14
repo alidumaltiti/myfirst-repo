@@ -6,6 +6,7 @@
     <title>Register as Service Provider - Tamale TVET Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -230,8 +231,21 @@
                     <a href="index.html#services" class="nav-link font-medium">Services</a>
                     <a href="index.html#providers" class="nav-link font-medium">Find Professionals</a>
                     <a href="register.html" class="nav-link font-medium text-orange-500">Register</a>
+                    <button onclick="window.location.href='index.html'" class="btn-secondary px-6 py-2 rounded-full font-medium">Back to Home</button>
                 </div>
-                <button onclick="window.location.href='index.html'" class="btn-secondary px-6 py-2 rounded-full font-medium">Back to Home</button>
+                <!-- Hamburger Menu -->
+                <div class="md:hidden">
+                    <button id="hamburger-btn" class="text-2xl" style="color: var(--craftsman-blue);">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="index.html" class="block py-2 px-4 text-sm hover:bg-orange-100 rounded">Home</a>
+                <a href="index.html#services" class="block py-2 px-4 text-sm hover:bg-orange-100 rounded">Services</a>
+                <a href="index.html#providers" class="block py-2 px-4 text-sm hover:bg-orange-100 rounded">Find Professionals</a>
+                <a href="register.html" class="block py-2 px-4 text-sm bg-orange-100 text-orange-800 rounded">Register</a>
             </div>
         </div>
     </nav>
@@ -694,6 +708,17 @@
 
         // Initialize registration form
         document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger Menu Toggle
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = hamburgerBtn.querySelector('i');
+
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('fa-bars');
+                hamburgerIcon.classList.toggle('fa-times');
+            });
+
             initializeRegistrationForm();
         });
 

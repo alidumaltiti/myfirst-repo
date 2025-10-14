@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -173,13 +174,27 @@
                     </div>
                     <span class="font-display text-2xl font-bold" style="color: var(--forest-green);">Green Skills Ghana</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="About.html" class="nav-link font-medium dark-nav-text"><i class="fas fa-home"></i>About</a>
                     <a href="assessment.html" class="nav-link font-medium">Assessment</a>
                     <a href="calculator.html" class="nav-link font-medium text-orange-500">Calculator</a>
                     <a href="resources.html" class="nav-link font-medium">Resources</a>
+                    <button onclick="window.location.href='index.html'" class="btn-primary px-6 py-2 rounded-full font-medium">Back to Home</button>
                 </div>
-                <button onclick="window.location.href='index.html'" class="btn-primary px-6 py-2 rounded-full font-medium">Back to Home</button>
+                <!-- Hamburger Menu -->
+                <div class="md:hidden">
+                    <button id="hamburger-btn" class="text-2xl" style="color: var(--forest-green);">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="index.html" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Home</a>
+                <a href="assessment.html" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Assessment</a>
+                <a href="calculator.html" class="block py-2 px-4 text-sm bg-green-100 text-green-800 rounded">Calculator</a>
+                <a href="resources.html" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Resources</a>
             </div>
         </div>
     </nav>
@@ -821,6 +836,18 @@
 
         // Initialize page animations
         document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger Menu Toggle
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = hamburgerBtn.querySelector('i');
+
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                hamburgerIcon.classList.toggle('fa-bars');
+                hamburgerIcon.classList.toggle('fa-times');
+            });
+
+
             const elements = document.querySelectorAll('.stagger-fade');
             
             anime({
