@@ -10,13 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
             --forest-green: #2D5016;
-            --earth-brown: #8b5834;
+            --earth-brown: #422091;
             --sunset-orange: #FF6B35;
-            --savannah-gold: #f7dd9b;
-            --cream-white: #FFF8DC;
+            --savannah-gold: #07ee07;
+            --cream-white: #ccbc7d;
             --charcoal: #2F2F2F;
         }
 
@@ -182,7 +183,18 @@
                     <a href="calculator.html" class="nav-link font-medium">Impact Calculator</a>
                     <a href="resources.html" class="nav-link font-medium">Resources</a>
                 </div>
-                <button onclick="window.location.href='assessment.html'" class="btn-primary px-6 py-2 rounded-full font-medium">Get Started</button>
+                <div class="flex items-center">
+                    <button onclick="window.location.href='assessment.html'" class="btn-primary px-6 py-2 rounded-full font-medium">Get Started</button>
+                    <div class="ml-4">
+                        <input type="checkbox" id="theme-toggle" class="hidden">
+                        <label for="theme-toggle" class="flex items-center cursor-pointer">
+                            <div class="relative">
+                                <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+                                <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -532,5 +544,5 @@
             }
         });
     </script>
-</body>
-</html>
+        <script src="script.js"></script>
+    </body></html>

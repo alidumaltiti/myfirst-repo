@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jqUERY</title>
+    <script src="jquery-3.7.1.min.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: rgb(240, 236, 236);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: small;
+        color: rgba(11, 11, 15, 0.836);
+        padding: 20px;
+        text-align: justify;
+        line-height: 1.6
+    }
+    header{
+        background-color: rgb(104, 86, 86);
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+    main{
+        margin: 20px 0;
+        padding: 20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2, h3{
+        color: rgb(0, 0, 0);
+        margin-bottom: 10px;
+    }
+    p, ul, ol{
+        margin-bottom: 15px;
+    }
+    button{
+        padding: 10px 15px;
+        background-color: rgb(0, 0, 0);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: rgb(33, 32, 32);
+    }
+    pre{
+        background-color: rgb(240, 236, 236);
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin-bottom: 15px;
+    }
+    code{
+        font-family: 'Courier New', Courier, monospace;
+        color: rgb(0, 0, 0);
+    }
+    a{
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+    .container{
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    section{
+        margin-bottom: 20px;
+    }
+    ul{
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+    ol{
+        list-style-type: decimal;
+        margin-left: 20px;
+    }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+    th, td{
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th{
+        background-color: rgb(0, 0, 0);
+        color: white;
+    }
+    tr:nth-child(even){
+        background-color: #f2f2f2;
+    }
+    tr:hover{
+        background-color: #ddd;
+    }
+</style>
+<body>
+    <header>
+        <h1>Introduction to JQuery</h1>
+    </header>
+    <main>
+        <h2>What is JQuery?</h2>
+        <p>jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, and animation much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.</p>
+        <p>jQuery is designed to change the way that you write JavaScript.</p>
+        <h2>Why Use jQuery?</h2>
+        <ul>
+            <li>Write less, do more</li>
+            <li>Cross-browser compatibility</li>
+            <li>Rich set of features</li>
+            <li>Extensible with plugins</li>
+            <li>Strong community support</li>
+        </ul>
+        <h2>Getting Started with jQuery</h2>
+        <p>To start using jQuery, you can include it in your project by either
+            <ul>
+                <li>Downloading the jQuery library and hosting it yourself</li>
+                <li>Linking to a CDN (Content Delivery Network)</li>
+            </ul>
+        </p>
+        <p>Once jQuery is included in your project, you can start using its features by writing jQuery code within a script tag or in an external JavaScript file.</p>
+        <h2>Basic jQuery Syntax</h2>
+        <p>The basic syntax of jQuery is: <br>
+            $(selector).action();
+        </p>
+        <p>Where $ is the jQuery function, selector is used to "find" (or select) HTML elements, and action is the jQuery action to be performed on the element(s).</p>
+        <p>Example:</p>
+        <pre>
+            <code>
+                $(document).ready(function(){
+                    $("button").click(function(){
+                        $("p").hide();
+                    });
+                });
+            </code>
+        </pre>
+        <p>In this example, when the button is clicked, all paragraphs will be hidden.</p>
+        <h2>jQuery Selectors</h2>
+        <p>jQuery selectors are used to select and manipulate HTML elements. Some common selectors include:</p>
+        <ul>
+            <li><code>$("#id")</code> - Selects an element with a specific ID</li>
+            <li><code>$(".class")</code> - Selects elements with a specific class</li>
+            <li><code>$("element")</code> - Selects all elements of a specific type (e.g., $("p") selects all paragraphs)</li>
+            <li><code>$("*")</code> - Selects all elements</li>
+        </ul>
+        <h2>jQuery Events</h2>
+        <p>jQuery provides a simple way to handle events such as clicks, mouse movements, and form submissions. Some common event methods include:</p>
+        <ul>
+            <li><code>.click()</code> - Triggered when an element is clicked</li>
+            <li><code>.hover()</code> - Triggered when the mouse pointer enters or leaves an element</li>
+            <li><code>.submit()</code> - Triggered when a form is submitted</li>
+            <li><code>.ready()</code> - Triggered when the DOM is fully loaded</li>
+        </ul>
+        <h2>jQuery Effects</h2>
+        <p>jQuery includes several built-in effects for showing and hiding elements, as well as for creating animations. Some common effect methods include:</p>
+        <ul>
+            <li><code>.hide()</code> - Hides the selected elements</li>
+            <li><code>.show()</code> - Shows the selected elements</li>
+            <li><code>.toggle()</code> - Toggles between hiding and showing the selected elements</li>
+            <li><code>.fadeIn()</code> - Fades in the selected elements</li>
+            <li><code>.fadeOut()</code> - Fades out the selected elements</li>
+            <li><code>.fadeToggle()</code> - Fades in or out the selected elements</li>
+        </ul>
+        <h2>jQuery AJAX</h2>
+        <p>jQuery makes it easy to work with AJAX (Asynchronous JavaScript and XML) to load data from a server without refreshing the page. Some common AJAX methods include:</p>
+        <ul>
+            <li><code>.load()</code> - Loads data from a server and places the returned HTML into the selected element</li>
+            <li><code>$.get()</code> - Sends a GET request to the server</li>
+            <li><code>$.post()</code> - Sends a POST request to the server</li>
+            <li><code>$.ajax()</code> - A more flexible method for making AJAX requests</li>
+        </ul>
+        <h2>Conclusion</h2>
+        <p>jQuery is a powerful and versatile library that simplifies many aspects of JavaScript programming. Whether you're a beginner or an experienced developer, learning jQuery can help you write cleaner, more efficient code and enhance the interactivity of your web applications.</p>
+        <h2>References</h2>
+        <p><a href="https://jquery.com/">https://jquery.com/</a></p>
+        <p><a href="https://www.w3schools.com/jquery/">https://www.w3schools.com/jquery/</a></p>
+        <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction</a></p>
+    </main>
+    <section>
+    <h2>Personal Practice Section: Jquery</h2>
+
+    <h2>jQuery Example</h2>
+    </section>
+    <br>
+    <section>
+        <h2>Hide and Show Example</h2>
+    <div>
+        <p>jQuery Resources</p>
+        <p>Documentation</p>
+        <p>Community</p>
+        <p>Free Tutorials</p>
+        <p>Quizzes</p>
+        <p>Courses</p>
+        <p>Certifications</p>
+    </div>
+
+    <p>Click the buttons to hide and show the div element:</p>
+
+    <button id="btn">Hide</button>
+    <button id="btn2">Show</button>
+
+    </section>
+    <br>
+    <section>
+        <h2>Toggle Example</h2>
+    <div>
+        <p>This is a paragraph.</p>
+        <p>This is another paragraph.</p>
+        <p>Yet another paragraph here.</p>
+    </div>
+    <button id="btn3">Toggle</button>
+    </section>
+
+    <section>
+        <h2>Fade Examples</h2>
+    <div>
+        <p>This is a paragraph.</p>
+        <p>This is another paragraph.</p>
+        <p>Yet another paragraph here.</p>
+    </div>
+    <button id="btn4">Fade Out</button>
+    <button id="btn5">Fade In</button>
+    <button id="btn6">Fade Toggle</button>
+    </section>
+
+    <script>
+        $(document).ready(function(){
+            $("#btn").click(function(){
+                $("div").hide();
+            });
+        });
+            $(document).ready(function(){
+                $("#btn2").click(function(){
+                    $("div").show();
+                });
+            });
+
+        $(document).ready(function(){
+            $("#btn3").click(function(){
+                $("p").toggle();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn4").click(function(){
+                $("p").fadeOut();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn5").click(function(){
+                $("p").fadeIn();
+            });
+        });
+        $(document).ready(function(){
+            $("#btn6").click(function(){
+                $("p").fadeToggle();
+            });
+        });
+
+        // $(document).ready(function(){
+        //     $("#btn").click(function(){
+        //         $("div").show();
+        //     });
+        // });
+    </script>
+    
+</body>
+</html>

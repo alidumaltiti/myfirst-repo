@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Database usage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: rgb(240, 236, 236);
+    }
+</style>
+<body>
+    <header>
+        <h1>Testing Database usage</h1>
+    </header>
+    <section>
+        <div class="container">
+            <div class="form-container">
+                <form action="insert.php" method="post">
+                    <h2>Insert Data</h2>
+                    <input type="text" name="name" placeholder="Enter Name" required>
+                    <input type="email" name="email" placeholder="Enter Email" required>
+                    <input type="text" name="phone" placeholder="Enter Phone Number" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="table-container">
+                <h2>Data Table</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data-table-body">
+                        <!-- Data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>

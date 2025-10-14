@@ -1,0 +1,41 @@
+
+:root {
+    --forest-green: #2D5016;
+    --earth-brown: #8B4513;
+    --sunset-orange: #FF6B35;
+    --savannah-gold: #DAA520;
+    --ocean-blue: #1E90FF;
+    --clay-red: #CD853F;
+    --cream-white: #FFF8DC;
+    --charcoal: #2F2F2F;
+
+    --primary-color-light: #2D5016;
+    --secondary-color-light: #8B4513;
+    --accent-color-light: #FF6B35;
+    --background-color-light: #FFF8DC;
+    --text-color-light: #2F2F2F;
+
+    --primary-color-dark: #5dbb63;
+    --secondary-color-dark: #c88c6c;
+    --accent-color-dark: #ff8a5b;
+    --background-color-dark: #1a202c;
+    --text-color-dark: #f7fafc;
+}
+
+body.light-mode {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+.nav-link-dark {
+    color: var(--text-color-dark);
+}
+
+.nav-link-light {
+    color: var(--text-color-light);
+}
