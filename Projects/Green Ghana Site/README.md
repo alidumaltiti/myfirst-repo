@@ -56,4 +56,4 @@ To get a local copy up and running, follow these simple steps:
 
 ## Author
 
-This project was created by Maltiti Azindoo Alidu.
+This project was created by Gemini.
