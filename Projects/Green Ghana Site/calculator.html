@@ -161,11 +161,24 @@
                 transform: translateY(0);
             }
         }
+
+        @media print {
+            body {
+                background: none;
+            }
+            .no-print {
+                display: none;
+            }
+            .calculator-card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="glass-nav fixed w-full top-0 z-50 py-4">
+    <nav class="glass-nav fixed w-full top-0 z-50 py-4 no-print">
         <div class="container mx-auto px-6">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
@@ -176,7 +189,7 @@
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="nav-link font-medium">Home</a>
-                    <a href="About.html" class="nav-link font-medium dark-nav-text"><i class="fas fa-home"></i>About</a>
+                    <a href="About.html" class="nav-link font-medium dark-nav-text">About</a>
                     <a href="assessment.html" class="nav-link font-medium">Assessment</a>
                     <a href="calculator.html" class="nav-link font-medium text-orange-500">Calculator</a>
                     <a href="resources.html" class="nav-link font-medium">Resources</a>
@@ -192,6 +205,7 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
                 <a href="index.html" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Home</a>
+                <a href="About.html" class="nav-link font-medium dark-nav-text">About</a>
                 <a href="assessment.html" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Assessment</a>
                 <a href="calculator.html" class="block py-2 px-4 text-sm bg-green-100 text-green-800 rounded">Calculator</a>
                 <a href="resources.html" class="block py-2 px-4 text-sm hover:bg-green-100 rounded">Resources</a>
@@ -203,7 +217,7 @@
     <main class="pt-24 pb-12">
         <div class="container mx-auto px-6">
             <!-- Header Section -->
-            <div class="text-center mb-12">
+            <div class="text-center mb-12 no-print">
                 <h1 class="font-display text-5xl font-bold mb-6 stagger-fade" style="color: var(--forest-green);">
                     Carbon Footprint Calculator
                 </h1>
@@ -215,7 +229,7 @@
             <!-- Calculator Container -->
             <div class="max-w-6xl mx-auto">
                 <!-- Input Form -->
-                <div id="calculator-form" class="calculator-step active">
+                <div id="calculator-form" class="calculator-step active no-print">
                     <div class="calculator-card rounded-2xl p-8 mb-8">
                         <h2 class="font-display text-3xl font-bold mb-8 text-center" style="color: var(--forest-green);">
                             Calculate Your Annual Carbon Footprint
@@ -378,7 +392,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-12" style="background: var(--charcoal);">
+    <footer class="py-12 no-print" style="background: var(--charcoal);">
         <div class="container mx-auto px-6">
             <div class="text-center">
                 <div class="flex items-center justify-center space-x-2 mb-6">
@@ -469,10 +483,17 @@
 
             // Validate required fields
             const requiredFields = ['cookingFuel', 'transportMode', 'dietType', 'foodSource', 'shoppingHabits', 'recyclingLevel'];
-            const missingFields = requiredFields.filter(field => !formData[field.replace(/([A-Z])/g, '-$1').toLowerCase()]);
+            const missingFields = requiredFields.filter(field => !formData[field]);
             
             if (missingFields.length > 0) {
-                alert('Please fill in all required fields before calculating.');
+                const missingFieldsFormatted = missingFields.map(field => {
+                    // Convert camelCase to a more readable format, e.g., 'cookingFuel' to 'Cooking Fuel'
+                    const readableName = field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                    return readableName;
+                });
+
+                // Alert the user with a more specific message
+                alert(`Please fill in the following required fields before calculating:\n- ${missingFieldsFormatted.join('\n- ')}`);
                 return;
             }
 
@@ -488,9 +509,11 @@
             const breakdown = {};
 
             // Energy emissions
-            const electricityKwh = (data.electricityBill / 0.8) * 12; // Convert GHS to kWh (average 0.8 GHS per kWh)
+            // Assumption: Average electricity tariff is 0.8 GHS/kWh. This is a simplification.
+            const electricityKwh = (data.electricityBill / 0.8) * 12; 
             const electricityEmissions = electricityKwh * emissionFactors.electricity / 1000; // Convert to tonnes
             
+            // Assumption: Average consumption for different cooking fuels. This is a simplification.
             let cookingEmissions = 0;
             switch(data.cookingFuel) {
                 case 'lpg':
@@ -517,7 +540,9 @@
             const weeklyTransportEmissions = data.weeklyDistance * emissionFactors.transport[data.transportMode];
             const annualTransportEmissions = weeklyTransportEmissions * 52 / 1000; // Convert to tonnes
             
-            const flightEmissions = data.annualFlights * emissionFactors.flights.international / 1000; // Assume mostly international
+            // Assume an average flight is a mix of domestic and international
+            const averageFlightEmissions = (emissionFactors.flights.domestic + emissionFactors.flights.international) / 2;
+            const flightEmissions = data.annualFlights * averageFlightEmissions / 1000; 
             
             breakdown.transport = annualTransportEmissions + flightEmissions;
             totalEmissions += breakdown.transport;
@@ -526,16 +551,17 @@
             breakdown.diet = emissionFactors.diet[data.dietType] + emissionFactors.foodTransport[data.foodSource];
             totalEmissions += breakdown.diet;
 
-            // Consumption emissions
-            breakdown.consumption = emissionFactors.consumption[data.shoppingHabits] * emissionFactors.waste[data.recyclingLevel];
+            // Consumption emissions are added, not multiplied
+            breakdown.consumption = emissionFactors.consumption[data.shoppingHabits] + emissionFactors.waste[data.recyclingLevel];
             totalEmissions += breakdown.consumption;
 
-            // Household size adjustment
-            const householdAdjustment = Math.sqrt(data.householdSize) / data.householdSize; // Economies of scale
-            totalEmissions *= householdAdjustment;
+            // Calculate per-person emissions before household adjustment for comparison
+            const perPersonEmissions = totalEmissions / data.householdSize;
+
 
             return {
-                total: totalEmissions,
+                total: totalEmissions, // Total for the household
+                perPerson: perPersonEmissions, // Per person
                 breakdown: breakdown,
                 householdSize: data.householdSize
             };
@@ -551,27 +577,34 @@
                         <h2 class="font-display text-4xl font-bold mb-6" style="color: var(--forest-green);">
                             Your Carbon Footprint Results
                         </h2>
-                        <div class="result-metric max-w-md mx-auto">
-                            <div class="text-5xl font-bold mb-2">${emissions.total.toFixed(1)}</div>
-                            <div class="text-xl">Tonnes CO₂e per year</div>
-                            <div class="text-sm opacity-90 mt-2">For your household of ${formData.householdSize} people</div>
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div class="result-metric max-w-md mx-auto">
+                                <div class="text-5xl font-bold mb-2">${emissions.total.toFixed(1)}</div>
+                                <div class="text-xl">Tonnes CO₂e / year</div>
+                                <div class="text-sm opacity-90 mt-2">For your household of ${formData.householdSize}</div>
+                            </div>
+                            <div class="result-metric max-w-md mx-auto bg-blue-500">
+                                <div class="text-5xl font-bold mb-2">${emissions.perPerson.toFixed(1)}</div>
+                                <div class="text-xl">Tonnes CO₂e / year</div>
+                                <div class="text-sm opacity-90 mt-2">Per person</div>
+                            </div>
                         </div>
                     </div>
                     
                     <!-- Comparison Chart -->
                     <div class="mb-12">
                         <h3 class="font-display text-2xl font-bold mb-6 text-center" style="color: var(--forest-green);">
-                            How You Compare
+                            How You Compare (per person)
                         </h3>
                         <div class="space-y-6">
                             <div>
                                 <div class="flex justify-between items-center mb-2">
                                     <span class="font-medium">Your Footprint</span>
-                                    <span class="font-bold">${emissions.total.toFixed(1)} tonnes</span>
+                                    <span class="font-bold">${emissions.perPerson.toFixed(1)} tonnes</span>
                                 </div>
                                 <div class="comparison-bar">
                                     <div class="comparison-fill bg-gradient-to-r from-orange-500 to-red-500" 
-                                         style="width: ${Math.min((emissions.total / globalAverage) * 100, 100)}%"></div>
+                                         style="width: ${Math.min((emissions.perPerson / globalAverage) * 100, 100)}%"></div>
                                 </div>
                             </div>
                             
@@ -613,7 +646,7 @@
                     <!-- Emissions Breakdown Chart -->
                     <div class="mb-12">
                         <h3 class="font-display text-2xl font-bold mb-6 text-center" style="color: var(--forest-green);">
-                            Emissions Breakdown
+                            Emissions Breakdown (Household)
                         </h3>
                         <div class="chart-container">
                             <canvas id="emissionsChart"></canvas>
@@ -631,12 +664,15 @@
                     </div>
                     
                     <!-- Action Buttons -->
-                    <div class="text-center">
+                    <div class="text-center no-print">
                         <button onclick="retakeCalculator()" class="btn-primary px-8 py-3 rounded-full font-semibold mr-4">
                             Recalculate
                         </button>
-                        <button onclick="window.location.href='resources.html'" class="border-2 border-green-600 text-green-600 px-8 py-3 rounded-full font-semibold hover:bg-green-600 hover:text-white transition-all duration-300">
+                        <button onclick="window.location.href='resources.html'" class="border-2 border-green-600 text-green-600 px-8 py-3 rounded-full font-semibold hover:bg-green-600 hover:text-white transition-all duration-300 mr-4">
                             Find Green Solutions
+                        </button>
+                        <button onclick="printResults()" class="border-2 border-blue-500 text-blue-500 px-8 py-3 rounded-full font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300">
+                            Print Results
                         </button>
                     </div>
                 </div>
@@ -651,6 +687,7 @@
                 scale: [0.8, 1],
                 opacity: [0, 1],
                 duration: 1000,
+                delay: anime.stagger(200),
                 easing: 'easeOutElastic(1, .8)'
             });
             
@@ -717,84 +754,117 @@
 
         function generateRecommendations(emissions, formData) {
             let recommendations = [];
-            
-            // Energy recommendations
-            if (emissions.breakdown.energy > 1.0) {
-                recommendations.push({
-                    icon: '☀️',
-                    title: 'Switch to Solar Energy',
-                    description: 'Install solar panels or join community solar programs. Ghana has excellent solar potential with 5-6 peak sun hours daily.',
-                    impact: 'Reduce emissions by 0.5-1.0 tonnes/year',
-                    priority: 'high'
-                });
+            const breakdown = emissions.breakdown;
+
+            // Sort categories by emission amount
+            const sortedCategories = Object.keys(breakdown).sort((a, b) => breakdown[b] - breakdown[a]);
+
+            // Generate recommendations for the top 2-3 categories
+            for (let i = 0; i < Math.min(sortedCategories.length, 3); i++) {
+                const category = sortedCategories[i];
+                if (category === 'energy' && breakdown.energy > 0.5) {
+                    if (formData.cookingFuel === 'charcoal' || formData.cookingFuel === 'firewood') {
+                        recommendations.push({
+                            icon: '🔥',
+                            title: 'Switch to Clean Cooking',
+                            description: 'Transition to LPG or an electric stove. This is one of the most impactful changes for both your health and the environment.',
+                            impact: 'High',
+                            priority: 'high'
+                        });
+                    } else {
+                        recommendations.push({
+                            icon: '☀️',
+                            title: 'Embrace Solar & Efficiency',
+                            description: 'Consider installing solar panels or using solar-powered appliances. Even small changes like switching to LED bulbs can make a big difference.',
+                            impact: 'High',
+                            priority: 'high'
+                        });
+                    }
+                }
+
+                if (category === 'transport' && breakdown.transport > 0.5) {
+                     if (formData.transportMode === 'private-car') {
+                        recommendations.push({
+                            icon: '🚌',
+                            title: 'Rethink Your Commute',
+                            description: 'Using a trotro, ride-sharing, or even a motorcycle for some trips can significantly cut your transport emissions.',
+                            impact: 'High',
+                            priority: 'high'
+                        });
+                    } else {
+                        recommendations.push({
+                            icon: '✈️',
+                            title: 'Fly Smarter',
+                            description: 'When possible, choose direct flights and pack light. For domestic travel, consider alternatives like buses for shorter distances.',
+                            impact: 'Medium',
+                            priority: 'medium'
+                        });
+                    }
+                }
+
+                if (category === 'diet' && breakdown.diet > 1.5) {
+                    if (formData.dietType.includes('meat')) {
+                        recommendations.push({
+                            icon: '🥗',
+                            title: 'Eat More Local Plants',
+                            description: 'Reducing meat consumption, even by a day or two a week, and choosing local produce makes a huge impact. Explore Ghana\'s rich variety of vegetables and legumes.',
+                            impact: 'High',
+                            priority: 'high'
+                        });
+                    }
+                     if (formData.foodSource === 'mostly-imported') {
+                        recommendations.push({
+                            icon: '🌾',
+                            title: 'Choose Ghanaian First',
+                            description: 'Support local farmers and reduce food miles by consciously buying food produced in Ghana. Check labels and visit local markets.',
+                            impact: 'Medium',
+                            priority: 'medium'
+                        });
+                    }
+                }
+
+                if (category === 'consumption' && breakdown.consumption > 1.0) {
+                    if (formData.shoppingHabits === 'frequent' || formData.shoppingHabits === 'heavy') {
+                        recommendations.push({
+                            icon: '🛍️',
+                            title: 'Shop Second-Hand & Local',
+                            description: 'Before buying new, explore second-hand markets. Support local artisans and brands to reduce shipping emissions and support the local economy.',
+                            impact: 'Medium',
+                            priority: 'medium'
+                        });
+                    }
+                    if (formData.recyclingLevel === 'none' || formData.recyclingLevel === 'minimal') {
+                        recommendations.push({
+                            icon: '♻️',
+                            title: 'Step Up Your Recycling Game',
+                            description: 'Many services in Ghana now recycle plastics and other materials. Start segregating your waste and find a local collection point.',
+                            impact: 'Low',
+                            priority: 'low'
+                        });
+                    }
+                }
             }
-            
-            if (formData.cookingFuel === 'charcoal' || formData.cookingFuel === 'firewood') {
-                recommendations.push({
-                    icon: '🔥',
-                    title: 'Switch to Clean Cooking',
-                    description: 'Transition to LPG or electric cooking to reduce indoor air pollution and deforestation.',
-                    impact: 'Reduce emissions by 0.3-0.5 tonnes/year',
-                    priority: 'high'
+
+            // Ensure at least 2 recommendations are shown
+            if (recommendations.length < 2) {
+                 recommendations.push({
+                    icon: '💡',
+                    title: 'General Tip: Unplug Electronics',
+                    description: 'Unplug chargers and electronics when not in use to avoid \'vampire\' power consumption, a small but easy way to save energy.',
+                    impact: 'Low',
+                    priority: 'low'
                 });
-            }
-            
-            // Transport recommendations
-            if (emissions.breakdown.transport > 1.5) {
                 recommendations.push({
-                    icon: '🚌',
-                    title: 'Use Public Transport',
-                    description: 'Ghana\'s trotro system is efficient and has lower emissions per passenger than private vehicles.',
-                    impact: 'Reduce emissions by 0.5-1.0 tonnes/year',
-                    priority: 'high'
-                });
-            }
-            
-            if (formData.transportMode === 'private-car') {
-                recommendations.push({
-                    icon: '🚗',
-                    title: 'Consider Electric Vehicle',
-                    description: 'Electric vehicles are becoming more available in Ghana and can be charged with solar power.',
-                    impact: 'Reduce emissions by 1.0-1.5 tonnes/year',
-                    priority: 'medium'
-                });
-            }
-            
-            // Diet recommendations
-            if (formData.dietType === 'heavy-meat' || formData.dietType === 'average-meat') {
-                recommendations.push({
-                    icon: '🥗',
-                    title: 'Reduce Meat Consumption',
-                    description: 'Try meat-free days or transition to more plant-based meals. Ghana has excellent local vegetables and legumes.',
-                    impact: 'Reduce emissions by 0.5-1.0 tonnes/year',
-                    priority: 'medium'
-                });
-            }
-            
-            // Local food recommendations
-            if (formData.foodSource === 'mostly-imported') {
-                recommendations.push({
-                    icon: '🌾',
-                    title: 'Buy Local Foods',
-                    description: 'Support Ghanaian farmers and reduce transport emissions by choosing locally grown foods.',
-                    impact: 'Reduce emissions by 0.2-0.4 tonnes/year',
-                    priority: 'medium'
-                });
-            }
-            
-            // Waste recommendations
-            if (formData.recyclingLevel === 'none' || formData.recyclingLevel === 'minimal') {
-                recommendations.push({
-                    icon: '♻️',
-                    title: 'Improve Recycling',
-                    description: 'Start separating waste and use Ghana\'s growing recycling infrastructure. Compost organic waste.',
-                    impact: 'Reduce emissions by 0.1-0.3 tonnes/year',
+                    icon: '💧',
+                    title: 'Conserve Water',
+                    description: 'Water processing and pumping requires energy. Conserving water, especially hot water, helps reduce your indirect carbon footprint.',
+                    impact: 'Low',
                     priority: 'low'
                 });
             }
             
             // Generate HTML
-            return recommendations.map(rec => `
+            return recommendations.slice(0, 3).map(rec => `
                 <div class="recommendation-card">
                     <div class="flex items-start">
                         <div class="text-2xl mr-4">${rec.icon}</div>
@@ -802,7 +872,7 @@
                             <h4 class="font-bold text-lg mb-2" style="color: var(--forest-green);">${rec.title}</h4>
                             <p class="text-gray-600 mb-3">${rec.description}</p>
                             <div class="flex items-center justify-between">
-                                <span class="text-sm font-medium text-green-600">${rec.impact}</span>
+                                <span class="text-sm font-medium text-green-600">Impact: ${rec.impact}</span>
                                 <span class="text-xs px-2 py-1 rounded-full ${
                                     rec.priority === 'high' ? 'bg-red-100 text-red-800' :
                                     rec.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
@@ -832,6 +902,10 @@
             document.getElementById('food-source').value = '';
             document.getElementById('shopping-habits').value = '';
             document.getElementById('recycling-level').value = '';
+        }
+
+        function printResults() {
+            window.print();
         }
 
         // Initialize page animations
