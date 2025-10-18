@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rotating Ring of Light Around Image</title>
+  <style>
+    :root{
+      --size: 280px; /* circle diameter */
+      --ring-size: calc(var(--size) + 36px);
+      --speed: 6s; /* rotation duration */
+    }
+
+  
+
+    .stage{
+      position:relative;
+      width:var(--ring-size);
+      height:var(--ring-size);
+      display:grid;
+      place-items:center;
+      user-select:none;
+    }
+
+    /* the image in the center */
+    .avatar{
+      width:var(--size);
+      height:var(--size);
+      border-radius:50%;
+      overflow:hidden;
+      position:relative;
+      z-index:2;
+      box-shadow:0 8px 30px rgba(2,6,23,0.7);
+      border:4px solid rgba(255,255,255,0.04);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* The rotating ring */
+    .ring{
+      position:absolute;
+      width:var(--ring-size);
+      height:var(--ring-size);
+      border-radius:50%;
+      z-index:1;
+      display:block;
+      pointer-events:none;
+      /* create a colorful glowing arc using conic-gradient */
+      background:
+        conic-gradient(from 90deg,
+          rgba(255,255,255,0.95),
+          rgba(255,200,80,0.95) 20deg,
+          rgba(255,65,108,0.95) 70deg,
+          rgba(126,58,255,0.95) 130deg,
+          rgba(64,214,255,0.95) 200deg,
+          rgba(255,255,255,0.95) 260deg,
+          rgba(255,200,80,0.95) 300deg,
+          rgba(255,65,108,0.95) 330deg,
+          rgba(126,58,255,0.95) 360deg
+        );
+
+      /* mask out the inner part so it becomes a ring */
+      -webkit-mask: radial-gradient(circle, transparent calc(50% - 16px), black calc(50% - 12px));
+      mask: radial-gradient(circle, transparent calc(50% - 16px), black calc(50% - 12px));
+
+      filter:blur(6px) saturate(130%);
+      opacity:0.95;
+
+      animation:spin linear infinite var(--speed);
+      transform-origin:50% 50%;
+    }
+
+    /* a sharper inner ring for crisp highlight */
+    .ring::after{
+      content:"";
+      position:absolute;inset:0;border-radius:50%;
+      -webkit-mask: radial-gradient(circle, transparent calc(50% - 22px), black calc(50% - 18px));
+      mask: radial-gradient(circle, transparent calc(50% - 22px), black calc(50% - 18px));
+      background: conic-gradient(from 80deg, rgba(255,255,255,0.85), rgba(255,120,80,0.8), rgba(120,60,255,0.85));
+      filter:blur(2px) saturate(120%);
+      mix-blend-mode:screen;
+    }
+
+    @keyframes spin{
+      from{transform:rotate(0deg)}
+      to{transform:rotate(360deg)}
+    }
+
+    /* Controls box */
+    .controls{
+      display:flex;flex-direction:column;gap:8px;align-items:flex-start;color:#cbd5e1
+    }
+    .controls label{font-size:13px}
+    .controls input[type=range]{width:200px}
+    .btn{
+      background:transparent;border:1px solid rgba(255,255,255,0.12);padding:8px 12px;border-radius:8px;color:#fff;cursor:pointer
+    }
+
+    /* Hover effect: slow down and brighten on hover */
+    .stage:hover .ring{animation-duration:calc(var(--speed) / 2);filter:blur(4px) saturate(170%);opacity:1}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="stage" aria-label="Image with rotating ring">
+      <div class="ring" id="ring"></div>
+
+      <figure class="avatar" title="Profile image">
+        <!-- Replace the src with your image -->
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=0c5e9e5d5b5b2f692b7c6e2d9f9a1a2b" alt="Avatar">
+      </figure>
+    </section>
+
+    <aside class="controls" aria-hidden="false">
+      <label>Rotation speed (seconds per revolution): <strong id="speedVal">6</strong>s</label>
+      <input id="speedRange" type="range" min="1" max="20" step="0.5" value="6">
+
+      <label>Pause / Play</label>
+      <div style="display:flex;gap:8px">
+        <button id="pauseBtn" class="btn">Pause</button>
+        <button id="resumeBtn" class="btn">Resume</button>
+      </div>
+
+      <p style="font-size:13px;color:#9aa7c7;max-width:260px">Tip: hover the image to temporarily speed up & brighten the ring. Replace the image URL in the &lt;img&gt; tag with your own image.</p>
+    </aside>
+  </main>
+
+  <script>
+    const ring = document.getElementById('ring');
+    const speedRange = document.getElementById('speedRange');
+    const speedVal = document.getElementById('speedVal');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resumeBtn = document.getElementById('resumeBtn');
+
+    function setSpeed(sec){
+      // set css variable for animation duration
+      document.documentElement.style.setProperty('--speed', sec + 's');
+      speedVal.textContent = sec;
+    }
+
+    speedRange.addEventListener('input', e => setSpeed(e.target.value));
+
+    pauseBtn.addEventListener('click', ()=>{
+      ring.style.animationPlayState = 'paused';
+    });
+    resumeBtn.addEventListener('click', ()=>{
+      ring.style.animationPlayState = 'running';
+    });
+
+    // small accessibility: space toggles pause/play when controls not focused
+    window.addEventListener('keydown', (e)=>{
+      if(e.code === 'Space' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
+        e.preventDefault();
+        ring.style.animationPlayState = (ring.style.animationPlayState === 'paused') ? 'running' : 'paused';
+      }
+    });
+
+    // initialize with default
+    setSpeed(speedRange.value);
+  </script>
+</body>
+</html>

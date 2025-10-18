@@ -11,6 +11,7 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "myfirst-repo"
+		"liveServer.settings.multiRootWorkspaceName": "myfirst-repo",
+		"liveServer.settings.port": 5501
 	}
 }
