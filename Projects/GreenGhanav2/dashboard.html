@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Green Ghana</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #F1F8E9; /* Light Green */
+        }
+        .progress-bar-fill {
+            background-color: #FFC107; /* Amber for points/gamification */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-4xl font-bold text-[#2E7D32]">Welcome Back, <span id="display-name">...</span>!</h1>
+            <p class="text-lg text-gray-600 mt-2">Here is your green journey summary and personalized guidance.</p>
+        </header>
+
+        <!-- Main Dashboard Content -->
+        <div id="dashboard-content" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Left Column: Gamification & Actions -->
+            <div class="lg:col-span-1 space-y-8">
+                
+                <!-- Gamification Card -->
+                <div class="card p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">My Impact Score</h2>
+                    <div class="flex items-center justify-center text-6xl font-bold text-amber-500">
+                        <span id="total-points">0</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <p class="text-center text-gray-500">Total Points Earned</p>
+
+                    <div class="mt-6">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-amber-700">Progress to Next Level</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div id="progress-bar" class="progress-bar-fill h-4 rounded-full text-center text-white text-xs font-bold" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Card -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <a href="/calculator.html" class="block w-full text-center bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">Log a New Impact</a>
+                        <a href="/assessment.html" class="block w-full text-center bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 transition-colors">Retake Assessment</a>
+                        <button id="sign-out-btn" class="block w-full text-center bg-red-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-600 transition-colors">Sign Out</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Recommendations -->
+            <div class="lg:col-span-2 card p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Personalized Resources</h2>
+                <p class="text-gray-600 mb-6">Based on your latest assessment, here are some resources to help you grow.</p>
+                
+                <div id="recommendation-panel" class="space-y-4">
+                    <!-- Loading State -->
+                    <p class="text-gray-500">Loading recommendations...</p>
+                    <!-- Recommendations will be dynamically inserted here -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Firebase & Dashboard Logic -->
+    <script type="module">
+        import { checkAuthAndRedirect, handleSignOut } from './auth.js';
+        import { loadDashboard } from './dashboard.js';
+
+        // 1. Protect the page: If the user is not logged in, this will redirect them.
+        checkAuthAndRedirect();
+
+        // 2. Once authentication is confirmed, load the dashboard data and add event listeners.
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboard();
+
+            const signOutBtn = document.getElementById('sign-out-btn');
+            signOutBtn.addEventListener('click', () => {
+                handleSignOut();
+            });
+        });
+
+    </script>
+
+</body>
+</html>

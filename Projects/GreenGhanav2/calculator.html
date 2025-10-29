@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact Calculator - Green Ghana</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #F1F8E9; /* Light Green */
+        }
+        .btn-primary {
+            background-color: #388E3C; /* Darker Green */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2E7D32; /* Even Darker Green */
+        }
+        .form-label {
+            color: #1B5E20; /* Dark Green */
+        }
+        .form-input {
+            border-color: #A5D6A7; /* Soft Green Border */
+        }
+        .form-input:focus {
+            border-color: #4CAF50; /* Strong Green Border */
+            ring-color: #81C784;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-2xl">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-[#2E7D32]">Log Your Green Impact</h1>
+            <p class="text-lg text-gray-600 mt-2">Track your contributions and see the difference you make.</p>
+        </header>
+
+        <!-- Calculator Form -->
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+            <form id="impact-form">
+                <div class="space-y-6">
+                    <!-- Activity Type -->
+                    <div>
+                        <label for="activity-type" class="block mb-2 text-sm font-medium form-label">Select an Activity</label>
+                        <select id="activity-type" name="activityType" class="bg-gray-50 border form-input text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                            <option selected disabled>Choose an activity...</option>
+                            <option value="cycling">Cycling Instead of Driving</option>
+                            <option value="waste_recycled">Waste Recycled</option>
+                            <option value="energy_conservation">Energy Conservation</option>
+                            <option value="tree_planting">Tree Planting</option>
+                        </select>
+                    </div>
+
+                    <!-- Metric Value -->
+                    <div>
+                        <label for="metric-value" class="block mb-2 text-sm font-medium form-label">Quantity</label>
+                        <input type="number" id="metric-value" name="metricValue" class="bg-gray-50 border form-input text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="e.g., 10" required>
+                        <p id="unit-display" class="mt-1 text-xs text-gray-500">Enter the amount (e.g., kilometers, kilograms, hours, or number of trees).</p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mt-8 text-center">
+                    <button type="submit" class="btn-primary font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105">
+                        Log My Impact
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="hidden mt-6 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md shadow-md">
+            <p class="font-bold">Success!</p>
+            <p>Your impact has been logged. Thank you for your contribution!</p>
+        </div>
+
+    </div>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <!-- Firebase & Calculator Logic -->
+    <script type="module">
+        import { checkAuthAndRedirect } from './auth.js';
+        import { calculateAndLogImpact } from './calculator.js';
+
+        // Protect the page
+        checkAuthAndRedirect();
+
+        const form = document.getElementById('impact-form');
+        const successMessage = document.getElementById('success-message');
+        const activityTypeSelect = document.getElementById('activity-type');
+        const unitDisplay = document.getElementById('unit-display');
+
+        // Unit display logic
+        const units = {
+            cycling: 'kilometers (km)',
+            waste_recycled: 'kilograms (kg)',
+            energy_conservation: 'hours (hrs)',
+            tree_planting: 'number of trees'
+        };
+
+        activityTypeSelect.addEventListener('change', (e) => {
+            const unit = units[e.target.value] || '...';
+            unitDisplay.textContent = `Enter the amount in ${unit}.`;
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {
+                activityType: formData.get('activityType'),
+                metricValue: parseFloat(formData.get('metricValue'))
+            };
+
+            if (!data.activityType || isNaN(data.metricValue) || data.metricValue <= 0) {
+                alert("Please select a valid activity and enter a positive number.");
+                return;
+            }
+
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.textContent = "Logging...";
+            submitButton.disabled = true;
+
+            try {
+                await calculateAndLogImpact(data);
+                form.reset();
+                unitDisplay.textContent = 'Enter the amount (e.g., kilometers, kilograms, hours, or number of trees).';
+                successMessage.classList.remove('hidden');
+                // Hide the message after a few seconds
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+            } catch (error) {
+                // Error is already alerted in the imported function
+                console.error(error);
+            } finally {
+                submitButton.textContent = "Log My Impact";
+                submitButton.disabled = false;
+            }
+        });
+
+    </script>
+
+</body>
+</html>

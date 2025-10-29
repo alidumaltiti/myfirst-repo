@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Skills Assessment - Green Ghana</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <!-- Custom Styles -->
+    <style>
+        /* Using a sustainable, earthy color palette */
+        body {
+            background-color: #F1F8E9; /* Light Green */
+        }
+        .progress-bar-fill {
+            background-color: #4CAF50; /* Strong Green */
+        }
+        .quiz-option:hover {
+            background-color: #DCEDC8; /* Lighter Green */
+            border-color: #8BC34A; /* Medium Green */
+        }
+        .quiz-option.selected {
+            background-color: #C5E1A5; /* Soft Green */
+            border-color: #4CAF50; /* Strong Green */
+            color: #1B5E20; /* Dark Green */
+        }
+        .btn-primary {
+            background-color: #388E3C; /* Darker Green */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2E7D32; /* Even Darker Green */
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-3xl">
+        
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-[#2E7D32]">Green Skills Assessment</h1>
+            <p class="text-lg text-gray-600 mt-2">Discover your potential to contribute to a greener Ghana.</p>
+        </header>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="bg-white p-6 rounded-lg shadow-lg">
+            
+            <!-- Progress Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-[#388E3C]">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-[#388E3C]">Question 1 of 10</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="progress-bar-fill h-2.5 rounded-full" style="width: 10%"></div>
+                </div>
+            </div>
+
+            <!-- Question Area -->
+            <div id="question-area">
+                <h2 id="question-title" class="text-2xl font-semibold text-gray-800 mb-4"></h2>
+                <div id="options-container" class="space-y-3">
+                    <!-- Options will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between mt-8">
+                <button id="prev-btn" class="btn-primary font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed" disabled>Previous</button>
+                <button id="next-btn" class="btn-primary font-bold py-2 px-4 rounded">Next</button>
+                <button id="submit-btn" class="hidden btn-primary font-bold py-2 px-4 rounded">Submit Quiz</button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="hidden text-center bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-[#2E7D32]">Assessment Complete!</h2>
+            <p class="text-gray-700 mt-4">Thank you for participating. Your results have been saved to your profile.</p>
+            <p class="text-xl mt-2">Your Score: <span id="final-score" class="font-bold"></span>%</p>
+            <div class="mt-6">
+                <a href="/dashboard.html" class="btn-primary font-bold py-3 px-6 rounded text-lg">View My Dashboard</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <!-- Firebase & Quiz Logic -->
+    <script type="module">
+        import { checkAuthAndRedirect } from './auth.js';
+        import { quizQuestions, processQuizSubmission } from './quiz.js';
+
+        // Protect the page
+        checkAuthAndRedirect();
+
+        let currentQuestionIndex = 0;
+        const userAnswers = new Array(quizQuestions.length).fill(null);
+
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const questionTitle = document.getElementById('question-title');
+        const optionsContainer = document.getElementById('options-container');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const quizContainer = document.getElementById('quiz-container');
+        const resultScreen = document.getElementById('result-screen');
+        const finalScoreEl = document.getElementById('final-score');
+
+        function loadQuestion(index) {
+            const question = quizQuestions[index];
+            questionTitle.textContent = question.question;
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option border-2 border-gray-300 p-4 rounded-lg cursor-pointer transition-colors';
+                optionElement.textContent = option;
+                optionElement.dataset.optionIndex = i;
+
+                if (userAnswers[index] === i) {
+                    optionElement.classList.add('selected');
+                }
+
+                optionElement.addEventListener('click', () => selectOption(index, i));
+                optionsContainer.appendChild(optionElement);
+            });
+
+            updateNavigation();
+            updateProgress();
+        }
+
+        function selectOption(qIndex, oIndex) {
+            userAnswers[qIndex] = oIndex;
+            // Reload to show selection
+            loadQuestion(qIndex);
+        }
+
+        function updateNavigation() {
+            // Previous button state
+            if (currentQuestionIndex > 0) {
+                prevBtn.disabled = false;
+                prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                prevBtn.disabled = true;
+                prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+
+            // Next/Submit button state
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        }
+
+        function updateProgress() {
+            const progressPercentage = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            progressText.textContent = `Question ${currentQuestionIndex + 1} of ${quizQuestions.length}`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
+            }
+        });
+
+        submitBtn.addEventListener('click', async () => {
+            // Check if all questions are answered
+            if (userAnswers.includes(null)) {
+                alert("Please answer all questions before submitting.");
+                return;
+            }
+            
+            // Show a loading state if needed
+            submitBtn.textContent = "Submitting...";
+            submitBtn.disabled = true;
+
+            await processQuizSubmission(userAnswers);
+
+            // Show result screen
+            const score = (userAnswers.filter((a, i) => a === quizQuestions[i].correct).length / quizQuestions.length) * 100;
+            finalScoreEl.textContent = score.toFixed(0);
+            quizContainer.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+        });
+
+        // Initial load
+        loadQuestion(currentQuestionIndex);
+
+    </script>
+
+</body>
+</html>
