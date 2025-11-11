@@ -1,0 +1,62 @@
+:root{
+    --bg: white;
+    --text:black;
+    --primary:blue;
+    --primary-dark:rgb(30, 30, 119);
+    --border-color:rgb(236, 224, 224);
+    --card-bg:white;
+    --radius:8px;
+    --container:1100px;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+html, body{
+    height: 100%;
+}
+body{
+    background-color: rgb(173, 173, 185);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    text-decoration: none;
+    background-color:var(--primary-dark);
+    gap: 180px;
+    
+    a{
+        text-decoration: none;
+        font-size: large;
+        line-height: 60px;
+        color: white;
+    }
+}
+main{
+    display: flex;
+    flex-direction: column;
+}
+.hero-section{
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid;
+    margin-top: 10px;
+    background-color: rgb(226, 234, 241);
+    height: 190px auto;
+}
+footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 100%;
+    bottom: 100%;
+    background-color: var(--primary-dark);
+    color: white;
+    height: 150px;
+    text-align: center;
+    padding: 20px;
+}

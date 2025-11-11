@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentureLens 2.0 - Your Smart Partner for Business Success</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 64 64" class="logo-icon">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#007BFF"/>
+                                <stop offset="100%" style="stop-color:#00C48C"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="32" cy="32" r="30" fill="url(#logoGradient)"/>
+                        <path d="M20 32 L32 20 L44 32 L32 44 Z" fill="white" opacity="0.9"/>
+                        <circle cx="32" cy="32" r="8" fill="white"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">VentureLens</span>
+                    <span class="brand-version">2.0</span>
+                </div>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="calculator.html" class="nav-link">Calculator</a>
+                <a href="business-plan-generator.html" class="nav-link">Business Plans</a>
+                <a href="resource-center.html" class="nav-link">Resources</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="login.html" class="btn-outline">Login</a>
+                <a href="signup.html" class="btn-primary">Get Started</a>
+            </div>
+            
+            <div class="nav-hamburger" id="nav-hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-background">
+                <div class="hero-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-badge">
+                            <i class="fas fa-rocket"></i>
+                            <span>Now with AI-Powered Insights</span>
+                        </div>
+                        <h1 class="hero-title">
+                            Your <span class="gradient-text">Smart Partner</span> for Business Success
+                        </h1>
+                        <p class="hero-description">
+                            VentureLens 2.0 is the ultimate platform for entrepreneurs. Validate ideas, create business plans, 
+                            get AI insights, and access resources—all in one intelligent hub designed for your success.
+                        </p>
+                        
+                        <div class="hero-cta">
+                            <a href="calculator.html" class="btn-primary btn-lg">
+                                <i class="fas fa-calculator"></i>
+                                Start Feasibility Test
+                            </a>
+                            <a href="resource-center.html" class="btn-ghost btn-lg">
+                                <i class="fas fa-book-open"></i>
+                                Explore Resources
+                            </a>
+                            <a href="business-idea-analyzer.html" class="btn-outline btn-lg">
+                                <i class="fas fa-robot"></i>
+                                Ask LensAI
+                            </a>
+                        </div>
+                        
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <div class="stat-number">1000+</div>
+                                <div class="stat-label">Business Ideas Validated</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">95%</div>
+                                <div class="stat-label">User Satisfaction</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">24/7</div>
+                                <div class="stat-label">AI Assistant</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-visual">
+                        <div class="dashboard-preview">
+                            <div class="preview-header">
+                                <div class="preview-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="preview-title">VentureLens Dashboard</span>
+                            </div>
+                            <div class="preview-content">
+                                <div class="preview-chart">
+                                    <canvas id="hero-chart"></canvas>
+                                </div>
+                                <div class="preview-features">
+                                    <div class="feature-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Feasibility Score: 87%</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-lightbulb"></i>
+                                        <span>AI Recommendations Ready</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Market Analysis Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Features</span>
+                    <h2>Everything You Need to Succeed</h2>
+                    <p>Comprehensive tools and insights to turn your business ideas into reality</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Smart Feasibility Calculator</h3>
+                        <p>Advanced algorithm analyzes market potential, startup costs, competition, and sustainability with weighted scoring.</p>
+                        <a href="calculator.html" class="feature-link">
+                            Try Calculator <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>LensAI Assistant</h3>
+                        <p>24/7 AI-powered business advisor providing instant insights, market validation, and strategic recommendations.</p>
+                        <a href="business-idea-analyzer.html" class="feature-link">
+                            Chat with LensAI <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Business Plan Generator</h3>
+                        <p>Create professional business plans with our interactive tool. Export as PDF or Word with one click.</p>
+                        <a href="business-plan-generator.html" class="feature-link">
+                            Generate Plan <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Financial Estimators</h3>
+                        <p>Powerful tools for cost estimation, revenue projection, and break-even analysis with visual charts.</p>
+                        <a href="market-financial-estimators.html" class="feature-link">
+                            Analyze Finances <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Resource Center</h3>
+                        <p>Curated library of guides, templates, videos, and tools for every stage of your entrepreneurial journey.</p>
+                        <a href="resource-center.html" class="feature-link">
+                            Browse Resources <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Mentorship Hub</h3>
+                        <p>Connect with experienced entrepreneurs and industry experts for personalized guidance and support.</p>
+                        <a href="mentorship-support.html" class="feature-link">
+                            Find Mentors <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Process</span>
+                    <h2>How VentureLens 2.0 Works</h2>
+                    <p>Four simple steps to validate and develop your business idea</p>
+                </div>
+                
+                <div class="process-steps">
+                    <div class="step" data-aos="fade-right" data-aos-delay="100">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Input Your Idea</h3>
+                            <p>Share your business concept and answer guided questions about market, costs, and competition.</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step" data-aos="fade-left" data-aos-delay="200">
+                        <div class="step-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>AI Analysis</h3>
+                            <p>Our advanced AI analyzes your data and provides detailed feasibility scores and market insights.</p>
+                        </div>
+                        <div class="step-number">2</div>
+                    </div>
+                    
+                    <div class="step" data-aos="fade-right" data-aos-delay="300">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Get Recommendations</h3>
+                            <p>Receive personalized action items and strategic recommendations to improve your business viability.</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step" data-aos="fade-left" data-aos-delay="400">
+                        <div class="step-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Launch & Grow</h3>
+                            <p>Use our business plan generator, connect with mentors, and access ongoing support for success.</p>
+                        </div>
+                        <div class="step-number">4</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Success Stories</span>
+                    <h2>What Our Users Say</h2>
+                    <p>Real feedback from entrepreneurs who transformed their ideas with VentureLens</p>
+                </div>
+                
+                <div class="testimonials-carousel" id="testimonials-carousel">
+                    <div class="testimonial-track">
+                        <div class="testimonial-item">
+                            <div class="testimonial-content">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>"VentureLens 2.0 helped me identify critical gaps in my business model. The AI insights were spot-on, and I successfully launched my eco-friendly packaging startup!"</p>
+                                <div class="testimonial-author">
+                                    <img src="https://via.placeholder.com/60" alt="Sarah Johnson" class="author-avatar">
+                                    <div class="author-info">
+                                        <div class="author-name">Sarah Johnson</div>
+                                        <div class="author-title">Founder, EcoPackage Solutions</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-item">
+                            <div class="testimonial-content">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>"The business plan generator saved me weeks of work. Professional, comprehensive, and investor-ready. Highly recommended for any serious entrepreneur."</p>
+                                <div class="testimonial-author">
+                                    <img src="https://via.placeholder.com/60" alt="Michael Chen" class="author-avatar">
+                                    <div class="author-info">
+                                        <div class="author-name">Michael Chen</div>
+                                        <div class="author-title">CEO, TechStart Innovations</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-item">
+                            <div class="testimonial-content">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p>"LensAI is like having a business consultant available 24/7. The financial projections feature helped me secure my first round of funding!"</p>
+                                <div class="testimonial-author">
+                                    <img src="https://via.placeholder.com/60" alt="Emily Rodriguez" class="author-avatar">
+                                    <div class="author-info">
+                                        <div class="author-name">Emily Rodriguez</div>
+                                        <div class="author-title">Founder, Local Marketplace App</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-navigation">
+                    <button class="testimonial-nav prev" id="testimonial-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="testimonial-nav next" id="testimonial-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Turn Your Idea Into Reality?</h2>
+                    <p>Join thousands of entrepreneurs who've validated and launched successful businesses with VentureLens 2.0</p>
+                    <div class="cta-buttons">
+                        <a href="calculator.html" class="btn-primary btn-lg">
+                            <i class="fas fa-play"></i>
+                            Start Free Assessment
+                        </a>
+                        <a href="signup.html" class="btn-outline btn-lg">
+                            <i class="fas fa-user-plus"></i>
+                            Create Account
+                        </a>
+                    </div>
+                    <div class="cta-features">
+                        <div class="cta-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Free to start</span>
+                        </div>
+                        <div class="cta-feature">
+                            <i class="fas fa-check"></i>
+                            <span>No credit card required</span>
+                        </div>
+                        <div class="cta-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Instant results</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <svg viewBox="0 0 64 64" class="logo-icon">
+                            <defs>
+                                <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#007BFF"/>
+                                    <stop offset="100%" style="stop-color:#00C48C"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="32" cy="32" r="30" fill="url(#footerLogoGradient)"/>
+                            <path d="M20 32 L32 20 L44 32 L32 44 Z" fill="white" opacity="0.9"/>
+                            <circle cx="32" cy="32" r="8" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">VentureLens 2.0</span>
+                        <p class="brand-tagline">See your business potential clearly</p>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Platform</h3>
+                        <a href="calculator.html">Feasibility Calculator</a>
+                        <a href="business-idea-analyzer.html">AI Assistant</a>
+                        <a href="business-plan-generator.html">Business Plans</a>
+                        <a href="market-financial-estimators.html">Financial Tools</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <a href="resource-center.html">Learning Center</a>
+                        <a href="mentorship-support.html">Mentorship</a>
+                        <a href="about.html">About Us</a>
+                        <a href="feedback.html">Feedback</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Account</h3>
+                        <a href="signup.html">Sign Up</a>
+                        <a href="login.html">Login</a>
+                        <a href="dashboard.html">Dashboard</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h3>Connect</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <div class="newsletter-signup">
+                            <h4>Stay Updated</h4>
+                            <div class="newsletter-form">
+                                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                                <button class="newsletter-btn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2025 VentureLens 2.0. All rights reserved.</p>
+                    <p>Built with ❤️ for entrepreneurs everywhere</p>
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/hero-chart.js"></script>
+</body>
+</html>

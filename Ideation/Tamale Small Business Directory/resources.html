@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Resources & Initiatives - Green Skills Ghana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --forest-green: #2D5016;
+            --earth-brown: #8B4513;
+            --sunset-orange: #FF6B35;
+            --savannah-gold: #DAA520;
+            --ocean-blue: #1E90FF;
+            --clay-red: #CD853F;
+            --cream-white: #FFF8DC;
+            --charcoal: #2F2F2F;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--cream-white) 0%, var(--savannah-gold) 100%);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+        
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-script { font-family: 'Dancing Script', cursive; }
+        
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 248, 220, 0.9);
+            border-bottom: 1px solid rgba(45, 80, 22, 0.1);
+        }
+        
+        .resource-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(45, 80, 22, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.15);
+        }
+        
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(45, 80, 22, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: var(--forest-green);
+            color: white;
+            border-color: var(--forest-green);
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--sunset-orange);
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        .btn-primary {
+            background: var(--forest-green);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--earth-brown);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(45, 80, 22, 0.3);
+        }
+        
+        .map-container {
+            height: 500px;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--sunset-orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .stagger-fade {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .leaflet-popup-content {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .search-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(45, 80, 22, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: var(--forest-green);
+            box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full top-0 z-50 py-4">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🌱</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold" style="color: var(--forest-green);">Green Skills Ghana</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="assessment.html" class="nav-link font-medium">Assessment</a>
+                    <a href="calculator.html" class="nav-link font-medium">Calculator</a>
+                    <a href="resources.html" class="nav-link font-medium text-orange-500">Resources</a>
+                </div>
+                <button onclick="window.location.href='index.html'" class="btn-primary px-6 py-2 rounded-full font-medium">Back to Home</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <!-- Header Section -->
+            <div class="text-center mb-12">
+                <h1 class="font-display text-5xl font-bold mb-6 stagger-fade" style="color: var(--forest-green);">
+                    Green Resources & Initiatives
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8 stagger-fade">
+                    Discover green skills training centers, renewable energy projects, and sustainability initiatives across Ghana. 
+                    Connect with local opportunities and join the green economy movement.
+                </p>
+            </div>
+
+            <!-- Interactive Map Section -->
+            <section class="mb-16">
+                <div class="calculator-card rounded-2xl p-8">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
+                        <div>
+                            <h2 class="font-display text-3xl font-bold mb-4" style="color: var(--forest-green);">
+                                Ghana Green Initiatives Map
+                            </h2>
+                            <p class="text-gray-600">
+                                Explore green projects, training centers, and opportunities across Ghana
+                            </p>
+                        </div>
+                        
+                        <!-- Search and Filter -->
+                        <div class="mt-6 lg:mt-0 space-y-4">
+                            <div class="search-box rounded-lg p-3">
+                                <input type="text" id="search-input" placeholder="Search initiatives..." 
+                                       class="w-full bg-transparent border-0 focus:outline-none">
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-2">
+                                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium active" data-category="all">
+                                    All
+                                </button>
+                                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-category="renewable">
+                                    Renewable Energy
+                                </button>
+                                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-category="training">
+                                    Training Centers
+                                </button>
+                                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-category="conservation">
+                                    Conservation
+                                </button>
+                                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-category="agriculture">
+                                    Agriculture
+                                </button>
+                                <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium" data-category="waste">
+                                    Waste Management
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map -->
+                    <div id="map" class="map-container"></div>
+                    
+                    <!-- Map Legend -->
+                    <div class="mt-6 flex flex-wrap justify-center gap-4">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Renewable Energy</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Training Centers</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Conservation</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-orange-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Agriculture</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-purple-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Waste Management</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resource Categories -->
+            <section class="mb-16">
+                <h2 class="font-display text-4xl font-bold text-center mb-12" style="color: var(--forest-green);">
+                    Resource Categories
+                </h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Renewable Energy -->
+                    <div class="resource-card rounded-2xl p-8 text-center stagger-fade">
+                        <div class="category-icon bg-gradient-to-br from-yellow-400 to-orange-500">
+                            <span class="text-white">☀️</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--forest-green);">Renewable Energy</h3>
+                        <p class="text-gray-600 mb-6">
+                            Solar installation training, wind energy projects, and hydroelectric initiatives across Ghana.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500 mb-6">
+                            <div>• Solar PV Installation</div>
+                            <div>• Wind Energy Systems</div>
+                            <div>• Hydroelectric Projects</div>
+                            <div>• Energy Storage Solutions</div>
+                        </div>
+                        <button onclick="filterMap('renewable')" class="btn-primary px-6 py-2 rounded-full font-medium">
+                            View Projects
+                        </button>
+                    </div>
+                    
+                    <!-- Training Centers -->
+                    <div class="resource-card rounded-2xl p-8 text-center stagger-fade">
+                        <div class="category-icon bg-gradient-to-br from-blue-400 to-blue-600">
+                            <span class="text-white">🎓</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--forest-green);">Training Centers</h3>
+                        <p class="text-gray-600 mb-6">
+                            Vocational training institutes and universities offering green skills programs and certifications.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500 mb-6">
+                            <div>• Technical Universities</div>
+                            <div>• Vocational Institutes</div>
+                            <div>• Online Learning Platforms</div>
+                            <div>• Certification Programs</div>
+                        </div>
+                        <button onclick="filterMap('training')" class="btn-primary px-6 py-2 rounded-full font-medium">
+                            Find Centers
+                        </button>
+                    </div>
+                    
+                    <!-- Conservation -->
+                    <div class="resource-card rounded-2xl p-8 text-center stagger-fade">
+                        <div class="category-icon bg-gradient-to-br from-green-400 to-green-600">
+                            <span class="text-white">🌿</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--forest-green);">Conservation</h3>
+                        <p class="text-gray-600 mb-6">
+                            Wildlife protection projects, forest conservation, and biodiversity initiatives in Ghana.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500 mb-6">
+                            <div>• National Parks</div>
+                            <div>• Wildlife Sanctuaries</div>
+                            <div>• Forest Reserves</div>
+                            <div>• Marine Conservation</div>
+                        </div>
+                        <button onclick="filterMap('conservation')" class="btn-primary px-6 py-2 rounded-full font-medium">
+                            Explore Areas
+                        </button>
+                    </div>
+                    
+                    <!-- Agriculture -->
+                    <div class="resource-card rounded-2xl p-8 text-center stagger-fade">
+                        <div class="category-icon bg-gradient-to-br from-orange-400 to-red-500">
+                            <span class="text-white">🌾</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--forest-green);">Sustainable Agriculture</h3>
+                        <p class="text-gray-600 mb-6">
+                            Climate-smart farming projects, organic agriculture, and agroforestry initiatives.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500 mb-6">
+                            <div>• Organic Farming</div>
+                            <div>• Permaculture Projects</div>
+                            <div>• Agroforestry Systems</div>
+                            <div>• Climate-Smart Agriculture</div>
+                        </div>
+                        <button onclick="filterMap('agriculture')" class="btn-primary px-6 py-2 rounded-full font-medium">
+                            View Farms
+                        </button>
+                    </div>
+                    
+                    <!-- Waste Management -->
+                    <div class="resource-card rounded-2xl p-8 text-center stagger-fade">
+                        <div class="category-icon bg-gradient-to-br from-purple-400 to-purple-600">
+                            <span class="text-white">♻️</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--forest-green);">Waste Management</h3>
+                        <p class="text-gray-600 mb-6">
+                            Recycling centers, composting facilities, and circular economy projects across Ghana.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500 mb-6">
+                            <div>• Recycling Centers</div>
+                            <div>• Composting Facilities</div>
+                            <div>• Waste-to-Energy Projects</div>
+                            <div>• Plastic Alternatives</div>
+                        </div>
+                        <button onclick="filterMap('waste')" class="btn-primary px-6 py-2 rounded-full font-medium">
+                            Find Centers
+                        </button>
+                    </div>
+                    
+                    <!-- Green Jobs -->
+                    <div class="resource-card rounded-2xl p-8 text-center stagger-fade">
+                        <div class="category-icon bg-gradient-to-br from-indigo-400 to-indigo-600">
+                            <span class="text-white">💼</span>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-4" style="color: var(--forest-green);">Green Jobs</h3>
+                        <p class="text-gray-600 mb-6">
+                            Employment opportunities in renewable energy, conservation, and sustainable development sectors.
+                        </p>
+                        <div class="space-y-2 text-sm text-gray-500 mb-6">
+                            <div>• Job Portals</div>
+                            <div>• Skills Development</div>
+                            <div>• Entrepreneurship Support</div>
+                            <div>• Career Guidance</div>
+                        </div>
+                        <button onclick="showJobsSection()" class="btn-primary px-6 py-2 rounded-full font-medium">
+                            Browse Jobs
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Initiatives -->
+            <section class="mb-16">
+                <h2 class="font-display text-4xl font-bold text-center mb-12" style="color: var(--forest-green);">
+                    Featured Green Initiatives
+                </h2>
+                
+                <div class="resource-grid">
+                    <!-- Green Fund Africa -->
+                    <div class="resource-card rounded-2xl p-8 stagger-fade">
+                        <div class="flex items-center mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.wagner-renewables.com/7aea2b6a1b951cfa1f4d29474b7e6abe3a0cdc2d.jpg" 
+                                 alt="Solar Installation" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h3 class="font-display text-xl font-bold" style="color: var(--forest-green);">Green Fund Africa</h3>
+                                <p class="text-gray-600 text-sm">Accra, Ghana</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            Empowering youth and women through clean energy education, innovation accelerators, and green livelihood training programs.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium px-3 py-1 bg-green-100 text-green-800 rounded-full">
+                                Training Center
+                            </span>
+                            <button onclick="showDetails('green-fund')" class="text-orange-500 font-medium hover:text-orange-600">
+                                Learn More →
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Northern Regional College Partnership -->
+                    <div class="resource-card rounded-2xl p-8 stagger-fade">
+                        <div class="flex items-center mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/web.musc.edu/3ea6b37b86fd0acc09388adca5bd294916188f19.jpg" 
+                                 alt="Agricultural Training" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h3 class="font-display text-xl font-bold" style="color: var(--forest-green);">Green Skills Partnership</h3>
+                                <p class="text-gray-600 text-sm">Kumasi & Bolgatanga</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            International collaboration bringing cutting-edge green skills curriculum to Ghanaian technical universities.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                                Education
+                            </span>
+                            <button onclick="showDetails('partnership')" class="text-orange-500 font-medium hover:text-orange-600">
+                                Learn More →
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Youth in Green Ghana -->
+                    <div class="resource-card rounded-2xl p-8 stagger-fade">
+                        <div class="flex items-center mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.iucn.nl/45ef4b274f863013a1b13666d38de3006c724be9.jpg" 
+                                 alt="Conservation Work" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h3 class="font-display text-xl font-bold" style="color: var(--forest-green);">Youth in Green Ghana</h3>
+                                <p class="text-gray-600 text-sm">Nationwide</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            Creating green employment for 2,000 youth through urban greening, beautification, and environmental projects.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium px-3 py-1 bg-purple-100 text-purple-800 rounded-full">
+                                Employment
+                            </span>
+                            <button onclick="showDetails('youth-green')" class="text-orange-500 font-medium hover:text-orange-600">
+                                Learn More →
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Ghana REDD+ Program -->
+                    <div class="resource-card rounded-2xl p-8 stagger-fade">
+                        <div class="flex items-center mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/3479be2ad60d5072cb3a048187633f91afef3e85.jpeg" 
+                                 alt="Forest Conservation" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h3 class="font-display text-xl font-bold" style="color: var(--forest-green);">Ghana REDD+ Program</h3>
+                                <p class="text-gray-600 text-sm">Cocoa Forest Regions</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            Reducing emissions from deforestation while supporting cocoa farmers with climate-smart agriculture practices.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium px-3 py-1 bg-green-100 text-green-800 rounded-full">
+                                Conservation
+                            </span>
+                            <button onclick="showDetails('redd-plus')" class="text-orange-500 font-medium hover:text-orange-600">
+                                Learn More →
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- National Green Jobs Strategy -->
+                    <div class="resource-card rounded-2xl p-8 stagger-fade">
+                        <div class="flex items-center mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.powerengineeringint.com/f49808d6a32a1dc3392745a284e2a84433f92bf4.jpg" 
+                                 alt="Green Jobs" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h3 class="font-display text-xl font-bold" style="color: var(--forest-green);">National Green Jobs Strategy</h3>
+                                <p class="text-gray-600 text-sm">National Policy</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            $13.2 million strategy creating green employment across five priority sectors through 2025.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full">
+                                Policy
+                            </span>
+                            <button onclick="showDetails('green-jobs-strategy')" class="text-orange-500 font-medium hover:text-orange-600">
+                                Learn More →
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Climate Change Education -->
+                    <div class="resource-card rounded-2xl p-8 stagger-fade">
+                        <div class="flex items-center mb-6">
+                            <img src="https://kimi-web-img.moonshot.cn/img/d2n41s0wa71yzf.cloudfront.net/9ecbf601fe3349727cf7c1c95838d733028e3a8c.jpg" 
+                                 alt="Climate Education" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h3 class="font-display text-xl font-bold" style="color: var(--forest-green);">Climate Education Initiative</h3>
+                                <p class="text-gray-600 text-sm">Schools & Universities</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            Integrating climate change and green economy concepts into Ghana's education curriculum.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+                                Education
+                            </span>
+                            <button onclick="showDetails('climate-education')" class="text-orange-500 font-medium hover:text-orange-600">
+                                Learn More →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="text-center">
+                <div class="calculator-card rounded-2xl p-12">
+                    <h2 class="font-display text-4xl font-bold mb-6" style="color: var(--forest-green);">
+                        Ready to Get Involved?
+                    </h2>
+                    <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                        Join thousands of Ghanaians who are already building green careers and making a positive impact on our environment. 
+                        Start your journey today.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                        <button onclick="window.location.href='assessment.html'" class="btn-primary px-12 py-4 rounded-full text-lg font-semibold">
+                            Take Skills Assessment
+                        </button>
+                        <button onclick="window.location.href='calculator.html'" class="border-2 border-green-600 text-green-600 px-12 py-4 rounded-full text-lg font-semibold hover:bg-green-600 hover:text-white transition-all duration-300">
+                            Calculate Your Impact
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background: var(--charcoal);">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">🌱</span>
+                    </div>
+                    <span class="font-display text-2xl font-bold text-white">Green Skills Ghana</span>
+                </div>
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">
+                    Empowering Ghana's communities with green skills, sustainable practices, and climate resilience for a prosperous future.
+                </p>
+                <div class="border-t border-gray-700 pt-6">
+                    <p class="text-gray-500 text-sm">
+                        © 2025 Green Skills Ghana. Building sustainable futures together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Map initialization
+        let map;
+        let markers = [];
+        
+        // Green initiatives data
+        const initiatives = [
+            // Renewable Energy
+            {
+                name: "Bui Solar Power Plant",
+                lat: 8.2833,
+                lng: -2.4833,
+                category: "renewable",
+                type: "Solar Energy",
+                description: "Large-scale solar installation generating clean energy for the national grid.",
+                contact: "info@buipower.com",
+                website: "www.buipower.com"
+            },
+            {
+                name: "Green Fund Africa - Accra",
+                lat: 5.6037,
+                lng: -0.1870,
+                category: "training",
+                type: "Training Center",
+                description: "Clean energy education and innovation accelerator for youth and women.",
+                contact: "info@greenfundafrica.org",
+                website: "www.greenfundafrica.org"
+            },
+            {
+                name: "Kumasi Technical University",
+                lat: 6.6667,
+                lng: -1.6167,
+                category: "training",
+                type: "University",
+                description: "Green skills curriculum and hydrogen technology training programs.",
+                contact: "info@ktu.edu.gh",
+                website: "www.ktu.edu.gh"
+            },
+            {
+                name: "Bolgatanga Technical University",
+                lat: 10.7856,
+                lng: -0.8514,
+                category: "training",
+                type: "University",
+                description: "Green technologies and sustainable development education programs.",
+                contact: "info@btu.edu.gh",
+                website: "www.btu.edu.gh"
+            },
+            {
+                name: "Mole National Park",
+                lat: 9.5833,
+                lng: -1.8333,
+                category: "conservation",
+                type: "National Park",
+                description: "Wildlife conservation and eco-tourism in Ghana's largest national park.",
+                contact: "info@molepark.com",
+                website: "www.molepark.com"
+            },
+            {
+                name: "Kakum Conservation Area",
+                lat: 5.3600,
+                lng: -1.3300,
+                category: "conservation",
+                type: "Forest Reserve",
+                description: "Tropical forest conservation and canopy walkway eco-tourism.",
+                contact: "info@kakumpark.com",
+                website: "www.kakumpark.com"
+            },
+            {
+                name: "Tono Irrigation Project",
+                lat: 10.8500,
+                lng: -1.1000,
+                category: "agriculture",
+                type: "Irrigation Scheme",
+                description: "Large-scale irrigation supporting climate-smart agriculture.",
+                contact: "info@tonoirrigation.gov.gh",
+                website: "www.tonoirrigation.gov.gh"
+            },
+            {
+                name: "Accra Recycling Center",
+                lat: 5.6037,
+                lng: -0.1870,
+                category: "waste",
+                type: "Recycling Facility",
+                description: "Comprehensive waste management and recycling services for Greater Accra.",
+                contact: "info@accrawaste.gov.gh",
+                website: "www.accrawaste.gov.gh"
+            },
+            {
+                name: "Ashaiman Waste-to-Energy",
+                lat: 5.8170,
+                lng: -0.0280,
+                category: "waste",
+                type: "Waste-to-Energy Plant",
+                description: "Converting municipal waste into clean energy for the community.",
+                contact: "info@ashaimanwte.com",
+                website: "www.ashaimanwte.com"
+            },
+            {
+                name: "Ghana Bamboo Project",
+                lat: 6.1500,
+                lng: -0.2667,
+                category: "agriculture",
+                type: "Bamboo Plantation",
+                description: "Sustainable bamboo cultivation for construction and carbon sequestration.",
+                contact: "info@ghanabamboo.com",
+                website: "www.ghanabamboo.com"
+            },
+            {
+                name: "Navrongo Solar Demonstration",
+                lat: 10.8833,
+                lng: -1.1000,
+                category: "renewable",
+                type: "Solar Research",
+                description: "Solar energy research and demonstration facility in Northern Ghana.",
+                contact: "info@navrongosolar.org",
+                website: "www.navrongosolar.org"
+            },
+            {
+                name: "Cape Coast Green Hub",
+                lat: 5.1000,
+                lng: -1.2500,
+                category: "training",
+                type: "Green Innovation Hub",
+                description: "Incubator for green startups and sustainable technology development.",
+                contact: "info@capecoastgreenhub.org",
+                website: "www.capecoastgreenhub.org"
+            },
+            {
+                name: "Tamale Organic Farming Cooperative",
+                lat: 9.4000,
+                lng: -0.8500,
+                category: "agriculture",
+                type: "Organic Farming",
+                description: "Cooperative promoting organic farming and sustainable agriculture practices.",
+                contact: "info@tamaleorganic.org",
+                website: "www.tamaleorganic.org"
+            },
+            {
+                name: "Tema Industrial Waste Management",
+                lat: 5.6667,
+                lng: 0.0167,
+                category: "waste",
+                type: "Industrial Waste Treatment",
+                description: "Advanced waste treatment and recycling for industrial zones.",
+                contact: "info@temawaste.com",
+                website: "www.temawaste.com"
+            },
+            {
+                name: "Ankasa Conservation Area",
+                lat: 5.2167,
+                lng: -2.7500,
+                category: "conservation",
+                type: "Forest Reserve",
+                description: "Biodiversity hotspot and tropical forest conservation project.",
+                contact: "info@ankasaconservation.org",
+                website: "www.ankasaconservation.org"
+            }
+        ];
+
+        // Initialize map
+        function initializeMap() {
+            map = L.map('map').setView([7.9465, -1.0232], 6); // Center on Ghana
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Add markers for all initiatives
+            initiatives.forEach(initiative => {
+                const marker = L.marker([initiative.lat, initiative.lng])
+                    .addTo(map)
+                    .bindPopup(createPopupContent(initiative));
+                
+                marker.initiativeData = initiative;
+                markers.push(marker);
+            });
+        }
+
+        // Create popup content
+        function createPopupContent(initiative) {
+            const categoryColors = {
+                renewable: 'yellow',
+                training: 'blue',
+                conservation: 'green',
+                agriculture: 'orange',
+                waste: 'purple'
+            };
+            
+            const color = categoryColors[initiative.category] || 'gray';
+            
+            return `
+                <div class="p-2 max-w-xs">
+                    <div class="flex items-center mb-2">
+                        <div class="w-3 h-3 bg-${color}-500 rounded-full mr-2"></div>
+                        <span class="text-xs font-medium text-${color}-600 uppercase">${initiative.category}</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">${initiative.name}</h3>
+                    <p class="text-sm text-gray-600 mb-3">${initiative.description}</p>
+                    <div class="space-y-1 text-xs">
+                        <div><strong>Type:</strong> ${initiative.type}</div>
+                        <div><strong>Contact:</strong> ${initiative.contact}</div>
+                        <div><strong>Website:</strong> <a href="http://${initiative.website}" target="_blank" class="text-blue-600 hover:underline">${initiative.website}</a></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Filter map by category
+        function filterMap(category) {
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-category="${category}"]`).classList.add('active');
+            
+            // Filter markers
+            markers.forEach(marker => {
+                if (category === 'all' || marker.initiativeData.category === category) {
+                    marker.addTo(map);
+                } else {
+                    map.removeLayer(marker);
+                }
+            });
+            
+            // Fit map to filtered markers
+            const visibleMarkers = markers.filter(marker => 
+                category === 'all' || marker.initiativeData.category === category
+            );
+            
+            if (visibleMarkers.length > 0) {
+                const group = new L.featureGroup(visibleMarkers);
+                map.fitBounds(group.getBounds().pad(0.1));
+            }
+        }
+
+        // Search functionality
+        function initializeSearch() {
+            const searchInput = document.getElementById('search-input');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                
+                markers.forEach(marker => {
+                    const data = marker.initiativeData;
+                    const matchesSearch = !searchTerm || 
+                        data.name.toLowerCase().includes(searchTerm) ||
+                        data.description.toLowerCase().includes(searchTerm) ||
+                        data.type.toLowerCase().includes(searchTerm);
+                    
+                    if (matchesSearch) {
+                        marker.addTo(map);
+                    } else {
+                        map.removeLayer(marker);
+                    }
+                });
+            });
+        }
+
+        // Show details modal (placeholder)
+        function showDetails(initiativeId) {
+            alert(`Detailed information about ${initiativeId} will be available soon. This will open a detailed modal with more information about the initiative.`);
+        }
+
+        // Show jobs section (placeholder)
+        function showJobsSection() {
+            alert('Green jobs portal coming soon! This will connect you with employment opportunities in Ghana\'s green economy.');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize animations
+            const elements = document.querySelectorAll('.stagger-fade');
+            
+            anime({
+                targets: elements,
+                opacity: [0, 1],
+                translateY: [30, 0],
+                delay: anime.stagger(200),
+                duration: 800,
+                easing: 'easeOutQuart'
+            });
+            
+            // Initialize map
+            setTimeout(() => {
+                initializeMap();
+                initializeSearch();
+            }, 500);
+            
+            // Add filter button event listeners
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    filterMap(category);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

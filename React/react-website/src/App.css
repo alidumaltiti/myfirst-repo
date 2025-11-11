@@ -1,0 +1,5 @@
+/* Basic layout helpers */
+main { min-height: calc(100vh - 60px - 80px); }
+.features h2 { margin: 0 0 8px; }
+.feature-card h3 { font-size: 18px; }
+.header .btn { font-size: 14px; }

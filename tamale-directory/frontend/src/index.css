@@ -1,0 +1,3 @@
+/* Minimal styles; you can replace with Tailwind config */
+body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 16px; }
